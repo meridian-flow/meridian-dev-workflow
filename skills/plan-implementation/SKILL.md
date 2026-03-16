@@ -68,7 +68,7 @@ A blueprint is the phase spec file itself. It lives in `$MERIDIAN_WORK_DIR/plan/
 
 **Constraints and boundaries.** What the coder should not do is as important as what they should do. If a file is out of scope, say so. If there's a known issue they should avoid fixing in this phase, say so. Boundary clarity prevents scope creep.
 
-**Verification criteria.** Concrete checks the coder (and later the tester in verify mode) can run. "Tests pass" is bare minimum. "Token validation rejects expired tokens with a 401, test case exists in `tests/auth/`" is actionable.
+**Verification criteria.** Concrete checks the coder (and later the verification-tester) can run. "Tests pass" is bare minimum. "Token validation rejects expired tokens with a 401, test case exists in `tests/auth/`" is actionable.
 
 ### What stays out of a blueprint
 
@@ -88,23 +88,24 @@ Usually `coder`. For phases with significant UI/UX work, complex architectural d
 
 ### Reviewers
 
-Pick review lenses based on what the phase actually touches:
+Pick review focus based on what the phase actually touches. The `review-orchestration` skill has the full methodology; here's a quick guide:
 
-| Phase touches | Reviewer lens |
-|---------------|---------------|
-| Shared state, locks, async | `reviewer` (concurrency lens) |
-| Auth, input handling, user data | `reviewer` (security lens) |
-| New abstractions, interfaces, module boundaries | `reviewer` (solid lens) |
-| Foundational phase that later phases build on | `reviewer` (planning lens) |
+| Phase touches | Review focus |
+|---------------|-------------|
+| Shared state, locks, async | Concurrency — races, deadlocks, ordering (see `review/resources/concurrency.md`) |
+| Auth, input handling, user data | Security — trust boundaries, validation, injection (see `review/resources/security.md`) |
+| New abstractions, interfaces, module boundaries | Architecture — SOLID, coupling, design alignment (see `review/resources/architecture.md`) |
+| Foundational phase that later phases build on | Design alignment — does this set up the next phase correctly? |
 
-Two reviewers is the default. Three for high-risk phases. One for simple/mechanical phases. Zero for trivial changes (config tweaks, renames).
+Two reviewers is the default. Three for high-risk phases. One for simple/mechanical phases. Zero for trivial changes.
 
-### Other agents
+### Testers
 
-- **Tester (verify mode):** Include for any phase that modifies logic. The tester (in verify mode) runs tests and type checks, fixing mechanical issues before reviewers see the code. This avoids wasting reviewer attention on things a type checker catches.
-- **Tester (unit-test mode):** Include when the phase creates behavior that's hard to verify manually — edge cases, error paths, boundary conditions.
-- **Tester (smoke/browser mode):** Include when the phase produces user-visible behavior that benefits from end-to-end validation.
-- **Investigator:** Not staffed per phase. Spawned reactively when the coder or reviewer flags something outside the current scope.
+- **verification-tester:** Include for any phase that modifies logic. Runs tests, type checks, and linters, fixing mechanical issues before reviewers see the code.
+- **unit-tester:** Include when the phase creates behavior that's hard to verify manually — edge cases, error paths, boundary conditions.
+- **smoke-tester:** Include when the phase produces user-facing behavior that benefits from end-to-end validation.
+- **browser-tester:** Include when the phase touches frontend UI and needs visual/interaction verification.
+- **investigator:** Not staffed per phase. Spawned reactively when the coder or reviewer flags something outside the current scope.
 
 ## Writing Phase Files
 

@@ -2,7 +2,7 @@
 name: dev-orchestrator
 description: Full dev lifecycle orchestrator — plans, delegates, and drives work to completion
 harness: claude
-skills: [__meridian-spawn-agent, __meridian-session-context, __meridian-work-coordination, dev-workflow, architecture-design, plan-implementation]
+skills: [__meridian-spawn-agent, __meridian-session-context, __meridian-work-coordination, dev-workflow, review-orchestration, architecture-design, plan-implementation, mermaid]
 sandbox: unrestricted
 thinking: high
 ---

@@ -47,8 +47,8 @@ make the coder go read other phase files.
 
 ## Agent Headcount
 - **Implementer:** `coder`, model: `codex`
-- **Reviewers:** `reviewer` (solid lens), `reviewer` (security lens)
-- **Tester (verify mode):** yes
+- **Reviewers:** `reviewer` (architecture focus), `reviewer` (security focus)
+- **Verification:** `verification-tester`
 
 ## Context Files
 Files to pass as `-f` when spawning the coder:
@@ -151,7 +151,7 @@ Fewer, more relevant files beat a large pile of "might be useful" files.
 
 - **Don't create cleanup-only phases.** Bake cleanup into each phase. A "Phase 5: cleanup" means Phases 1-4 left messes, which means their scope was wrong.
 
-- **Write verification criteria the tester (verify mode) can actually check.** "Should work correctly" is not verifiable. "Tests pass, type checker clean, endpoint returns 401 for expired tokens" is verifiable. If you can't write a concrete check, the scope is probably too vague.
+- **Write verification criteria the verification-tester can actually check.** "Should work correctly" is not verifiable. "Tests pass, type checker clean, endpoint returns 401 for expired tokens" is verifiable. If you can't write a concrete check, the scope is probably too vague.
 
 - **Plan for the review loop.** Each phase might take 1-3 fix-and-re-review cycles. Complex phases with concurrency or security concerns tend toward 3 cycles. Simple data model phases tend toward 1. Factor this into your time estimates.
 
