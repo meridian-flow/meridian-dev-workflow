@@ -16,8 +16,8 @@ The orchestrator can now run a full dev lifecycle autonomously:
 # Research phase — explore the codebase on a fast model
 meridian spawn -a researcher -p "Map the auth module — all token handling and session management"
 
-# Design phase — the orchestrator collaborates with you interactively,
-# then captures the design in a work directory
+# Design phase — spawn a designer to flesh out the architecture
+meridian spawn -a designer --from p1 -p "Design JWT token validation — explore tradeoffs between symmetric and asymmetric signing"
 
 # Implementation — spawn coders in parallel, passing prior context
 meridian spawn -a coder --from p1 -p "Phase 1: JWT token validation" -f plan/phase-1.md
@@ -49,6 +49,7 @@ The orchestrator picks the right agent for each task.
 
 | Agent | Model | Role |
 |---|---|---|
+| `designer` | opus | Explores tradeoffs, creates design docs, and captures decisions with rationale |
 | `coder` | codex | Implements scoped tasks from phase specs and design docs |
 | `researcher` | codex | Explores best practices, alternatives, and architecture patterns via web search |
 | `explorer` | gpt-5.3-codex-spark | Fast, cheap codebase explorer — reads files, searches code, mines past sessions |
