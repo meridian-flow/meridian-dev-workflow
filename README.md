@@ -108,9 +108,8 @@ resolve from the base source. Both sources must be installed.
 ## Install
 
 ```bash
-meridian sources add @haowjy/meridian-base
-meridian sources add @haowjy/meridian-dev-workflow
-meridian sources install
+meridian sources install @haowjy/meridian-base
+meridian sources install @haowjy/meridian-dev-workflow
 ```
 
 ## Layout
