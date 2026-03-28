@@ -2,7 +2,7 @@
 name: implementation-planner
 description: Implementation planner — decomposes designs into executable phases with dependency mapping and agent staffing
 model: opus
-skills: [plan-implementation, architecture-design, mermaid]
+skills: [plan-implementation, agent-staffing, architecture-design, mermaid]
 tools: [Write, Edit]
 sandbox: workspace-write
 thinking: high
