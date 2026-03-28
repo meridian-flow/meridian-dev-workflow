@@ -25,3 +25,30 @@ meridian spawn -a designer --from $MERIDIAN_CHAT_ID \
 ```
 
 Evaluate output before moving on. If reviewers flag issues, decide whether to fix now or defer, and document why.
+
+## Default Team (standard implementation phase)
+
+### Implement
+- 1x coder (or frontend-coder for UI phases)
+
+### Verify
+- 1x verification-tester — tests, lints, type checks
+- 1x smoke-tester — end-to-end from the users perspective
+
+### Review fan-out (parallel)
+High-judgment areas — fan out with different model overrides (`-m`) for diverse perspectives:
+- 2x reviewer: SOLID principles and design quality
+- 2x reviewer: direction alignment with design spec
+
+Mechanical areas — single reviewer each:
+- 1x reviewer: security, compliance, risk
+- 1x reviewer: testing coverage and edge cases
+- 1x reviewer: code reduction, dead code, simplification, deduplication
+
+### Document
+- 1x documenter --from $MERIDIAN_CHAT_ID — update FS mirror, capture decisions
+
+### Backlog (background)
+- 1x investigator --from $MERIDIAN_CHAT_ID — mine conversation and code for deferred items
+
+Scale down for simpler work — a bug fix might just be: 1 coder, 1 verification-tester, 1 reviewer.
