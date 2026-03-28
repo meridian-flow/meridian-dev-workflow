@@ -1,6 +1,6 @@
 ---
 name: frontend-designer
-description: Frontend designer — UI/UX design decisions, component structure, layout, and aesthetic direction
+description: Frontend designer — give it requirements, target audience, and constraints to produce UI/UX design specs in $MERIDIAN_WORK_DIR/ that the frontend-coder implements. Anti-generic-AI aesthetics.
 model: opus
 skills: [frontend-design, mermaid]
 tools: [Write, Edit, WebSearch, WebFetch]

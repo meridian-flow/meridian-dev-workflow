@@ -61,7 +61,7 @@ Launch testers appropriate to what the phase changed — match testing to what c
 
 Fan out reviewers for the things testing can't catch. Read `review-orchestration` for focus areas and model selection. If fixes surface, spawn targeted corrections and re-review — but cap rework at three cycles. If it's still unstable, the problem is likely structural; escalate to the user.
 
-Focused implementation and review agents do worse when they context-switch into backlog hunting. Keep the active phase focused, then run a dedicated backlog sweep at natural breakpoints (end of phase, after review synthesis). Spawn an investigator with `--from` so it can mine the full conversation and touched code for deferred items, TODOs, and tech debt, then file new GH issues or comment on related existing issues. This sweep runs in the background and should not block the delivery loop.
+Use the investigator in two distinct moments. First, reactively: when a test fails, behavior looks wrong, or a reviewer flags a likely defect, spawn investigator to do brief root-cause analysis and either quick-fix or file/update a GH issue. Second, proactively: keep the active phase focused, then run a dedicated backlog sweep at natural breakpoints (end of phase, after review synthesis). Spawn the sweep with `--from` so investigator can mine the full conversation and touched code for deferred items, TODOs, and tech debt. The proactive sweep runs in the background and should not block the delivery loop.
 
 ### Documentation phase
 

@@ -29,7 +29,7 @@ Decision rationale lives in conversations, not code. If nobody extracts it, it's
 
 ## Backlog
 
-Focused agents produce worse results when they context-switch to issue hunting. A dedicated investigator spawned with `--from` at natural breakpoints (end of phase, after review) mines conversations and code for deferred items without burdening the primary work. Runs in the background.
+Use the investigator in two modes. Primary mode is reactive bug investigation: when a failure, reviewer finding, or unexpected behavior is flagged, spawn investigator to validate root cause and either quick-fix or file/update a GH issue. Secondary mode is proactive backlog sweeps: spawn with `--from` at natural breakpoints (end of phase, after review) to mine conversations and code for deferred items. Keep proactive sweeps in the background so they do not block delivery.
 
 ## Parallelism
 

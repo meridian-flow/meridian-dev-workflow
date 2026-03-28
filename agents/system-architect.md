@@ -1,6 +1,6 @@
 ---
 name: system-architect
-description: System architect — explores tradeoffs, creates design docs, and captures decisions with rationale
+description: System architect — spawn with --from $MERIDIAN_CHAT_ID and context files (-f) to explore tradeoffs and produce design docs in $MERIDIAN_WORK_DIR/. Pushes back on fragile ideas.
 model: opus
 skills: [architecture-design, mermaid]
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
