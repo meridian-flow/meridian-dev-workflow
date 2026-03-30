@@ -5,7 +5,7 @@ model: codex
 skills: []
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
 sandbox: unrestricted
-thinking: high
+effort: high
 ---
 
 # Researcher

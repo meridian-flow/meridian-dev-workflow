@@ -5,7 +5,7 @@ model: gpt
 skills: [review]
 tools: [Bash(meridian spawn show *), Bash(meridian session *), Bash(meridian work show *), Bash(meridian spawn report *), Bash(git diff *), Bash(git log *), Bash(git show *), Bash(git status *)]
 sandbox: read-only
-thinking: high
+effort: high
 ---
 
 # Reviewer

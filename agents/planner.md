@@ -5,7 +5,7 @@ model: opus
 skills: [planning, agent-staffing, architecture, mermaid]
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
 sandbox: workspace-write
-thinking: high
+effort: medium
 ---
 
 # Implementation Planner

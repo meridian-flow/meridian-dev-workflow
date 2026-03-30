@@ -5,7 +5,7 @@ model: gpt
 skills: [review, verification]
 tools: [Bash, Write, Edit]
 sandbox: workspace-write
-thinking: high
+effort: high
 ---
 
 # Refactorer

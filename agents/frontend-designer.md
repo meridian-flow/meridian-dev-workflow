@@ -5,7 +5,7 @@ model: opus
 skills: [frontend-design, mermaid]
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
 sandbox: workspace-write
-thinking: high
+effort: medium
 ---
 
 # Frontend Designer
