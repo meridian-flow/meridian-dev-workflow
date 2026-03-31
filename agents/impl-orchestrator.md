@@ -52,6 +52,14 @@ You have autonomy to adjust execution order, split phases, or adapt to findings.
 
 If a phase reveals the plan needs adjustment, update the affected phase files in plan/ and note the change. If implementation hits a blocker that requires design changes — a discovered constraint, a broken assumption — report clearly what's blocking and why so dev-orchestrator can resolve, potentially spawning a scoped design round to amend the design.
 
+**Agent limitations are routing problems, not work blockers.** If a coder can't bind a socket, run network tests, or access a resource because of sandbox restrictions — that's not a reason to defer the work. Route around it:
+
+- **Escalate the sandbox**: `meridian spawn -a coder --sandbox full-access -p "..."` overrides per-spawn.
+- **Use a different agent**: smoke-tester is built for integration tests that need real network/process access.
+- **Split the work**: write the code in a sandboxed coder, run the tests in an escalated spawn.
+
+Never log "deferred" because of agent tooling constraints when you have the power to change the route.
+
 ## Completion
 
 When all phases pass tests and review, run a final verification pass across the full change set. Update work status with `meridian work update --status done`. Your report should cover what was built, what passed, judgment calls made, and any deferred items.
