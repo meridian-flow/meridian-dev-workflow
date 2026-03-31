@@ -97,3 +97,11 @@ Don't wait to mine decisions retroactively — context decays fast. Capture rati
 **Reference, don't duplicate.** Point to source locations rather than pasting code. Snippets only for critical patterns — atomic operations, race guards, non-obvious invariants. Duplicated content is content that will drift.
 
 **WHAT and WHY, not HOW.** Code shows the how. Documentation captures what the code can't easily tell you: component relationships, dependency directions, data flows, and especially why the system ended up this way. When rationale is missing, go find it — don't guess and don't skip it.
+
+## Verification
+
+After writing or restructuring linked docs, run the co-located link checker to catch broken internal links and anchors:
+
+```bash
+scripts/check-md-links.sh <doc-root>
+```
