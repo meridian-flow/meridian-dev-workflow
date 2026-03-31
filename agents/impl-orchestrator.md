@@ -52,14 +52,12 @@ You have autonomy to adjust execution order, split phases, or adapt to findings.
 
 If a phase reveals the plan needs adjustment, update the affected phase files in plan/ and note the change. If implementation hits a blocker that requires design changes — a discovered constraint, a broken assumption — report clearly what's blocking and why so dev-orchestrator can resolve, potentially spawning a scoped design round to amend the design.
 
-**Agent limitations are routing problems, not work blockers.** If a coder can't bind a socket, run network tests, or access a resource because of sandbox restrictions — that's not a reason to defer the work. Route around it:
+**Agent capability gaps are routing problems, not work blockers.** When an agent can't do something — sandbox restrictions, missing tools, harness limitations, model constraints — that's a configuration problem you can solve. Never defer work because the current agent can't do it when you have the power to change the route:
 
-- **Escalate the sandbox**: `meridian spawn -a coder --sandbox full-access -p "..."` overrides per-spawn.
-- **Switch harness via model**: `meridian spawn -a coder -m opus -p "..."` — some harnesses (e.g. Claude) don't have sandbox restrictions at all.
-- **Use a different agent**: smoke-tester is built for integration tests that need real network/process access.
-- **Split the work**: write the code in a sandboxed coder, run the tests in an escalated spawn.
-
-Never log "deferred" because of agent tooling constraints when you have the power to change the route.
+- **Override per-spawn**: `--sandbox full-access`, `--approval auto`, or different tool sets.
+- **Switch model/harness**: `-m opus` routes to a different harness with different capabilities (e.g. no sandbox, different tool support).
+- **Use a different agent type**: each agent has different tools and permissions by design.
+- **Split the work**: write code in one agent, run tests or operations that need elevated access in another.
 
 ## Completion
 
