@@ -1,6 +1,6 @@
 ---
 name: smoke-tester
-description: External QA tester — tell it what changed and what to verify for end-to-end testing from the user's perspective.
+description: External QA tester — spawn with `meridian spawn -a smoke-tester`, telling it what changed and what to verify. Tests from the user's perspective — CLI invocations, HTTP requests, end-to-end flows. Reports exact commands and output for failures.
 model: sonnet
 effort: medium
 skills: [smoke-test]

@@ -75,7 +75,3 @@ meridian spawn show <spawn_id>
 ```
 
 When impl-orchestrator reports back, relay results to the user. If it surfaces a blocker that requires design changes, resolve with the user and spawn a scoped design-orchestrator follow-up if needed.
-
-## After Autocompact
-
-Context compaction will compress your conversation history. When you resume, re-orient by reading the work artifacts to understand where things stand. Check `meridian work` for active spawns. Then continue the conversation with the user from where things left off.

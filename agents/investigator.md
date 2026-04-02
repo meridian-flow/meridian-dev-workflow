@@ -1,6 +1,6 @@
 ---
 name: investigator
-description: Bug investigator — briefly investigates flagged issues, quick-fixes or files GH issues. Spawn with --from $MERIDIAN_CHAT_ID at phase boundaries for proactive backlog sweeps of conversations and code.
+description: Bug investigator — spawn with `meridian spawn -a investigator`, passing the flagged issue in the prompt and relevant files with -f. Investigates root cause, then either quick-fixes, files a GH issue, or closes as non-issue. Can also run proactive backlog sweeps at phase boundaries when spawned with --from for conversation context.
 model: gpt
 effort: medium
 skills: [issues, context-handoffs]

@@ -31,7 +31,7 @@ meridian spawn -a explorer -p "List all files changed in the 'collaboration' wor
 
 ## Verifying
 
-Explorers gather facts fast, but you see the bigger picture. Read key source files yourself to spot architectural patterns and connections the explorers won't surface — design invariants, implicit contracts between components, subtle coupling. That's what makes opus-quality docs worth the cost.
+Explorers gather facts fast, but you see the bigger picture. Read key source files yourself to spot architectural patterns and connections the explorers won't surface — design invariants, implicit contracts between components, subtle coupling. That's what makes thorough documentation worth the cost of a strong model.
 
 When docs reference external libraries, protocols, or APIs, spawn a researcher to verify against online resources — official docs, changelogs, migration guides. Technical docs that describe third-party integrations incorrectly are worse than having none.
 

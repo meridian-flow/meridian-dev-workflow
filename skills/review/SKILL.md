@@ -34,7 +34,7 @@ Write your findings however makes sense for what you found. Good findings share 
 
 ## Communicating Impact
 
-Make it obvious which findings are serious and which are minor. The orchestrator triages your findings against context you don't have — design intent, upcoming phases, blast radius — so give them a clear signal about how much each finding matters and why. Lead with the things that could cause real damage (bugs, security holes, data loss, broken invariants) and let the smaller stuff follow naturally. When in doubt about how serious something is, err toward calling it out — the orchestrator can always downgrade, but they can't act on problems you buried.
+Make it obvious which findings are serious and which are minor. Whoever triages your findings has context you don't — design intent, upcoming phases, blast radius — so give them a clear signal about how much each finding matters and why. Lead with the things that could cause real damage (bugs, security holes, data loss, broken invariants) and let the smaller stuff follow naturally. When in doubt about how serious something is, err toward calling it out — severity can always be downgraded, but buried problems can't be acted on.
 
 ## The Adversarial Mindset
 

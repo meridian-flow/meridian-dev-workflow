@@ -46,32 +46,11 @@ Create an issue when you find something worth tracking that you can't or shouldn
 
 **Decisions already made** — If a decision is already made and implemented, there's nothing to track. The decision is done.
 
-## Labels
+## Labels and Issue Format
 
-Use labels consistently so the team can filter by category. Keep every issue tagged with what it is and which work item found it.
+Use labels consistently so the team can filter by category — tag every issue with what it is and which work item found it (`work:<slug>`). Every issue body should answer three questions: where was this found, what is it, and what should be done about it.
 
-| Label | Purpose |
-|-------|---------|
-| `bug` | Bug found during implementation |
-| `unexpected` | Surprising behavior worth investigating |
-| `backlog` | Needed but out of current scope |
-| `deferred` | Explicitly deferred from current work |
-| `review-finding` | From code review, not blocking |
-| `decision-needed` | Needs a decision before work can proceed |
-| `work:<slug>` | Links issue to its originating meridian work item |
-| `tech-debt` | Code quality, cleanup, refactoring needs |
-| `enhancement` | New feature or improvement to existing functionality |
-| `design` | Needs design discussion before implementation |
-| `blocked` | Waiting on external dependency or another issue |
-| `good-first-task` | Well-scoped, good for a single spawn |
-
-These are defaults. Create project-specific labels when none of the above fit — just keep them descriptive and consistent within the repo.
-
-See [`resources/gh-commands.md`](resources/gh-commands.md) for the full label taxonomy with colors, issue body template, and all `gh` CLI commands.
-
-## Issue Body Structure
-
-Every issue should answer three questions: where was this found, what is it, and what should be done about it. Use the template in [`resources/gh-commands.md`](resources/gh-commands.md) — it covers context, description, evidence, and suggested action.
+See [`resources/gh-commands.md`](resources/gh-commands.md) for the full label taxonomy with colors, the issue body template, and all `gh` CLI commands.
 
 ## Quick Example
 

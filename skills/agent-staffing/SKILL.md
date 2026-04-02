@@ -23,7 +23,7 @@ One architect is usually enough when the problem is constrained and the tradeoff
 
 ## Coders
 
-One coder per phase — multiple coders on the same files create merge conflicts and duplicated work. If a phase feels too big for one coder, the plan needs splitting. Pick the coder variant that matches the work: `coder` for backend/infrastructure, `frontend-coder` for UI.
+Default to one coder per phase — multiple coders on the same files tend to create merge conflicts and duplicated work. If a phase feels too big for one coder, splitting the plan is usually better than parallelizing coders. The exception is when phases touch cleanly disjoint file sets. Pick the coder variant that matches the work: `coder` for backend/infrastructure, `frontend-coder` for UI.
 
 ## Reviewers
 

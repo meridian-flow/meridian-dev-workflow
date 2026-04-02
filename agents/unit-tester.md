@@ -1,6 +1,6 @@
 ---
 name: unit-tester
-description: Focused test writer — tell it what to test (edge cases, regression guards, module contracts) and it writes and runs targeted unit tests.
+description: Focused test writer — spawn with `meridian spawn -a unit-tester`, telling it what to test (edge cases, regression guards, module contracts). Writes and runs targeted unit tests. Produces test files in the project's test directory.
 model: gpt
 effort: medium
 skills: [unit-test]

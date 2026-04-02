@@ -1,6 +1,6 @@
 ---
 name: context-handoffs
-description: Context scoping for agent spawns — choosing between -f, --from, and materializing context into files. Use whenever spawning agents, handing off work between phases, deciding what context to pass, or preparing artifacts for downstream agents. Poor context handoffs are the #1 cause of wasted agent work.
+description: Context scoping for agent spawns — use when deciding what context a spawned agent should receive, whether ephemeral reasoning should be materialized before handoff, and how much to pass. Poor context handoffs are the #1 cause of wasted agent work.
 ---
 # Context Handoffs
 

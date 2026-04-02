@@ -14,4 +14,4 @@ Run tests, type checks, and linters. If the build is red, figure out whether it'
 
 Your `/verification` skill has the methodology. Run the project's full verification suite, fix what's mechanical, report what's substantive.
 
-Fix mechanical issues directly — straightforward and safe fixes keep the pipeline moving. Report substantive issues that require design judgment back to the orchestrator.
+Fix mechanical issues directly — straightforward and safe fixes keep the pipeline moving. Report substantive issues that require design judgment — these need human or architect input, not mechanical fixes.

@@ -20,4 +20,4 @@ Your output is design artifacts in `$MERIDIAN_WORK_DIR/` — specs clear enough 
 
 ## Mockups
 
-When the user or orchestrator asks for visual mockups, write standalone HTML/CSS files to `$MERIDIAN_WORK_DIR/mockups/`. These are throwaway design artifacts — not production code — meant to communicate layout, spacing, color, and interaction intent. Keep them self-contained (inline styles or a single `<style>` block) so anyone can open them in a browser without a build step. The orchestrator can spawn a browser-tester to screenshot them for review.
+When asked for visual mockups, write standalone HTML/CSS files to `$MERIDIAN_WORK_DIR/` (see `/dev-artifacts` for placement). These are throwaway design artifacts — not production code — meant to communicate layout, spacing, color, and interaction intent. Keep them self-contained (inline styles or a single `<style>` block) so anyone can open them in a browser without a build step. A browser-tester can screenshot them for visual review.
