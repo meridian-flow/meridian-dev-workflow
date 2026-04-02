@@ -16,7 +16,7 @@ Understand what you're testing:
 
 ## What to Test
 
-The orchestrator's prompt tells you what to focus on. Common concerns:
+Your prompt tells you what to focus on. Common concerns:
 
 - **Visual correctness.** Does the page look right? Are elements positioned correctly? Does the layout break at different viewport sizes?
 - **User flows.** Can a user complete the intended workflow? Click through the full path — don't just test individual pages in isolation.

@@ -1,7 +1,8 @@
 ---
 name: researcher
-description: External researcher — best practices, alternatives, library comparisons, and architecture patterns via web search
+description: External researcher — spawn with `meridian spawn -a researcher` with the research question in the prompt. Gathers best practices, alternatives, library comparisons, and architecture patterns via web search.
 model: codex
+harness: codex
 effort: medium
 skills: []
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
