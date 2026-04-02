@@ -124,8 +124,8 @@ resolve from the base source. Both sources must be installed.
 ## Install
 
 ```bash
-meridian sources install @haowjy/meridian-base
-meridian sources install @haowjy/meridian-dev-workflow
+mars add haowjy/meridian-base
+mars add haowjy/meridian-dev-workflow
 ```
 
 ## Layout
