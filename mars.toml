@@ -1,6 +1,6 @@
 [package]
 name = "meridian-dev-workflow"
-version = "0.0.1"
+version = "0.0.2"
 description = "Opinionated dev team for Meridian — architects, coders, reviewers, testers, and the skills that coordinate them."
 
 [dependencies.meridian-base]
@@ -9,3 +9,5 @@ url = "https://github.com/haowjy/meridian-base"
 [dependencies.anthropic-skills]
 url = "https://github.com/anthropics/skills"
 skills = ["frontend-design"]
+
+[settings]
