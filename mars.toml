@@ -10,4 +10,50 @@ url = "https://github.com/haowjy/meridian-base"
 url = "https://github.com/anthropics/skills"
 skills = ["frontend-design"]
 
+[models.opus]
+harness = "claude"
+provider = "anthropic"
+match = ["opus"]
+description = "Strong orchestrator. Creative but can hallucinate. Best for orchestration, architecture, and design exploration."
+
+[models.sonnet]
+harness = "claude"
+provider = "anthropic"
+match = ["sonnet"]
+description = "Balanced performance and cost. Good general-purpose model."
+
+[models.haiku]
+harness = "claude"
+provider = "anthropic"
+match = ["haiku"]
+description = "Fast and affordable. Good for bulk exploration and simple tasks."
+
+[models.codex]
+harness = "codex"
+provider = "openai"
+match = ["codex"]
+exclude = ["*-mini", "*-spark", "*-max"]
+description = "Default backend implementer. Fast, token-efficient, faithful to instructions. Weak at frontend."
+
+[models.gpt]
+harness = "codex"
+provider = "openai"
+match = ["gpt-5.*"]
+exclude = ["*-codex", "*-pro", "*-mini", "*-nano", "*-chat", "*-turbo"]
+description = "Strongest generalist. Best for review, verification, security, and architectural judgment."
+
+[models.gpt52]
+harness = "codex"
+provider = "openai"
+match = ["gpt-5.2"]
+exclude = ["*-codex", "*-pro", "*-mini", "*-nano", "*-chat", "*-turbo"]
+description = "Extremely thorough reviewer, but slow."
+
+[models.gemini]
+harness = "opencode"
+provider = "google"
+match = ["gemini", "pro"]
+exclude = ["*-customtools"]
+description = "Large context window. Best for multimodal tasks."
+
 [settings]
