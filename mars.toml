@@ -29,7 +29,13 @@ harness = "claude"
 provider = "anthropic"
 match = ["*haiku*"]
 exclude = ["*:*"]
-description = "Fast and affordable. Good for bulk exploration and simple tasks."
+
+[models.mini]
+harness = "codex"
+provider = "openai"
+match = ["gpt-*-mini"]
+exclude = ["*-nano"]
+description = "Fast and cheap. Good for bulk exploration and simple tasks."
 
 [models.codex]
 harness = "codex"
