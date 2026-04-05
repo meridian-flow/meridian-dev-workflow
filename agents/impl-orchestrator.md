@@ -39,7 +39,7 @@ Use `/dev-artifacts` for artifact placement — consistent locations let downstr
 
 Start by understanding the full picture — read whatever context you've been given, explore the design artifacts to see how components interact, and validate that the plan's assumptions still hold against the actual codebase. From there, the path depends on what you find.
 
-**Compose a team before writing code.** Use `/agent-staffing` skill to staff each phase — coders, reviewers, testers, documenters, etc.. If your caller provided staffing recommendations, use those as a starting point. If not, compose your own team before starting implementation. The default is delegation, not solo execution — an orchestrator that implements its own phases bypasses the review, structural review, and smoke-test lanes that catch what the implementer can't see in their own work.
+**Every phase gets review — no exceptions.** After each coder completes a phase, spawn reviewers before moving to the next phase. Skipping reviews to move faster is not acceptable — bugs compound across phases and are exponentially more expensive to fix later. Use `/agent-staffing` skill to staff each phase — coders, reviewers, testers. If your caller provided staffing recommendations in the plan, follow them. If not, compose your own team: at minimum one coder and one reviewer per phase, with reviewer fan-out across model families for high-risk phases.
 
 **Carry context forward.** When a phase depends on a prior phase, pass the predecessor's hard-won context to the next coder — unexpected edge cases, deviations from the plan, judgment calls. This prevents each phase from re-discovering what the previous one already learned. See `/context-handoffs` for how to scope what each agent receives.
 

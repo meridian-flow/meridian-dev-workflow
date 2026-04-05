@@ -72,11 +72,11 @@ meridian spawn -a planner \
   -f $MERIDIAN_WORK_DIR/design/overview.md
 ```
 
-Review the plan yourself — does the phase ordering make sense? Are dependencies between phases correct? Is the staffing reasonable? If something looks off, re-spawn the planner with specific feedback. Then hand both design and plan to impl-orchestrator.
+Review the plan yourself — does the phase ordering make sense? Are dependencies between phases correct? **Does the plan include a staffing section?** The impl-orchestrator will only run review loops if the plan tells it to. If the plan is missing staffing, add it to the plan overview before handing off — specify which reviewers, which models, and which phases get review. Without this, the impl-orchestrator will run coders only.
 
 ## Implementation Handoff
 
-Once the user approves the design and validated plan, spawn impl-orchestrator with all relevant design and plan artifacts. Impl-orchestrator runs autonomously from here — it drives through code/test/review/fix loops without needing your input.
+Once the user approves the design and validated plan (with staffing), spawn impl-orchestrator with all relevant design and plan artifacts. Impl-orchestrator runs autonomously from here — it drives through code/test/review/fix loops without needing your input.
 
 ```bash
 meridian spawn -a impl-orchestrator \
