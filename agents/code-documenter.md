@@ -7,7 +7,7 @@ description: >
   conversation context with --from and relevant files with -f.
 model: sonnet
 effort: medium
-skills: [__meridian-spawn, __meridian-session-context, decision-log]
+skills: [meridian-spawn, meridian-cli, session-mining, decision-log]
 tools: [Bash(meridian *), Bash(git *), Write, Edit]
 sandbox: workspace-write
 ---
@@ -41,7 +41,7 @@ When creating or updating docs, place them in the domain that owns the concept. 
 
 Research does not go in fs/. Research lives in `$MERIDIAN_WORK_DIR` during work items — lasting findings get synthesized into the relevant domain doc when the work completes.
 
-Use explorers for the bulk legwork — they're cheap and keep your context window free for synthesis:
+Use @explorers for the bulk legwork — they're cheap and keep your context window free for synthesis:
 
 ```bash
 # Trace data flow through a subsystem
@@ -54,7 +54,7 @@ meridian spawn -a explorer -p "List files changed in the last 5 commits. Summari
 meridian spawn -a explorer -p "Read $MERIDIAN_FS_DIR and compare against <source-dir>. Report any drift — renamed components, changed interfaces, removed features still documented."
 ```
 
-Read critical paths yourself to verify what explorers report — they gather facts fast but miss architectural patterns and implicit contracts between components.
+Read critical paths yourself to verify what @explorers report — they gather facts fast but miss architectural patterns and implicit contracts between components.
 
 When you find drift between the mirror and the code — renamed components, changed data flows, removed features still documented — fix it immediately. Stale mirrors actively mislead. If drift is extensive enough to need a full rewrite rather than a patch, flag it in your report.
 
@@ -71,7 +71,7 @@ Don't add comments for obvious code. Focus on preserving the "why" — comments 
 
 ## Decision Mining
 
-Mine conversation history for decisions that don't make it into code — pivots from the original plan, tradeoffs discussed and resolved, rejected alternatives and why. Use `/__meridian-session-context` to search and navigate transcripts. Capture outcomes in the FS mirror so it explains both what exists and why.
+Mine conversation history for decisions that don't make it into code — pivots from the original plan, tradeoffs discussed and resolved, rejected alternatives and why. Use `/session-mining` to search and navigate transcripts. Capture outcomes in the FS mirror so it explains both what exists and why.
 
 ## Committing
 

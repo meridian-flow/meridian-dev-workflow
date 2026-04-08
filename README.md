@@ -3,7 +3,7 @@
 An opinionated multi-agent dev team for structured software development,
 built on [Meridian](https://github.com/haowjy/meridian-channel)'s coordination
 primitives. Install this and your orchestrator gets a full squad — architects,
-coders, reviewers, testers, researchers, and documenter — plus workflow skills
+coders, reviewers, testers, researchers, and documenters — plus workflow skills
 that teach it how to run a structured development lifecycle.
 
 Built on [meridian-base](https://github.com/haowjy/meridian-base). Both must
@@ -80,7 +80,9 @@ meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
 |---|---|---|
 | `researcher` | codex | Best practices, library comparisons, and architecture patterns via web search |
 | `explorer` | gpt-5.3-codex-spark | Fast, cheap codebase explorer — reads files, searches code, mines past sessions |
-| `documenter` | opus | Technical document synthesis — writes clear, linked docs humans and agents can navigate |
+| `code-documenter` | sonnet | Maintains the codebase mirror in `$MERIDIAN_FS_DIR`, keeps code comments accurate, and captures design rationale from sessions |
+| `tech-writer` | sonnet | Writes and maintains user-facing docs — getting started guides, API reference, CLI usage, and tutorials |
+| `docs-orchestrator` | opus | Fans out code-documenters and tech-writers, then runs a reviewer loop until docs converge and are committed |
 
 ## Skills
 
@@ -91,6 +93,7 @@ meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
 | `decision-log` | Decision capture — reasoning, alternatives, constraints |
 | `dev-artifacts` | Shared artifact convention between orchestrators |
 | `context-handoffs` | Context scoping for agent spawns |
+| `session-mining` | Session-mining workflow patterns — recover parent-session decisions and delegate bulk transcript reads |
 | `architecture` | Problem framing, tradeoff analysis, visual communication with Mermaid diagrams |
 | `planning` | Decomposing designs into phases — focused blueprints, dependency mapping, execution order |
 | `review-orchestration` | Directing reviewers — choosing focus areas, model diversity, synthesizing findings |
@@ -114,9 +117,10 @@ meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
 
 Several agents load skills from both this repo and `meridian-base`:
 
-- `__meridian-spawn` (base) — how to spawn and coordinate agents
-- `__meridian-session-context` (base) — how to mine past sessions for context
-- `__meridian-work-coordination` (base) — how to manage work items
+- `meridian-spawn` (base) — how to spawn and coordinate agents
+- `meridian-cli` (base) — meridian and mars CLI mental model, sessions, and diagnostics
+- `meridian-work-coordination` (base) — how to manage work items
+- `session-mining` (dev-workflow) — workflow patterns for mining decisions from session history
 
 The install engine warns about cross-source deps but doesn't fail — these
 resolve from the base source. Both sources must be installed.
@@ -124,8 +128,8 @@ resolve from the base source. Both sources must be installed.
 ## Install
 
 ```bash
-mars add haowjy/meridian-base
-mars add haowjy/meridian-dev-workflow
+meridian mars add haowjy/meridian-base
+meridian mars add haowjy/meridian-dev-workflow
 ```
 
 ## Layout
