@@ -1,0 +1,1 @@
+../../agents/smoke-tester.md
