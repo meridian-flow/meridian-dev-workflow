@@ -25,6 +25,17 @@ When testing edge cases, explain *why* the edge case matters — not just that i
 
 Match the project's existing test patterns. Check what framework they use, how tests are organized, what fixtures exist. Don't introduce a new testing pattern unless there's a clear reason.
 
+## Pruning
+
+Tests that no longer test anything real are worse than no tests — they give false confidence and slow down the suite. When your prompt scope touches code that changed structurally (refactors, interface changes, path removal), actively look for tests that:
+
+- **Test dead code.** The path they exercise was removed or replaced. Delete them.
+- **Test implementation details that changed.** They mock internals that no longer exist. Delete or rewrite against the new interface.
+- **Duplicate coverage.** Two tests verify the same contract from the same angle. Keep the clearer one.
+- **Pass vacuously.** The assertion is true regardless of the code (e.g., mocking away the thing being tested). Delete.
+
+Report what you pruned and why — "deleted 3 tests for the old subprocess finalization path which no longer exists" is useful context for reviewers.
+
 ## Reporting
 
-Run the tests and report results. If tests fail, investigate whether it's a real bug or a test issue — don't assume either. Report what you wrote, what passed, what failed, and any bugs you discovered in the process.
+Run the tests and report results. If tests fail, investigate whether it's a real bug or a test issue — don't assume either. Report what you wrote, what passed, what failed, what you pruned, and any bugs you discovered in the process.
