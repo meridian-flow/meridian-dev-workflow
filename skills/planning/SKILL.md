@@ -13,7 +13,17 @@ See `/dev-artifacts` for where blueprints, status tracking, and decision logs go
 
 ## Phase Decomposition
 
-Break the design into phases. Each phase becomes a unit of work — small enough to be completable, large enough to be meaningful. See `/agent-staffing` for how to staff each phase.
+Break the design into phases. Each phase becomes a unit of work — small enough to be completable, large enough to be meaningful.
+
+### Staffing is mandatory output
+
+Every plan must include a staffing section that the @impl-orchestrator can execute without guessing. Without explicit staffing, the orchestrator runs @coders only — no review loops, no model diversity, no quality gates beyond tests. The staffing section must specify:
+
+1. **Per-phase teams**: which `@coder` model, which testers (`@verifier`, `@smoke-tester`, `@unit-tester`, `@browser-tester`), and whether the phase needs a scoped `@reviewer` (escalation only for intermediate phases).
+2. **Final review loop**: which `@reviewer` models, which focus areas, and which `@refactor-reviewer` assignments. Fan out across diverse model families so blind spots don't overlap. Pass design docs to the design-alignment reviewer.
+3. **Escalation policy**: when intermediate-phase testers should trigger a `@reviewer` instead of just fixing and retesting.
+
+See `/agent-staffing` for the full framework — reviewer catalogs, model selection, effort scaling, and parallelism rules.
 
 A good phase is:
 
