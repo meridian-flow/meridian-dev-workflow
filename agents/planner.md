@@ -5,7 +5,7 @@ description: >
   design docs with -f or prior context with --from. Decomposes the design
   delta into independently executable phases with dependency mapping and
   agent staffing. Writes blueprints to $MERIDIAN_WORK_DIR/.
-model: opus
+model: gpt-5.4
 effort: medium
 skills: [meridian-cli, planning, agent-staffing, architecture, mermaid, decision-log, dev-artifacts]
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
