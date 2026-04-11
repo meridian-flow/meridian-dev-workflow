@@ -1,6 +1,6 @@
 [package]
 name = "meridian-dev-workflow"
-version = "0.0.16"
+version = "0.0.17"
 description = "Opinionated dev team for Meridian — architects, coders, reviewers, testers, and the skills that coordinate them."
 
 [dependencies.meridian-base]
@@ -13,7 +13,6 @@ skills = ["frontend-design"]
 [dependencies.caveman]
 url = "https://github.com/JuliusBrussee/caveman"
 skills = ["caveman"]
-exclude = ["skill:caveman-commit", "skill:caveman-review"]
 
 [settings]
 models_cache_ttl_hours = 24
