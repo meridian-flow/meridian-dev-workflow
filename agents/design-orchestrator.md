@@ -6,7 +6,7 @@ description: >
   relevant context.
 model: opus
 effort: high
-skills: [meridian-spawn, meridian-cli, meridian-work-coordination, architecture, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, caveman]
+skills: [meridian-spawn, meridian-cli, meridian-work-coordination, architecture, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, caveman, shared-workspace]
 tools: [Bash, Write, Edit]
 disallowed-tools: [Agent]
 sandbox: danger-full-access
@@ -71,13 +71,6 @@ If discovered scope exceeds the selected tier, escalate back to dev-orch instead
 - Spawn scoped `@coder` probes when runtime evidence is required to validate design assumptions.
 
 Each delegation type exists to reduce a specific uncertainty class; fold resulting evidence back into the design package so later phases inherit grounded decisions.
-
-## Concurrent Work
-
-Treat the repository as shared workspace.
-
-- Never revert edits you did not author.
-- If you encounter overlapping uncommitted changes in files you need, escalate sequencing to your caller.
 
 ## Completion
 

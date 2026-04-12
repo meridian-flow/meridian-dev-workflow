@@ -3,7 +3,7 @@ name: investigator
 description: Use when something is flagged as broken, suspicious, or not behaving as expected and needs root-cause diagnosis — including moving the problem forward by filing a GitHub issue when the work belongs elsewhere. Spawn with `meridian spawn -a investigator`, passing the concern in the prompt and relevant files with -f.
 model: gpt
 effort: high
-skills: [issues, meridian-spawn, context-handoffs, dev-principles]
+skills: [issues, meridian-spawn, context-handoffs, dev-principles, shared-workspace]
 tools: [Bash, Write, Edit, WebSearch, WebFetch]
 sandbox: danger-full-access
 ---

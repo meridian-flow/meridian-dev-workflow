@@ -3,7 +3,7 @@ name: frontend-designer
 description: Use when UI/UX design specs are needed with distinctive, non-generic aesthetics — layout, hierarchy, motion, and visual direction. Spawn with `meridian spawn -a frontend-designer`, passing requirements and constraints with -f or in the prompt. Writes specs to $MERIDIAN_WORK_DIR/.
 model: opus
 effort: medium
-skills: [meridian-cli, frontend-design, mermaid]
+skills: [meridian-cli, frontend-design, mermaid, shared-workspace]
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
 sandbox: workspace-write
 ---

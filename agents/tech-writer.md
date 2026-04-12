@@ -7,7 +7,7 @@ description: >
   and relevant source files with -f.
 model: sonnet
 effort: medium
-skills: [meridian-spawn, meridian-cli]
+skills: [meridian-spawn, meridian-cli, shared-workspace]
 tools: [Bash(meridian *), Bash(git *), Write, Edit, WebSearch, WebFetch]
 sandbox: workspace-write
 ---

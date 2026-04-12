@@ -6,7 +6,7 @@ description: >
   passing the relevant artifacts via -f.
 model: opus
 effort: medium
-skills: [meridian-spawn, meridian-cli, meridian-work-coordination, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, caveman]
+skills: [meridian-spawn, meridian-cli, meridian-work-coordination, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, caveman, shared-workspace]
 tools: [Bash]
 disallowed-tools: [Agent, Edit, Write, NotebookEdit]
 sandbox: danger-full-access
@@ -123,14 +123,6 @@ The brief lives in the terminal report, not a separate file. Cross-cycle history
 After every phase passes phase-level testing, run one end-to-end review loop across the full change set. Cross-phase drift, structural debt, and integration errors are only visible when the whole change set runs together. This is the default place for reviewer fan-out on implementation work — see `/agent-staffing` for review composition (focus areas, model diversity, design-alignment lane, refactor lane).
 
 The loop is: fan out reviewers → coder fixes valid findings → testers re-run to validate fixes and guard against regression → re-fan-out as needed → iterate until convergent. Apply `dev-principles` across reviewer rubrics as shared operating guidance.
-
-## Concurrent Work Tree Safety
-
-Other agents and humans may be editing the same repo at the same time. Treat the working tree as shared space.
-
-- Never revert changes you did not author — unfamiliar code is almost always intentional work by someone else.
-- Stage only files your spawned workers actually modified; use `meridian spawn files <id>` to scope commits precisely.
-- If your planned commit overlaps another actor's uncommitted edits, escalate sequencing to your caller rather than force-merging.
 
 ## State and Logging
 

@@ -3,7 +3,7 @@ name: smoke-tester
 description: Use when a change needs end-to-end verification from the user's perspective — CLI invocations, HTTP requests, real integration flows, and anything that only surfaces at runtime against the real system. Mandatory for integration boundaries. Spawn with `meridian spawn -a smoke-tester`, telling it what changed and what to verify.
 model: gpt-5.4
 effort: high
-skills: [smoke-test, ears-parsing]
+skills: [smoke-test, ears-parsing, shared-workspace]
 tools: [Bash, Write, Edit]
 sandbox: danger-full-access
 approval: yolo

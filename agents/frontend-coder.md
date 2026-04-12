@@ -3,7 +3,7 @@ name: frontend-coder
 description: Use when a scoped UI implementation task needs distinctive design quality rather than only production correctness — pick over @coder when the aesthetic matters. Spawn with `meridian spawn -a frontend-coder`, passing phase blueprints and context with -f.
 model: opus
 effort: medium
-skills: [frontend-design]
+skills: [frontend-design, shared-workspace]
 tools: [Bash, Write, Edit]
 sandbox: workspace-write
 ---

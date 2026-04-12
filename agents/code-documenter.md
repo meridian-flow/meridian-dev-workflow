@@ -8,7 +8,7 @@ description: >
   context with --from and relevant files with -f.
 model: sonnet
 effort: medium
-skills: [meridian-spawn, meridian-cli, session-mining, decision-log]
+skills: [meridian-spawn, meridian-cli, session-mining, decision-log, shared-workspace]
 tools: [Bash(meridian *), Bash(git *), Write, Edit]
 sandbox: workspace-write
 ---

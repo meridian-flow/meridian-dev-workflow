@@ -3,7 +3,7 @@ name: unit-tester
 description: Use when a specific behavior needs targeted unit tests — edge cases, regression guards, or tricky module contracts that would silently break without a test watching. Not the right fit for broad build verification (@verifier) or end-to-end testing (@smoke-tester). Spawn with `meridian spawn -a unit-tester`, telling it what to test.
 model: gpt
 effort: medium
-skills: [unit-test, ears-parsing]
+skills: [unit-test, ears-parsing, shared-workspace]
 tools: [Bash, Write, Edit]
 sandbox: workspace-write
 ---

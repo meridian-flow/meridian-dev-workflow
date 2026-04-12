@@ -10,7 +10,7 @@ description: >
 model: codex
 harness: codex
 effort: medium
-skills: []
+skills: [shared-workspace]
 tools: [Bash(meridian *), WebSearch, WebFetch]
 sandbox: read-only
 ---

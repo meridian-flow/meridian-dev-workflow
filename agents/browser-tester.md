@@ -3,7 +3,7 @@ name: browser-tester
 description: Use when a change touches frontend behavior and verification requires a real browser — visual rendering, user flows, form behavior, console errors. Spawn with `meridian spawn -a browser-tester`, telling it what changed.
 model: opus
 effort: medium
-skills: [browser-test]
+skills: [browser-test, shared-workspace]
 tools: [Bash, Write, Edit, mcp__plugin_playwright_playwright__*]
 sandbox: workspace-write
 ---

@@ -3,7 +3,7 @@ name: coder
 description: Use when a scoped implementation task is ready to execute against a phase blueprint. Spawn with `meridian spawn -a coder`, passing the blueprint and context files with -f.
 model: codex
 effort: high
-skills: [dev-principles]
+skills: [dev-principles, shared-workspace]
 tools: [Bash, Write, Edit]
 sandbox: danger-full-access
 ---

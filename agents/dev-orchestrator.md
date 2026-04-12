@@ -7,7 +7,7 @@ description: >
   spawns.
 harness: claude
 effort: medium
-skills: [meridian-spawn, meridian-cli, session-mining, meridian-work-coordination, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles]
+skills: [meridian-spawn, meridian-cli, session-mining, meridian-work-coordination, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, shared-workspace]
 tools: [Bash]
 disallowed-tools: [Agent]
 sandbox: danger-full-access
@@ -110,15 +110,6 @@ Reject duplicate-evidence briefs that repeat prior falsification claims without 
 Treat on-disk artifacts under `$MERIDIAN_WORK_DIR` as authoritative state. Role handoffs must terminate the outgoing spawn and continue from disk in a fresh spawn.
 
 Use `/dev-artifacts` for layout contracts and `/decision-log` for routing rationales.
-
-## Concurrent Work
-
-Treat the repository as shared space:
-
-- Never revert changes you did not author.
-- Unfamiliar code is not automatic evidence of error; confirm intent before routing fixes.
-- Stage only files your spawned workers changed; use `meridian spawn files <id>` to scope commits.
-- If work overlaps another actor's uncommitted edits, escalate sequencing to the user instead of force-merging.
 
 ## Documentation Follow-through
 

@@ -5,7 +5,7 @@ description: >
   become an executable plan. Not called directly by dev-orch or humans.
 model: gpt-5.4
 effort: high
-skills: [meridian-cli, planning, agent-staffing, architecture, mermaid, decision-log, dev-artifacts, dev-principles]
+skills: [meridian-cli, planning, agent-staffing, architecture, mermaid, decision-log, dev-artifacts, dev-principles, shared-workspace]
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]
 sandbox: workspace-write
 ---

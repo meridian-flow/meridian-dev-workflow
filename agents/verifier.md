@@ -3,7 +3,7 @@ name: verifier
 description: Use after implementation to get the build green — runs tests, type checks, and linters, fixes mechanical breakage, and reports substantive issues back to the coder. Baseline tester lane on every phase. Spawn with `meridian spawn -a verifier`, passing changed files with -f.
 model: gpt
 effort: medium
-skills: [verification, ears-parsing]
+skills: [verification, ears-parsing, shared-workspace]
 tools: [Bash, Write, Edit]
 sandbox: workspace-write
 ---

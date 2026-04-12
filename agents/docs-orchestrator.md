@@ -8,7 +8,7 @@ description: >
   with -f.
 model: opus
 effort: medium
-skills: [meridian-spawn, meridian-cli, meridian-work-coordination, session-mining, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, caveman]
+skills: [meridian-spawn, meridian-cli, meridian-work-coordination, session-mining, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, caveman, shared-workspace]
 tools: [Bash]
 disallowed-tools: [Agent, Edit, Write, NotebookEdit]
 sandbox: danger-full-access
@@ -58,10 +58,6 @@ When reviewers find issues, spawn targeted fix spawns with findings as input —
 Scale team size to what actually changed, not to category labels. A single renamed function referenced in one doc may need one `@code-documenter` and one `@reviewer`. A redesigned subsystem may need multiple documenters per surface, full reviewer fan-out across diverse model families, and several fix iterations — larger changes accumulate more undocumented reasoning, so mine thoroughly before writing starts.
 
 Every documentation change runs through the final accuracy loop. Skipping review on small changes is a false economy: small changes produce accuracy issues at the same rate per change as large ones, because writers and reviewers see the same code differently regardless of scope. The question is how many writers and reviewers, not whether reviewers run.
-
-## Concurrent Work Tree Safety
-
-The repository is shared space. Never revert changes you did not author. Stage only files your documenter spawns actually modified — use `meridian spawn files <id>` to scope commits precisely. If overlapping edits appear, escalate sequencing to the user rather than force-merging.
 
 ## Completion
 

@@ -8,7 +8,7 @@ description: >
   relevant files with -f. Writes to $MERIDIAN_WORK_DIR/.
 model: gpt
 effort: high
-skills: [meridian-cli, architecture, mermaid, tech-docs, decision-log, context-handoffs, dev-artifacts, dev-principles]
+skills: [meridian-cli, architecture, mermaid, tech-docs, decision-log, context-handoffs, dev-artifacts, dev-principles, shared-workspace]
 tools: [Bash(meridian *), Bash(git *), Write, Edit, WebSearch, WebFetch]
 sandbox: workspace-write
 ---
