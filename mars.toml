@@ -1,6 +1,6 @@
 [package]
 name = "meridian-dev-workflow"
-version = "0.0.23"
+version = "0.0.24"
 description = "Opinionated dev team for Meridian — architects, coders, reviewers, testers, and the skills that coordinate them."
 
 [dependencies.meridian-base]
@@ -26,7 +26,6 @@ exclude = ["*:*"]
 
 [models.sonnet]
 harness = "claude"
-#description = "Balanced performance and cost. Good general-purpose model."
 provider = "anthropic"
 match = ["*sonnet*"]
 exclude = ["*:*"]
@@ -68,29 +67,3 @@ exclude = [
     "*-chat",
     "*-turbo",
 ]
-
-# [models.gpt52]
-# harness = "codex"
-# description = "Extremely thorough reviewer, but slow."
-# provider = "openai"
-# match = ["gpt-5.2*"]
-# exclude = [
-#     "*codex*",
-#     "*-pro",
-#     "*-mini",
-#     "*-nano",
-#     "*-chat",
-#     "*-turbo",
-# ]
-
-# [models.gemini]
-# harness = "opencode"
-# description = "Large context window. Best for multimodal tasks."
-# provider = "google"
-# match = [
-#     "gemini*",
-#     "*pro*",
-# ]
-# exclude = ["*-customtools"]
-
-
