@@ -19,14 +19,14 @@ models_cache_ttl_hours = 24
 
 [models.opus]
 harness = "claude"
-description = "Strong orchestrator. Creative but can hallucinate. Best for orchestration, architecture, and design exploration."
+description = "Strong orchestrator. Creative but can hallucinate. Best for orchestration, architecture, and big picture design exploration. Also the best at frontend. Most expensive of the models so use as reviewer sparingly."
 provider = "anthropic"
 match = ["*opus*"]
 exclude = ["*:*"]
 
 [models.sonnet]
 harness = "claude"
-description = "Balanced performance and cost. Good general-purpose model."
+#description = "Balanced performance and cost. Good general-purpose model."
 provider = "anthropic"
 match = ["*sonnet*"]
 exclude = ["*:*"]
@@ -69,26 +69,28 @@ exclude = [
     "*-turbo",
 ]
 
-[models.gpt52]
-harness = "codex"
-description = "Extremely thorough reviewer, but slow."
-provider = "openai"
-match = ["gpt-5.2*"]
-exclude = [
-    "*codex*",
-    "*-pro",
-    "*-mini",
-    "*-nano",
-    "*-chat",
-    "*-turbo",
-]
+# [models.gpt52]
+# harness = "codex"
+# description = "Extremely thorough reviewer, but slow."
+# provider = "openai"
+# match = ["gpt-5.2*"]
+# exclude = [
+#     "*codex*",
+#     "*-pro",
+#     "*-mini",
+#     "*-nano",
+#     "*-chat",
+#     "*-turbo",
+# ]
 
-[models.gemini]
-harness = "opencode"
-description = "Large context window. Best for multimodal tasks."
-provider = "google"
-match = [
-    "gemini*",
-    "*pro*",
-]
-exclude = ["*-customtools"]
+# [models.gemini]
+# harness = "opencode"
+# description = "Large context window. Best for multimodal tasks."
+# provider = "google"
+# match = [
+#     "gemini*",
+#     "*pro*",
+# ]
+# exclude = ["*-customtools"]
+
+
