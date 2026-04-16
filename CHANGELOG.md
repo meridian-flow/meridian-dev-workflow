@@ -4,6 +4,16 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.0.26] - 2026-04-16
+
+### Added
+- `@impl-orchestrator` gains explicit **Explore** phase before Plan. Verifies design against code reality — every structural claim in `design/refactors.md` or the architecture tree gets a file:line pointer confirming current code supports it; falsified claims trigger a Redesign Brief *before* any planning burn. Root-caused from R06 workspace-config-design cycle where design narrative ("move composition into factory") didn't match code shape (factory input DTO already carried pre-resolved outputs — the "move" was structurally impossible). Explore is a gate: `plan/pre-planning-notes.md` must exist + be populated before `@planner` spawns. Required fields: verified claims, falsified claims, latent risks not in design, probe gaps, leaf-distribution hypothesis. Previous prompt treated pre-planning notes as a preamble, which made skipping them invisible.
+- `@impl-orchestrator` Redesign Brief section lists explore-falsified as the cheapest trigger — costs only the explore phase, no planning or coding wasted. Plan and build triggers cost more. Explore exists to maximize the first and minimize the rest.
+- `agent-staffing` skill: new **@reviewer as Architectural Drift Gate** section under "When Reviewers Apply". Names the anti-pattern of rg-count / grep-count CI invariants for architectural enforcement — gameable via rename-and-shim (coder optimizing to green CI can stub the "correct" site and keep real composition at the old site, count stays clean, ship drift). Prescribes `@reviewer` with a declared-invariant prompt (lives at `.meridian/invariants/<surface>-invariant.md` or similar), CI spawns reviewer on PRs touching protected surface, blocks merge on `fail`. Pair with deterministic behavioral tests as backstop — reviewer is probabilistic, tests pin down specific invariants. Distinct @reviewer use from design review and final implementation review.
+
+### Changed
+- `agent-staffing` skill: new **Terminology: Fan-Out vs Parallel Lanes** section near the top. Names the distinction between same-prompt-different-models (fan-out, reserved for critical decisions) and different-prompts-different-focus-areas (parallel lanes, default review posture). Previous language conflated them in several places — "testers fan out in parallel" read as same-prompt-different-models to careful readers, but the intent was parallel lanes. Clarified the "testers fan out in parallel" and "final review loop fan-out" language in the Parallelism section to use the right terms.
+
 ## [0.0.25] - 2026-04-16
 
 ### Changed

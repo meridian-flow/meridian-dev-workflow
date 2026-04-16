@@ -11,6 +11,15 @@ Compose the right team for each phase. The goal is coverage across perspectives,
 
 Profile defaults are correct for most roles — don't override with `-m` unless you have a specific reason. The primary use of `-m` is **review fan-out**: spawning the same @reviewer role multiple times with different model families so their blind spots don't overlap. Run `meridian models list` to see available families and strengths.
 
+## Terminology: Fan-Out vs Parallel Lanes
+
+Two patterns that look similar and get conflated. Using the wrong term leads to either wasted model spend or missed coverage.
+
+- **Fan-out** — *same* prompt, *same* files, *different* models. Run one review question through 2–3 model families to get convergent (or divergent — itself informative) signal on a high-stakes call. Reserved for critical decisions: design convergence, final implementation review, architecture trade-offs where downstream work is locked in by the answer. Fan-out is the primary justification for `-m` overrides.
+- **Parallel lanes** — *different* prompts (different focus areas), usually one model each (profile default unless a specific focus area has a model-strength match). Design-alignment + correctness + structural is three parallel lanes, not fan-out — each lane is a different job, not three opinions on one job.
+
+Default posture for review staffing is **parallel lanes**. Escalate to **fan-out** when a single decision is critical enough to justify 2–3× the model spend on the same question.
+
 ## General Principles
 
 **Delegation is mandatory for orchestrators.** An orchestrator's value is coordination and judgment across phases, not solo execution. Orchestrators never write code or edit source files directly — not even for trivial changes. Implementing your own phases bypasses the review, structural review, and smoke-test lanes that catch what the implementer can't see in their own work. If no team composition was provided by your caller, compose one yourself before starting — use the catalogs in the resources below.
@@ -39,9 +48,9 @@ For high-risk focus areas anywhere, duplicate coverage across independent perspe
 
 Think about what depends on what:
 
-- **Intermediate implementation phase:** @coder runs first, then testers fan out in parallel. @reviewers are not part of the default per-phase lane.
+- **Intermediate implementation phase:** @coder runs first, then testers run in parallel lanes (verifier + smoke + unit as applicable). @reviewers are not part of the default per-phase lane.
 - **Escalation path:** if testers surface a real behavioral issue the @coder cannot resolve, spawn a scoped @reviewer for that specific concern while continuing with the smallest useful loop.
-- **Final review loop:** @reviewers fan out in parallel only after all implementation phases are complete and passing phase-level tests. Then @coder fixes, testers re-check, and @reviewers re-run until convergence.
+- **Final review loop:** @reviewers run in parallel lanes (different focus areas) only after all implementation phases are complete and passing phase-level tests. Fan-out across model families on top of that — same-question different-models — when the decision is critical. Then @coder fixes, testers re-check, and reviewers re-run until convergence.
 - @coders parallelize across non-overlapping phases (determined at plan time), not within a single phase.
 - Documenters and @investigators need the full picture — they run after review synthesis.
 
@@ -52,6 +61,22 @@ Think about what depends on what:
 - **Design phase (default):** heavy @reviewer fan-out across diverse model families; include @refactor-reviewer.
 - **Final implementation loop (default):** one end-to-end @reviewer fan-out over the complete change set; include @refactor-reviewer.
 - **Intermediate implementation phases (exception only):** @reviewer engagement is escalation-driven, triggered by specific unresolved behavioral concerns from testing.
+- **Architectural drift detection in CI (new pattern):** see next section.
+
+### @reviewer as Architectural Drift Gate
+
+Enforce structural invariants — *"composition happens inside factory X,"* *"stage Y has exactly one owner,"* *"module Z imports only from layers A and B"* — with a CI-spawned `@reviewer` reading the diff against a declared-invariant prompt. Semantic verification catches shim patterns, dead hooks, duplicated composition paths, and side channels. Structural claims need semantic verification; surface-level presence checks can be satisfied without the invariant being met.
+
+Shape:
+
+- The invariant prompt lives in-repo (e.g. `.meridian/invariants/<surface>-invariant.md`), version-controlled, updated when the architecture legitimately changes.
+- CI spawns the reviewer on PRs touching the protected surface, passes the diff plus relevant source files, and blocks merge on a `fail` verdict.
+- Reviewer returns `pass` / `fail` + specific violations with file:line pointers for each finding.
+- Use a cheaper model (mini / flash variants) for drift detection by default; escalate to the default reviewer model or fan-out on high-risk surfaces.
+- Pair with deterministic behavioral tests as backstop — not a replacement. The reviewer is probabilistic; a test that constructs the factory and asserts a specific input yields a specific output is not. Together they cover different failure modes: the reviewer catches novel violations of the declared intent; the tests pin down the specific invariants that must not drift.
+- Keep pyright, ruff, and pytest as the correctness gate. The drift gate sits beside them, not in place of them.
+
+This is a distinct @reviewer use from design review and final implementation review — it is a CI-triggered architectural gate running on every PR that touches the protected surface. When the gate fails, remediation is the same as any review finding: fix or log an explicit override with reasoning.
 
 ## Integration Boundaries
 

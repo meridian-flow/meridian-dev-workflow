@@ -44,13 +44,32 @@ Path conventions, plan structure, and artifact ownership live in `/dev-artifacts
 
 ## Lifecycle
 
+### Explore
+
+Verify the design against code reality before planning. The design describes an intended end-state; the code describes the current one. Explore produces the evidence that the gap between them is traversable, and surfaces the contradictions early when it is not.
+
+Explore produces `plan/pre-planning-notes.md` — a gate artifact required before any planner spawn. Fields:
+
+- **Verified design claims** — for every structural claim in `design/refactors.md` or the architecture tree, a file:line pointer confirming the current code supports the claim. When the design says "N callers consolidate to 1," verify the N exist *and* are the same semantic operation (see `dev-principles` → "Abstraction Judgment").
+- **Falsified design claims** — claims the code contradicts. Each falsification cites a specific contradicting observation (file:line, DTO shape, call-order evidence). This is the Redesign Brief trigger.
+- **Latent risks not in the design** — orphan-window races, DTO shape mismatches, leaky abstractions, platform-conditional branches, hidden invariants the design did not name. Each with a code pointer and proposed handling.
+- **Probe gaps** — things the design assumes and explore could not verify without runtime evidence. Each gap becomes a probe target or a documented acceptance-of-risk.
+- **Leaf-distribution hypothesis** — a provisional map of spec EARS statements to phases, for the planner to confirm or revise.
+
+Spawn `@explorer` for high-fanout verification (touching many files, scanning session history for prior decisions, mining prior spawn reports). Read code directly for targeted verification. When design intent is clear but code shape is ambiguous, run a scoped probe — a short script, a minimal-scale experiment, a tiny spawn that tries the change and reports what happened. See `dev-principles` → "Probe Your Options Before You Commit" and "Probe Before You Build at Integration Boundaries".
+
+Exit states:
+
+- **explore-clean** — design claims verified, no falsifications, latent risks documented with proposed handling. Proceed to Plan.
+- **explore-falsified** — one or more design claims contradicted by code reality. Terminate with a Redesign Brief citing the falsifications. A plan built on a falsified design propagates the falsification into every phase; the fix belongs at the design level.
+
+`plan/pre-planning-notes.md` existing and populated is the admission ticket to planning.
+
 ### Plan
 
-Read the design package (spec tree, architecture tree, refactor agenda, feasibility record), `requirements.md`, and prior `decisions.md`. On redesign cycles, also read the preservation hint.
+Read the design package (spec tree, architecture tree, refactor agenda, feasibility record), `requirements.md`, `decisions.md`, and the `plan/pre-planning-notes.md` produced by Explore. On redesign cycles, also read the preservation hint.
 
-Before spawning the planner, capture what the design alone does not carry in `plan/pre-planning-notes.md`: feasibility answers worth re-checking, architecture re-interpretation, module-scoped constraints, a hypothesis for leaf distribution across phases, probe gaps. Re-run probes when feasibility evidence is stale.
-
-Spawn `@planner` with the full artifact set. Handle three terminal shapes:
+Spawn `@planner` with the full artifact set including the explore outputs. Handle three terminal shapes:
 
 - **plan-ready** — artifacts written and consistent. If the parallelism posture declares sequential execution due to structural coupling, terminate with a Redesign Brief (unsafe sequential plans waste work). Otherwise terminate plan-ready for dev-orch review.
 - **probe-request** — run requested probes, update pre-planning notes, re-spawn the planner.
@@ -102,13 +121,15 @@ Each delegation type reduces a specific uncertainty class; fold the resulting ev
 
 ## Redesign Brief
 
-When reality contradicts the design — structural-blocking in planning, preserved-phase re-verification failure, or a spec leaf contradiction that cannot be fixed by changing the implementation — terminate with a `Redesign Brief` section in your terminal report:
+When reality contradicts the design — explore-falsified before planning, structural-blocking in planning, preserved-phase re-verification failure, or a spec leaf contradiction that cannot be fixed by changing the implementation — terminate with a `Redesign Brief` section in your terminal report:
 
-- Status: `design-problem` or `scope-problem`, and the trigger point
-- Evidence: runtime facts, failing EARS IDs, artifact pointers
+- Status: `design-problem` or `scope-problem`, and the trigger point (explore, plan, build, re-verify)
+- Evidence: runtime facts, code pointers, failing EARS IDs, artifact pointers
 - Falsification: the specific assumption that failed and the contradicting observation
 - Blast radius: what must change, what can stay, what must be replanned
-- Constraints discovered during execution
+- Constraints discovered during exploration or execution
 - For planning bail-outs: why decomposition cannot safely parallelize
+
+Explore-triggered redesigns are the cheapest — they cost only the explore phase, no planning or coding wasted. Planning-triggered and build-triggered redesigns cost more. The Explore phase exists to maximize the first and minimize the rest.
 
 Spec leaves are authoritative contracts — they cannot be overridden. Architecture leaves are observational — justified deviations are fine when logged in `decisions.md`.
