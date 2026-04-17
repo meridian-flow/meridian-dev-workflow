@@ -4,6 +4,13 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.0.29] - 2026-04-17
+
+### Changed
+- `shared-workspace` skill moved to `meridian-base` — base agents (orchestrator, subagent) need it, dev-workflow imports it via dependency.
+- `@architect`, `@docs-orchestrator`: spawn syntax teaching condensed to single line referencing `/meridian-spawn` skill.
+- `@planner`: `model: gpt-5.4` → `model: gpt`. Use symbolic name, let mars resolve to current best.
+
 ## [0.0.28] - 2026-04-17
 
 ### Changed

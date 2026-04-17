@@ -3,7 +3,7 @@ name: planner
 description: >
   Spawned by the planning impl-orchestrator when a design package needs to
   become an executable plan. Not called directly by dev-orch or humans.
-model: gpt-5.4
+model: gpt
 effort: high
 skills: [meridian-cli, planning, agent-staffing, architecture, mermaid, decision-log, dev-artifacts, dev-principles]
 tools: [Bash(meridian *), Write, Edit, WebSearch, WebFetch]

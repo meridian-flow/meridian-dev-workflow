@@ -1,6 +1,6 @@
 [package]
 name = "meridian-dev-workflow"
-version = "0.0.27"
+version = "0.0.29"
 description = "Opinionated dev team for Meridian — architects, coders, reviewers, testers, and the skills that coordinate them."
 
 [dependencies.meridian-base]
@@ -15,6 +15,10 @@ url = "https://github.com/JuliusBrussee/caveman"
 skills = ["caveman"]
 
 [settings]
+targets = [
+    ".agents",
+    ".claude",
+]
 models_cache_ttl_hours = 24
 
 [models.opus]
