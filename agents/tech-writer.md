@@ -9,6 +9,7 @@ model: sonnet
 effort: medium
 skills: [meridian-spawn, meridian-cli, shared-workspace]
 tools: [Bash(meridian *), Bash(git *), Write, Edit, WebSearch, WebFetch]
+disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout --:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
 sandbox: workspace-write
 ---
 

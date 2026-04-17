@@ -10,7 +10,7 @@ model: opus
 effort: high
 skills: [meridian-spawn, meridian-cli, meridian-work-coordination, session-mining, agent-staffing, decision-log, dev-artifacts, context-handoffs, dev-principles, caveman, shared-workspace]
 tools: [Bash, Bash(meridian spawn *)]
-disallowed-tools: [Agent, Edit, Write, NotebookEdit, Bash(git revert:*), Bash(git checkout --:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
+disallowed-tools: [Agent, Edit, Write, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout --:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
 sandbox: danger-full-access
 approval: auto
 autocompact: 85

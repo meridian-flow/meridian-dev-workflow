@@ -5,6 +5,7 @@ model: gpt
 effort: high
 skills: [meridian-cli, dev-principles, review, decision-log, context-handoffs]
 tools: [Bash(meridian spawn show *), Bash(meridian session *), Bash(meridian work show *), Bash(git diff *), Bash(git log *), Bash(git show *), Bash(git status *)]
+disallowed-tools: [Agent, Edit, Write, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree]
 sandbox: read-only
 ---
 
