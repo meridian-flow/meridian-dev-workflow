@@ -4,6 +4,29 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.0.30] - 2026-04-19
+
+### Added
+- `testing-principles` skill: research-backed testing foundation. Kent Beck's Test Desiderata, Gary Bernhardt's Functional Core / Imperative Shell, tier selection (unit vs integration vs smoke), common mistakes catalog.
+- `integration-test` skill: middle tier between unit and smoke. Fakes at external boundaries, no real I/O, tests component composition.
+- `orchestrate` skill: shared orchestration patterns. Convergence loops, escalation/redesign briefs, delegation discipline, artifact-as-state. All orchestrators load it.
+- `@integration-tester` agent: executes integration tests per the new skill.
+- `planning/resources/execution-model.md`: phase/subphase loop mermaid diagram. impl-orch and planner point here instead of restating.
+- `dev-artifacts/resources/plan-package.md`: phase file structure, artifact contracts. Offloaded from skill body.
+- `dev-artifacts/resources/ownership.md`: writer/reader rules, doc layers. Offloaded from skill body.
+
+### Changed
+- `smoke-test` skill: dual context — probing mode (research phase, understand behavior) vs verification mode (impl phase, prove correctness). Same tools, different intent.
+- `unit-test` skill: references `testing-principles`, language-agnostic, functional-core focus.
+- `planning` skill: subphase concept added. Subphases get light verification (build + existing tests), phases get full exit gates (testers + reviewer fan-out). Body trimmed, detail offloaded to resources.
+- `dev-artifacts` skill: body trimmed ~55%, detail offloaded to new resources.
+- `@impl-orchestrator`: flexible input — works with formal plan, or spawns @planner when no plan exists. Body trimmed ~65% since /orchestrate carries shared patterns.
+- `@planner`: can be spawned by @dev-orchestrator or @impl-orchestrator. Description updated. Body trimmed.
+- `@design-orchestrator`: loads `refactoring-principles`. Body trimmed ~45%, refactoring awareness section added.
+- `@dev-orchestrator`: body trimmed ~50%. Routing rules compressed.
+- `@docs-orchestrator`: body trimmed ~40%.
+- All orchestrators: `orchestrate` added to skills list, shared delegation/convergence/escalation patterns extracted.
+
 ## [0.0.29] - 2026-04-17
 
 ### Changed
