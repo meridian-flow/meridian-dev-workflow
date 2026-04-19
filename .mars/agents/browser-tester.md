@@ -1,1 +1,0 @@
-../../agents/browser-tester.md
