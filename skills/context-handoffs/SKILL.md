@@ -10,16 +10,16 @@ description: Context scoping for agent spawns — use when deciding what context
 
 ## Choose Mechanism
 
-- `-f`: default. Use concrete files.
+- `-f`: default. Folders for structure, specific files for content.
 - `--from`: use for reasoning/history not yet materialized.
 - Materialize first when context is critical.
 
 ```bash
-# Good: focused files
+# Good: folder for map, specific files for content
 meridian spawn -a coder -p "Implement auth middleware" \
-  -f <work_dir>/auth-design.md \
-  -f <work_dir>/phase-2.md \
-  -f src/middleware/base.py
+  -f src/middleware/ \
+  -f src/middleware/base.py \
+  -f <work_dir>/phase-2.md
 
 # Bad: broad dump
 meridian spawn -a coder -p "Implement auth middleware" \
@@ -47,10 +47,11 @@ meridian spawn -a coder -p "Implement event store" -f <work_dir>/approach.md
 ```bash
 meridian spawn -a coder \
   --from p301 \
-  -f <work_dir>/phase-2.md \
+  -f src/auth/ \
   -f src/auth/tokens.py \
+  -f <work_dir>/phase-2.md \
   -p "Implement token refresh, building on phase 1 token validation"
 ```
 
 - Use `--from` for predecessor reasoning.
-- Use `-f` for concrete artifacts.
+- Use `-f` folders for structure, specific files for content.

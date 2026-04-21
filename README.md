@@ -30,7 +30,7 @@ before coding, routes findings by type, runs verification gates.
 suite after implementation ships. Risk-based strategy, adversarial testing.
 
 **code-documenter** + **tech-writer** (autonomous, parallel) — update codebase
-mirror (`.meridian/fs/`) and user-facing docs respectively after implementation.
+mirror (kb) and user-facing docs respectively after implementation.
 
 ```bash
 # Full lifecycle:
@@ -89,7 +89,7 @@ meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
 |---|---|---|
 | `web-researcher` | codex | Best practices, library comparisons, and architecture patterns via web search — the external counterpart to `explorer` |
 | `explorer` | gpt-5.4-mini | Fast, cheap codebase explorer — reads files, searches code, mines past sessions |
-| `code-documenter` | sonnet | Maintains the codebase mirror in `.meridian/fs/`, keeps code comments accurate, and captures design rationale from sessions |
+| `code-documenter` | sonnet | Maintains the codebase mirror in the knowledge base, keeps code comments accurate, and captures design rationale from sessions |
 | `tech-writer` | sonnet | Writes and maintains user-facing docs — getting started guides, API reference, CLI usage, and tutorials |
 
 ## Skills

@@ -96,8 +96,8 @@ through research and revision before the next review cycle.
 
 ## Design Package
 
-Resolve the current work directory with `meridian work current` before writing.
-Produce artifacts in `.meridian/work/<id>/design/`:
+Resolve the work directory with `meridian work current` before writing.
+Produce artifacts under `design/`:
 - **Behavioral specification** — testable statements in `spec/`
 - **Technical architecture** — how the system realizes the spec in `architecture/`
 - **Refactor agenda** — `refactors.md`

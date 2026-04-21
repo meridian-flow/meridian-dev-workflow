@@ -6,7 +6,7 @@ description: >
   findings. Lighter than @design-orchestrator: does the writing, not the
   research or review coordination. Spawn with `meridian spawn -a design-writer`,
   passing the briefing in the prompt and existing design docs with -f.
-  Writes to `.meridian/work/<work_id>/design/`.
+  Writes to the work directory under `design/`.
 model: sonnet
 effort: medium
 skills: [dev-artifacts, architecture, shared-workspace]
@@ -41,7 +41,7 @@ design docs and any reference material. Read both before writing.
 
 ## What You Produce
 
-Design artifacts in `.meridian/work/<id>/design/`:
+Design artifacts in the work directory under `design/`:
 - **Spec documents** — behavioral statements in `spec/`
 - **Architecture documents** — technical realization in `architecture/`
 - **Refactor agenda** — `refactors.md`

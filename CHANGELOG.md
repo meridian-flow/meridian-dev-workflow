@@ -4,6 +4,11 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- Context backend migration: `.meridian/fs/` → kb (`meridian context kb`), `.meridian/work/<id>/` → work dir (`meridian work current`). All agents and skills use query commands instead of path construction or env vars.
+- Agents updated: architect, code-documenter, design-orchestrator, design-writer, dev-orchestrator, frontend-designer — removed path reconstruction, `meridian context --json`, hardcoded `.meridian/fs/` and `.meridian/work/` paths.
+- Skills updated: dev-artifacts (layout + ownership), agent-staffing/maintainers, context-handoffs — new `-f folder/` + `-f file` pattern in examples.
+
 ### Added
 - `@design-writer` agent: lightweight design doc writer for updates, post-review edits, scope adjustments. Sonnet model. Spawned by dev-orchestrator for settled changes — design-orchestrator still writes initial design.
 - `@test-orchestrator` agent: designs + produces permanent test suite after impl ships. Risk-based strategy before writing. Adversarial testing phase to counter LLM "verify what works" bias. Iterative refinement loop. Runs parallel with doc agents post-impl.

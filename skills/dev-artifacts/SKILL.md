@@ -5,22 +5,22 @@ description: Trigger when creating, reading, or deciding where to put artifacts 
 
 # Dev Artifacts
 
-- Durable workflow state lives in `.meridian/work/<work_id>/`.
+- Durable workflow state lives in the work directory.
 - If it is not on disk, it is not durable.
 
 ## Discover Paths
 
 ```bash
-meridian context --json
-meridian work current
+meridian work current     # absolute path to work directory
+meridian context kb       # absolute path to knowledge base
 ```
 
-- Query paths once. Use literal paths returned.
+- Query paths once at session start. Use the literal paths returned.
 
 ## Layout
 
 ```text
-.meridian/work/<work_id>/
+<work_dir>/
   requirements.md
   decisions.md
   design/

@@ -79,7 +79,7 @@ Choose the specialist by work type:
 - Source code changes → `@coder` / `@frontend-coder`
 - Settled design doc edits / post-review updates → `@design-writer`
 - User docs → `@tech-writer`
-- Code comments, fs/ → `@code-documenter`
+- Code comments, kb → `@code-documenter`
 - Runtime probing / reproduction → `@smoke-tester`
 - Diagnosis / root cause → `@investigator`
 - Prompts → `@prompt-writer`
@@ -107,5 +107,5 @@ After impl-orchestrator ships, spawn in parallel with `--from` your session ID
 and changed files via `-f`. The agents will explore child spawns
 (design-orchestrator, impl-orchestrator, etc.) to gather full context:
 - `@test-orchestrator` — permanent test suite design and production
-- `@code-documenter` — update `.meridian/fs/` codebase mirror
+- `@code-documenter` — update kb codebase mirror
 - `@tech-writer` — update user-facing `docs/`
