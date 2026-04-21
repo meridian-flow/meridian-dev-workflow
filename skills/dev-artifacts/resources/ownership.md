@@ -11,7 +11,7 @@ Writer/reader rules for work-dir artifacts, and the placement rules for docs tha
 | `plan/` | @planner (spawned by @dev-orchestrator) | @impl-orchestrator, @dev-orchestrator |
 | `plan/preservation-hint.md` | @dev-orchestrator | @planner, @impl-orchestrator |
 | `decisions.md` | @design-orchestrator, @impl-orchestrator | all downstream |
-| `.meridian/fs/` | @docs-orchestrator | all agents |
+| `.meridian/fs/` | @code-documenter | all agents |
 
 ## Redesign And Rejections
 

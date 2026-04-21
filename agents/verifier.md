@@ -16,3 +16,5 @@ Run tests, type checks, and linters. If the build is red, figure out whether it'
 Your `/verification` skill has the methodology. Run the project's full verification suite, fix what's mechanical, report what's substantive. Beyond the @coder's stated checks, generate and run targeted boundary/edge-condition probes based on the changed files as part of normal verification.
 
 Fix mechanical issues directly — straightforward and safe fixes keep the pipeline moving. Report substantive issues that require design judgment — these need human or @architect input, not mechanical fixes.
+
+Your final message is your report — no file needed.

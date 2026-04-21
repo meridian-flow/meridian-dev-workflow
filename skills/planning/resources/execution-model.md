@@ -10,11 +10,19 @@ flowchart TB
         direction TB
 
         subgraph SUBPHASE["FOR EACH SUBPHASE"]
-            C["@coder / @refactor-coder / @frontend-coder"]
-            C --> LV["Light @verifier<br/>(build + existing tests)"]
-            LV --> LR{"Issues?"}
-            LR -->|yes| C
-            LR -->|no| NEXT_SUB([Next Subphase])
+            PROBE{"Behavior unclear?"}
+            PROBE -->|yes| SM["@smoke-tester<br/>(probing mode)"]
+            SM --> IMPL
+            PROBE -->|no| IMPL
+            IMPL["@coder / @refactor-coder /<br/>@frontend-coder"]
+            IMPL --> LV["Light @verifier<br/>(build + existing tests)"]
+            LV --> LR["Light @reviewer -m codex<br/>(code quality + task adherence)"]
+            LR --> ROUTE{"Issues?"}
+            ROUTE -->|impl bug| IMPL
+            ROUTE -->|unclear behavior| SM
+            ROUTE -->|root-cause| INV["@investigator"]
+            INV --> IMPL
+            ROUTE -->|clean| NEXT_SUB([Next Subphase])
         end
 
         NEXT_SUB --> GATE
@@ -23,13 +31,14 @@ flowchart TB
             direction LR
             V["@verifier<br/>(full)"]
             ST["@smoke-tester<br/>(verify mode)"]
-            UT["@unit-tester /<br/>@integration-tester"]
-            RV["@reviewer<br/>(fan-out)"]
-            RFR["@refactor-reviewer"]
+            UT["@unit-tester /<br/>@integration-tester<br/>(temp — delete after)"]
+            RV["@reviewer<br/>(one general)"]
         end
 
         GATE --> PASS{"Gate passes?"}
-        PASS -->|no, findings| C
+        PASS -->|impl fix| IMPL
+        PASS -->|behavioral| SM
+        PASS -->|root-cause| INV
         PASS -->|yes| COMMIT([Commit phase])
         COMMIT --> NEXT_PHASE([Next Phase])
     end
@@ -37,9 +46,9 @@ flowchart TB
     NEXT_PHASE --> FINAL
 
     subgraph FINAL["FINAL GATE"]
-        FRV["@reviewer fan-out<br/>(full change set)"]
-        FST["@smoke-tester"]
-        CHECK["Verify plan coverage<br/>Verify design alignment"]
+        FRV["@reviewer fan-out<br/>(focus areas incl.<br/>plan coverage +<br/>design alignment)"]
+        FRFR["@refactor-reviewer<br/>(full change set)"]
+        FST["@smoke-tester<br/>(end-to-end)"]
     end
 
     FINAL --> GAPS{"Gaps found?"}
@@ -55,9 +64,19 @@ flowchart TB
 
 ## Fix-Cycle Routing
 
-- Light-verification issues within a subphase → back to the same coder spawn (context is still fresh).
-- Phase-gate issues → back into the phase, usually as a scoped coder fix followed by re-running the affected lanes, not the full gate.
-- Final-gate gaps → new phase appended to the plan, following the normal phase loop.
+Route findings to the right specialist, not always back to @coder:
+
+- **Implementation bugs** → back to the coder (context is still fresh).
+- **Unclear runtime behavior** → `@smoke-tester` probe before re-attempting the fix.
+- **Root-cause uncertainty** → `@investigator` to diagnose before coding resumes.
+- **Phase-gate findings** → route by type as above, then re-run affected gate lanes.
+- **Final-gate gaps** → new phase appended to the plan, following the normal phase loop.
+
+## Probe Before Coding
+
+When a subphase depends on runtime behavior that isn't well-understood, spawn
+`@smoke-tester` in probing mode before coding. Don't let @coder guess at system
+behavior — probing is cheap, wrong assumptions are expensive.
 
 ## When Subphases Are Omitted
 

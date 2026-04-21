@@ -3,7 +3,7 @@
 An opinionated multi-agent dev team for structured software development,
 built on [Meridian](https://github.com/meridian-flow/meridian-cli)'s coordination
 primitives. Install this and your orchestrator gets a full squad — architects,
-coders, reviewers, testers, internet-researchers, and documenters — plus workflow
+coders, reviewers, testers, web-researchers, and documenters — plus workflow
 skills that teach it how to run a structured development lifecycle.
 
 Built on [meridian-base](https://github.com/meridian-flow/meridian-base). Both must
@@ -13,26 +13,30 @@ be installed.
 
 The dev lifecycle splits across orchestrators with distinct ownership:
 
-**dev-orchestrator** (interactive) owns the user relationship — intent capture,
-scope sizing, design approval, plan review, and redesign routing.
+**dev-orchestrator** (interactive) — the primary developer. Translates between
+user and technical teams. Requirements gathering, scope sizing, design/plan
+approval, redesign routing. Spawns everything downstream.
 
-**design-orchestrator** (autonomous) owns the design package — behavioral spec
-(EARS statements), technical architecture, refactor agenda, and feasibility probes.
+**design-orchestrator** (autonomous) — owns the technical design. Challenges
+feasibility, explores structural options, produces behavioral spec + architecture.
 
-**impl-orchestrator** (autonomous, two roles per spawn) owns planning and execution.
-Planning role consumes the design package and calls `@planner` to produce the plan.
-Execution role consumes the approved plan and drives phase loops (code/test/fix)
-through to a final review loop. Each role runs in its own spawn.
+**planner** (autonomous) — decomposes design into executable phases with
+parallelism posture, EARS ownership, and staffing.
 
-**docs-orchestrator** (autonomous) owns post-implementation documentation —
-codebase mirror and user-facing docs through write/review/fix loops.
+**impl-orchestrator** (autonomous) — drives phase-by-phase execution. Probes
+before coding, routes findings by type, runs verification gates.
+
+**test-orchestrator** (autonomous) — designs and produces the permanent test
+suite after implementation ships. Risk-based strategy, adversarial testing.
+
+**code-documenter** + **tech-writer** (autonomous, parallel) — update codebase
+mirror (`.meridian/fs/`) and user-facing docs respectively after implementation.
 
 ```bash
-# dev-orchestrator handles requirements + design review
+# Full lifecycle:
+# dev-orchestrator → design-orchestrator → planner → impl-orchestrator
+#   → test-orchestrator + code-documenter + tech-writer (parallel)
 meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
-
-# @dev-orchestrator spawns @design-orchestrator → reviews design with user → spawns @impl-orchestrator (planning role)
-# → reviews plan with user → spawns @impl-orchestrator (execution role) → spawns @docs-orchestrator
 ```
 
 ## Agents
@@ -41,17 +45,18 @@ meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
 
 | Agent | Model | Role |
 |---|---|---|
-| `dev-orchestrator` | (harness default) | User relationship — intent capture, scope sizing, design/plan approval, redesign routing |
-| `design-orchestrator` | opus | Autonomous design — spec-first behavioral contract, architecture, feasibility probes, review convergence |
-| `impl-orchestrator` | opus | Two roles: planning (calls @planner, produces plan) and execution (drives phase loops, final review) |
-| `docs-orchestrator` | opus | Post-implementation documentation — write/review/fix loops for codebase mirror and user-facing docs |
+| `dev-orchestrator` | (harness default) | Primary developer — requirements gathering, routing, design/plan approval, redesign routing |
+| `design-orchestrator` | sonnet 1M | Technical design — challenges feasibility, explores options, produces spec + architecture |
+| `impl-orchestrator` | opus | Phase-by-phase execution — probe/code/verify loops, gates, final review |
+| `test-orchestrator` | gpt | Permanent test suite — risk-based strategy, tier design, adversarial testing |
 
 **Design & Planning:**
 
 | Agent | Model | Role |
 |---|---|---|
 | `architect` | gpt | Explores tradeoffs and produces hierarchical design docs with spec/architecture trees |
-| `planner` | gpt-5.4 | Decomposes design packages into executable phases with EARS-statement ownership and parallelism posture |
+| `planner` | gpt | Decomposes design packages into executable phases with EARS-statement ownership and parallelism posture |
+| `design-writer` | sonnet | Lightweight design doc writer — post-review updates, scope adjustments, settled design edits |
 | `frontend-designer` | opus | UI/UX design specs — layout, hierarchy, motion, aesthetic direction for frontend-coder |
 
 **Implementation:**
@@ -82,7 +87,7 @@ meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
 
 | Agent | Model | Role |
 |---|---|---|
-| `internet-researcher` | codex | Best practices, library comparisons, and architecture patterns via web search — the external counterpart to `explorer` |
+| `web-researcher` | codex | Best practices, library comparisons, and architecture patterns via web search — the external counterpart to `explorer` |
 | `explorer` | gpt-5.4-mini | Fast, cheap codebase explorer — reads files, searches code, mines past sessions |
 | `code-documenter` | sonnet | Maintains the codebase mirror in `.meridian/fs/`, keeps code comments accurate, and captures design rationale from sessions |
 | `tech-writer` | sonnet | Writes and maintains user-facing docs — getting started guides, API reference, CLI usage, and tutorials |

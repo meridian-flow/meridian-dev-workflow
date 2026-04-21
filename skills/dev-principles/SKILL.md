@@ -3,6 +3,43 @@ name: dev-principles
 description: Use when designing, implementing, reviewing, or refactoring code as shared operating guidance — covers patterns LLM agents systematically get wrong (refactoring discipline, abstraction judgment, deletion courage, dependency judgment, design probing, edge-case thinking, integration-boundary probing). Loaded into orchestrators to trigger proactive refactoring and into reviewers to guide what to flag.
 ---
 
+# Spec-Driven Development
+
+The workflow is spec-driven: requirements → behavioral spec → architecture →
+implementation verified against spec. The spec is the contract between design
+and implementation, not a formality.
+
+- Requirements capture the problem in solution-free terms (what outcome, not
+  what feature).
+- Design translates requirements into testable behavioral statements (EARS).
+- Architecture serves the spec — every structural decision traces back to a
+  behavioral requirement.
+- Implementation verifies against claimed EARS statement IDs. Untraceable code
+  is scope creep.
+- Reviews check spec alignment, not just code correctness.
+
+The spec is what makes the chain auditable. Without it, design is opinion,
+implementation is guesswork, and review has no reference point.
+
+# Treat Requirements as Hypotheses
+
+The stated problem is rarely the real problem. Users describe solutions they
+imagined (Y) when they need something different (X) — the XY Problem. Every
+requirement is a hypothesis until validated.
+
+- Ask for the outcome, not the feature. "What are you trying to achieve?" beats
+  "What do you want built?" (Jobs-to-Be-Done framing.)
+- Probe with "why" iteratively to reach the underlying need. The first answer
+  is surface-level.
+- When a requirement creates more problems than it solves, push back with
+  evidence and propose alternatives.
+- Gate design on a solution-free problem statement — a description of the
+  outcome that doesn't presuppose a technical implementation.
+
+This applies at every handoff: dev-orchestrator questioning user intent,
+design-orchestrator questioning stated requirements, reviewers questioning
+whether the implementation serves the original need.
+
 # Refactor Early, Refactor Continuously
 
 Context decays. Refactoring later means re-learning what you already knew. Kent Beck: "First make the change easy, then make the easy change."

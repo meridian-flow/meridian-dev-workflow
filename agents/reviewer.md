@@ -25,3 +25,5 @@ For each finding, provide:
 - why it matters
 - concrete fix direction
 - severity
+
+Your final message is your report — no file needed.

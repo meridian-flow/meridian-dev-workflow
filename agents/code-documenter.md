@@ -26,7 +26,15 @@ Run `meridian context --json` at the start of the spawn to get `work_id` and `re
 
 The `fs/` mirror is a textual compression of the codebase — module boundaries, data flows, component relationships, and design rationale. Not documentation for humans to read; context for agents to consume efficiently.
 
-Each doc should cover one coherent area (a subsystem, a data flow, a design boundary) and explain both what exists and why it ended up that way. The "why" is the most valuable part — code shows what, but the reasoning behind structural choices is invisible without it.
+Each doc should cover one coherent area (a subsystem, a data flow, a design
+boundary) and explain both what exists and why it ended up that way. The "why"
+is the most valuable part — code shows what, but the reasoning behind structural
+choices is invisible without it.
+
+**Format for agent consumption.** Bullet points and key-value pairs outperform
+prose for AI consumption. Structure context as scannable facts, not narrative.
+Include security constraints, performance requirements, and known failure modes
+— research shows these are the critical gaps in most codebase documentation.
 
 ### Domain Layout
 
@@ -78,6 +86,12 @@ Don't add comments for obvious code. Focus on preserving the "why" — comments 
 ## Decision Mining
 
 Mine conversation history for decisions that don't make it into code — pivots from the original plan, tradeoffs discussed and resolved, rejected alternatives and why. Use `/session-mining` to search and navigate transcripts. Capture outcomes in the FS mirror so it explains both what exists and why.
+
+## Review
+
+After writing, spawn `@reviewer` to check accuracy — do the docs match the
+code? Verify claims, cross-references, and that nothing describes behavior that
+no longer exists. Fix issues and re-review until clean.
 
 ## Committing
 

@@ -5,100 +5,56 @@ description: Use when composing a team for a design or implementation phase — 
 
 # Agent Staffing
 
-Compose the right team for each phase. The goal is coverage across perspectives, not redundant passes from the same angle.
+Compose the right team for each phase. The goal is coverage across
+perspectives, not redundant passes from the same angle.
 
-## Model Selection
-
-Profile defaults are correct for most roles — don't override with `-m` unless you have a specific reason. The primary use of `-m` is **review fan-out**: spawning the same @reviewer role multiple times with different model families so their blind spots don't overlap. Run `meridian models list` to see available families and strengths.
-
-## Terminology: Fan-Out vs Parallel Lanes
-
-Two patterns that look similar and get conflated. Using the wrong term leads to either wasted model spend or missed coverage.
-
-- **Fan-out** — *same* prompt, *same* files, *different* models. Run one review question through 2–3 model families to get convergent (or divergent — itself informative) signal on a high-stakes call. Reserved for critical decisions: design convergence, final implementation review, architecture trade-offs where downstream work is locked in by the answer. Fan-out is the primary justification for `-m` overrides.
-- **Parallel lanes** — *different* prompts (different focus areas), usually one model each (profile default unless a specific focus area has a model-strength match). Design-alignment + correctness + structural is three parallel lanes, not fan-out — each lane is a different job, not three opinions on one job.
-
-Default posture for review staffing is **parallel lanes**. Escalate to **fan-out** when a single decision is critical enough to justify 2–3× the model spend on the same question.
+Each orchestrator has its own staffing patterns in its body — this skill covers
+the general principles that apply everywhere.
 
 ## General Principles
 
-**Delegation is mandatory for orchestrators.** An orchestrator's value is coordination and judgment across phases, not solo execution. Orchestrators never write code or edit source files directly — not even for trivial changes. Implementing your own phases bypasses the review, structural review, and smoke-test lanes that catch what the implementer can't see in their own work. If no team composition was provided by your caller, compose one yourself before starting — use the catalogs in the resources below.
+**Delegation is mandatory for orchestrators.** Orchestrators never write code
+or edit source files directly. If no team composition was provided by your
+caller, compose one yourself using the agent catalogs below.
 
-**Default model primarily, specialists for their blind spots.** Most @reviewers should run on the default model — it's the baseline and usually the best cost/quality tradeoff. But every model has blind spots shaped by its training, and using only the default means every @reviewer shares the same ones. Bring in a different model when its strengths match the focus area — it's not there for prestige, it's there because it sees things the default model consistently misses on that dimension. Check `meridian models list` for current model strengths. For high-risk focus areas, duplicate coverage with both the default model and the specialist to get convergence across independent perspectives.
+**Scale effort to risk.** Two questions: how expensive is it to be wrong here,
+and how much harder is it to fix later than now? High-risk areas get more
+coverage and more diverse perspectives. Low-risk areas get lighter treatment.
 
-**Decision review.** Significant decisions — staffing composition, phase parallelization, design trade-off calls, interface choices — should get a review from a different model before committing. Not just code review; any judgment call that downstream work depends on. A second perspective on a different model catches blind spots cheaply, before they compound into implementation.
+**Review convergence.** Review loops run until convergence (no new substantive
+findings), not a fixed number of passes. The orchestrator can stop early but
+must log the reasoning.
 
-**Review convergence.** Review loops run until convergence (no new substantive findings), not a fixed number of passes. The orchestrator can override and stop early, but must log the reasoning in the decision log so future agents understand what was decided and why. The default is to keep iterating — when @reviewers come back clean, the work is ready.
+**Route by work type.** Not everything is a coding task. Probe unclear behavior
+with `@smoke-tester`, diagnose root causes with `@investigator`, implement with
+coder variants. Plans that treat everything as coder work produce guesswork at
+boundaries.
 
-**Design alignment as default focus.** Always include one @reviewer with design alignment focus and pass the design docs. Apply this explicitly in design review and again in the final end-to-end review loop after implementation phases are complete. Intermediate phases stay tester-driven unless a specific @reviewer escalation is needed.
+## Model Selection
 
-## Effort Scaling
+Profile defaults are correct for most roles — don't override with `-m` unless
+you have a specific reason. Run `meridian models list` to see available
+families and strengths.
 
-Scale @reviewer and tester effort to the risk and reversibility of the change. Two questions to ask: how expensive is it to be wrong here, and how much harder is it to fix this later than now?
+## Fan-Out vs Parallel Lanes
 
-**@reviewer effort by stage:**
-
-- **Design phase:** this is where @reviewer fan-out pays off most. Structural flaws caught here save rework cycles across every implementation phase that builds on them. Lean toward more @reviewers with wider focus area coverage and more model diversity for higher-risk designs; lean toward two @reviewers on the default model with different focus areas when the design is small and obvious.
-- **Intermediate implementation phases:** scale testers, not reviewers. One @coder per phase, with @verifier as a baseline and smoke/unit/browser lanes added when risk concentrates in things they specifically catch (smoke = end-to-end behavior, unit = tricky logic, browser = UI). @reviewer involvement here is escalation-only.
-- **Final review loop:** after all phases pass phase-level testing, run one full-change @reviewer fan-out across diverse model families. Use the same risk-and-reversibility scaling as design review — cross-phase drift and structural debt are most visible here.
-
-For high-risk focus areas anywhere, duplicate coverage across independent perspectives — the default model and a specialist reviewing the same concern give convergence that single-reviewer coverage can't.
-
-## Parallelism
-
-Think about what depends on what:
-
-- **Intermediate implementation phase:** @coder runs first, then testers run in parallel lanes (verifier + smoke + unit as applicable). @reviewers are not part of the default per-phase lane.
-- **Escalation path:** if testers surface a real behavioral issue the @coder cannot resolve, spawn a scoped @reviewer for that specific concern while continuing with the smallest useful loop.
-- **Final review loop:** @reviewers run in parallel lanes (different focus areas) only after all implementation phases are complete and passing phase-level tests. Fan-out across model families on top of that — same-question different-models — when the decision is critical. Then @coder fixes, testers re-check, and reviewers re-run until convergence.
-- @coders parallelize across non-overlapping phases (determined at plan time), not within a single phase.
-- Documenters and @investigators need the full picture — they run after review synthesis.
-
-## When Reviewers Apply
-
-@reviewers are high-leverage and should be used deliberately:
-
-- **Design phase (default):** heavy @reviewer fan-out across diverse model families; include @refactor-reviewer.
-- **Final implementation loop (default):** one end-to-end @reviewer fan-out over the complete change set; include @refactor-reviewer.
-- **Intermediate implementation phases (exception only):** @reviewer engagement is escalation-driven, triggered by specific unresolved behavioral concerns from testing.
-- **Architectural drift detection in CI (new pattern):** see next section.
-
-### @reviewer as Architectural Drift Gate
-
-Enforce structural invariants — *"composition happens inside factory X,"* *"stage Y has exactly one owner,"* *"module Z imports only from layers A and B"* — with a CI-spawned `@reviewer` reading the diff against a declared-invariant prompt. Semantic verification catches shim patterns, dead hooks, duplicated composition paths, and side channels. Structural claims need semantic verification; surface-level presence checks can be satisfied without the invariant being met.
-
-Shape:
-
-- The invariant prompt lives in-repo (e.g. `.meridian/invariants/<surface>-invariant.md`), version-controlled, updated when the architecture legitimately changes.
-- CI spawns the reviewer on PRs touching the protected surface, passes the diff plus relevant source files, and blocks merge on a `fail` verdict.
-- Reviewer returns `pass` / `fail` + specific violations with file:line pointers for each finding.
-- Use a cheaper model (mini / flash variants) for drift detection by default; escalate to the default reviewer model or fan-out on high-risk surfaces.
-- Pair with deterministic behavioral tests as backstop — not a replacement. The reviewer is probabilistic; a test that constructs the factory and asserts a specific input yields a specific output is not. Together they cover different failure modes: the reviewer catches novel violations of the declared intent; the tests pin down the specific invariants that must not drift.
-- Keep pyright, ruff, and pytest as the correctness gate. The drift gate sits beside them, not in place of them.
-
-This is a distinct @reviewer use from design review and final implementation review — it is a CI-triggered architectural gate running on every PR that touches the protected surface. When the gate fails, remediation is the same as any review finding: fix or log an explicit override with reasoning.
+- **Fan-out** — *same* prompt, *same* files, *different* models. Convergent
+  signal on a high-stakes call. Reserved for critical decisions.
+- **Parallel lanes** — *different* prompts (different focus areas), usually
+  default model each. Most review staffing uses parallel lanes.
 
 ## Integration Boundaries
 
-When a phase talks to an external system (CLI tool, API, wire protocol), the staffing changes:
-
-- **@coder prerequisite:** the blueprint must include a protocol validation step — probe the real binary/API, extract or reference the actual schema, then implement against observed behavior. Don't let @coders write adapters against assumed protocols.
-- **@smoke-tester is mandatory, not optional:** integration code can only be verified by running against the real external system. Staff a @smoke-tester for every integration phase, with explicit instructions to test against each external target. Unit tests and type checks verify internal correctness; only smoke tests verify protocol correctness.
-- **Per-target coverage:** if the phase touches N integration targets, the @smoke-tester must exercise all N and explicitly report which were tested. Testing one target out of three is incomplete coverage, not a passing result.
-
-## Edge Case Coverage
-
-Edge-case coverage is mandatory at every layer:
-
-- **Design:** enumerate failure modes, boundary conditions, and edge cases explicitly in design artifacts.
-- **Implementation planning:** before coding each phase, identify additional edge cases that the design may have missed and pass them to testers.
-- **Testing:** testers must generate and execute their own edge cases, not only the @coder's described happy path.
+When a phase talks to an external system:
+- Probe the real system before coding against assumed behavior
+- `@smoke-tester` is mandatory for every integration phase
+- Per-target coverage: N targets means N tested, not one-of-three
 
 ## Agent Catalogs
 
-See resources for detailed catalogs of available agents and when to use each:
+See resources for detailed catalogs:
 
-- Read `resources/reviewers.md` when composing review teams — covers @reviewer and refactor-reviewer. @reviewers apply by default in design and final review loops, and by exception for intermediate-phase escalations.
-- Read `resources/testers.md` when deciding what testing a phase needs — covers @verifier, @smoke-tester, @browser-tester, and unit-tester.
-- Read `resources/builders.md` when staffing implementation and design exploration — covers @coders, @architects, @internet-researchers, and @explorers.
-- Read `resources/maintainers.md` when a phase needs documentation updates, decision mining, or issue triage — covers @code-documenter, @tech-writer, and investigator.
+- `resources/reviewers.md` — @reviewer and @refactor-reviewer
+- `resources/testers.md` — @verifier, @smoke-tester, @unit-tester, @integration-tester, @browser-tester
+- `resources/builders.md` — @coders, @architects, @web-researchers, @explorers
+- `resources/maintainers.md` — @code-documenter, @tech-writer, @investigator

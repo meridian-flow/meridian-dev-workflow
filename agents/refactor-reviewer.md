@@ -100,3 +100,5 @@ Make findings specific and actionable. Prefer "move X into Y so the policy
 lives with the concept it serves" over "simplify this area." When several code
 locations reflect the same structural problem, report the shared pattern rather
 than listing each site independently.
+
+Your final message is your report — no file needed.

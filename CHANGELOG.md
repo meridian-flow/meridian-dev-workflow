@@ -4,6 +4,32 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- `@design-writer` agent: lightweight design doc writer for updates, post-review edits, scope adjustments. Sonnet model. Spawned by dev-orchestrator for settled changes — design-orchestrator still writes initial design.
+- `@test-orchestrator` agent: designs + produces permanent test suite after impl ships. Risk-based strategy before writing. Adversarial testing phase to counter LLM "verify what works" bias. Iterative refinement loop. Runs parallel with doc agents post-impl.
+- `dev-principles`: two new sections at top — "Spec-Driven Development" (requirements → EARS spec → architecture → verified impl, spec is the contract) and "Treat Requirements as Hypotheses" (XY Problem, JTBD framing, solution-free problem statements).
+
+### Changed
+- `@dev-orchestrator`: reframed as "primary developer / translator between user and technical teams." New requirements gathering section — XY Problem awareness, JTBD-style questioning, first-principles challenge, solution-free gating before routing to design. Specialist routing table expanded: design-writer, smoke-tester for probing, investigator for diagnosis. Post-impl routing: test-orchestrator + code-documenter + tech-writer in parallel with `--from` session context. Planner terminal state handling (probe-request → smoke-tester, structural-blocking → design-orchestrator). Writing constraint: delegate via specialists, exceptions for requirements.md and prompts.
+- `@design-orchestrator`: reframed as technical design owner, not problem discovery. Sonnet 1M model, autocompact 30. Explores technical options (not first-principle problems — that's dev-orchestrator). Challenges technical feasibility. Expanded refactoring awareness — "clean codebase is prerequisite, design time is cheapest fix." Spawns explorer, refactor-reviewer, reviewer. Uses smoke-tester for probes not coder.
+- `@impl-orchestrator`: broke coder-centrism. New definitions section (phase, subphase, probe, diagnosis — each with right agent). Subphase loop: probe-first step, light reviewer per subphase, route issues by type (impl → coder, behavioral → smoke-tester, root-cause → investigator). Phase gate: one general reviewer (save fan-out for final gate), temp unit/integration tests deleted after. Final gate: reviewer fan-out by focus area, duplicate higher-level with opus, refactor-reviewer on full change set. Judgment/escalation discipline — recognize non-converging cycles, escalate redesign briefs.
+- `@planner`: methodology moved from planning skill into agent body (inputs, thoroughness, priorities, output contract, terminal shapes). Parallelism-first. Route by work type — probe/diagnosis lanes before coding.
+- `planning` skill: stripped to shared definitions only (phase, subphase, verification levels, probe/diagnosis lanes, fix-cycle routing). Both planner and impl-orchestrator load it without overlap.
+- `execution-model.md`: full rewrite. Mermaid diagram matches updated impl-orchestrator — probe step, light reviewer, issue-type routing, refactor-reviewer final-gate only, temp gate tests.
+- `plan-package.md`: staffing contract updated — implementer variants, probe/diagnosis steps, routing by finding type.
+- `testing-principles` skill: added risk-based testing, testing trophy model (integration-heavy), test behavior not implementation, hermetic by default, DAMP over DRY, LLM-generated test caveats.
+- `@tech-writer`: Diátaxis framework (tutorials, how-tos, reference, explanation). Gather context first via explorers + --from. Spawns own reviewer for accuracy. Audience-flexible — adapts to technical level.
+- `@code-documenter`: agent-facing format guidance (bullet/key-value over prose, include security/performance/failure modes). Spawns own reviewer for accuracy.
+- `@docs-orchestrator`: deleted. Replaced by direct spawns of code-documenter + tech-writer from dev-orchestrator.
+- `@coder`: clarified that unclear runtime behavior at integration boundaries → report back to orchestrator for smoke-tester.
+- 7 worker agents: added "Your final message is your report — no file needed." (reviewer, refactor-reviewer, explorer, verifier, smoke-tester, investigator, web-researcher)
+
+### Renamed
+- `@internet-researcher` → `@web-researcher`. Updated all references across agents and skills.
+
+### Removed
+- `@docs-orchestrator` agent: replaced by direct code-documenter + tech-writer spawns with --from context.
+
 ## [0.0.31] - 2026-04-19
 
 ### Added
