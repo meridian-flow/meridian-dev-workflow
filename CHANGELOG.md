@@ -4,11 +4,20 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-04-24
+
+### Added
+- `md-validation` skill added to `@architect`, `@code-documenter`, `@tech-writer`, `@reviewer`, `@design-writer`, `@planner`, `@frontend-designer`.
+- "Prefer mermaid diagrams and tree structures" instructions in `@architect`, `@code-documenter`, `@tech-writer`, `@design-writer`.
+
 ### Changed
 - `@impl-orchestrator`: frontend/UI routing explicit. React, TSX, CSS, Storybook, components, visual states → `@frontend-coder`. UI phases need browser verification, not just typecheck/build.
 - `@impl-orchestrator`: broad Bash removed from profile tools. Orchestrator more spawn-only, less self-implementation path.
 - `@frontend-coder`: now default for all frontend/UI implementation, not only when aesthetic matters.
 - `@coder`: now excludes React, TSX, CSS, Storybook, and user-facing component work.
+
+### Removed
+- `mermaid` skill — replaced by `md-validation` from meridian-base.
 
 ## [0.1.2] - 2026-04-21
 

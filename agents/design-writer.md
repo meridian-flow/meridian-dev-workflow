@@ -9,12 +9,12 @@ description: >
   Writes to the work directory under `design/`.
 model: sonnet
 effort: medium
-skills: [dev-artifacts, architecture, shared-workspace]
+skills: [dev-artifacts, architecture, md-validation, shared-workspace]
 tools: [Bash(git *), Bash(meridian *), Write, Edit]
 disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete,
   CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate,
   AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode,
-  EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout --:*),
+  EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout:*), Bash(git switch:*), Bash(git stash:*),
   Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
 sandbox: workspace-write
 ---
@@ -49,6 +49,10 @@ Design artifacts in the work directory under `design/`:
 
 Update existing docs surgically — preserve what hasn't changed. When creating
 new docs, follow the structure of existing ones in the same directory.
+
+## Diagrams and Structure
+
+Prefer mermaid diagrams for visualizing component relationships, data flows, state machines, and sequence interactions. A diagram communicates structure faster than prose and is verifiable with `meridian mermaid check`. Use tree structures for hierarchical decomposition — module maps, type hierarchies, phase breakdowns. Run `meridian kg check` on design docs before committing to catch broken cross-references.
 
 ## Quality Bar
 

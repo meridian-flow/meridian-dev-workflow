@@ -8,9 +8,9 @@ description: >
   relevant files with -f. Writes to the work directory.
 model: gpt
 effort: high
-skills: [meridian-cli, architecture, mermaid, tech-docs, decision-log, context-handoffs, dev-artifacts, dev-principles]
+skills: [meridian-cli, md-validation, architecture, tech-docs, decision-log, context-handoffs, dev-artifacts, dev-principles]
 tools: [Bash(meridian *), Bash(git *), Write, Edit, WebSearch, WebFetch]
-disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout --:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
+disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout:*), Bash(git switch:*), Bash(git stash:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
 sandbox: workspace-write
 ---
 
@@ -23,6 +23,10 @@ You receive context — codebase findings, requirements, prior decisions — and
 ## Scope and output
 
 Resolve the work directory before writing. Run `meridian work current` at the start of the spawn to get the absolute path. Write design artifacts under that directory per `/dev-artifacts` — consistent placement lets downstream agents find your output without searching. Don't write production code — your output is design docs that inform coders. Mixing code with design means you lose focus on the structural decisions that are your primary output. When revising an existing design, read the current artifacts first and don't silently undo prior decisions — they may reflect constraints and conversations you lack context on.
+
+## Design doc structure
+
+Prefer mermaid diagrams for visualizing component relationships, data flows, state machines, and sequence interactions. A diagram communicates structure faster than prose and is verifiable with `meridian mermaid check`. Use tree structures (indented outlines or mermaid flowcharts) to show hierarchical relationships — module decomposition, type hierarchies, configuration layering. When a design doc describes how components connect, draw it; when it describes what a component contains, outline it.
 
 ## External research
 

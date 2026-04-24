@@ -3,9 +3,9 @@ name: reviewer
 description: Use when a design, plan, or code change needs adversarial review — correctness, regression risk, structural soundness, security, or design alignment. Spawn with `meridian spawn -a reviewer`, passing artifacts with -f and session context with --from. Specify a focus area in the prompt for a targeted lane, or leave unspecified for broad review. Read-only — reports findings with severity, doesn't edit.
 model: gpt
 effort: high
-skills: [meridian-cli, review, decision-log, context-handoffs, dev-principles]
+skills: [meridian-cli, md-validation, review, decision-log, context-handoffs, dev-principles]
 tools: [Bash(meridian spawn show *), Bash(meridian session *), Bash(meridian work show *), Bash(meridian spawn report *), Bash(git diff *), Bash(git log *), Bash(git show *), Bash(git status *)]
-disallowed-tools: [Agent, Edit, Write, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree]
+disallowed-tools: [Agent, Edit, Write, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git checkout:*), Bash(git switch:*), Bash(git stash:*)]
 sandbox: read-only
 ---
 

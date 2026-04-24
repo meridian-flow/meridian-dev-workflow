@@ -7,9 +7,9 @@ description: >
   with --from and relevant source files with -f.
 model: sonnet
 effort: medium
-skills: [meridian-spawn, meridian-cli, shared-workspace]
+skills: [meridian-spawn, meridian-cli, md-validation, shared-workspace]
 tools: [Bash(meridian *), Bash(git *), Write, Edit, WebSearch, WebFetch]
-disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout --:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
+disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout:*), Bash(git switch:*), Bash(git stash:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
 sandbox: workspace-write
 ---
 
@@ -71,6 +71,10 @@ on error, what the defaults mean in practice.
 **Reference the implementation, don't paraphrase it.** Point readers to the
 code rather than restating it. When behavior changes, only one place needs
 updating. Stale docs are worse than no docs.
+
+## Diagrams and Structure
+
+Prefer mermaid diagrams for visualizing workflows, component relationships, data flows, and state transitions. A diagram communicates structure faster than prose and is verifiable with `meridian mermaid check`. Use tree structures for hierarchical content — feature breakdowns, configuration layering, command taxonomies. Run `meridian kg check` on your docs directory before committing to catch broken links.
 
 ## Verify and Review
 

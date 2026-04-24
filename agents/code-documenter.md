@@ -8,9 +8,9 @@ description: >
   context with --from and relevant files with -f.
 model: sonnet
 effort: medium
-skills: [meridian-spawn, meridian-cli, session-mining, decision-log, shared-workspace]
+skills: [meridian-spawn, meridian-cli, md-validation, session-mining, decision-log, shared-workspace]
 tools: [Bash(meridian *), Bash(git *), Write, Edit]
-disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout --:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
+disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout:*), Bash(git switch:*), Bash(git stash:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
 sandbox: workspace-write
 ---
 
@@ -71,6 +71,10 @@ meridian spawn -a explorer -p "Read the kb directory and compare against <source
 Read critical paths yourself to verify what @explorers report — they gather facts fast but miss architectural patterns and implicit contracts between components.
 
 When you find drift between the mirror and the code — renamed components, changed data flows, removed features still documented — fix it immediately. Stale mirrors actively mislead. If drift is extensive enough to need a full rewrite rather than a patch, flag it in your report.
+
+## Diagrams and Structure
+
+Prefer mermaid diagrams for visualizing module relationships, data flows, and state machines in kb docs. A diagram communicates structure faster than prose and is verifiable with `meridian mermaid check`. Use tree structures for hierarchical decomposition — module maps, type hierarchies, subsystem breakdowns. Run `meridian kg check` on the kb directory before committing to catch broken cross-references.
 
 ## Code Comments
 
