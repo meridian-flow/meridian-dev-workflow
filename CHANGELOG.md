@@ -4,6 +4,22 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-04-24
+
+### Changed
+- mars.toml: model alias overhaul. Removed version-specific pinned aliases (`gpt54`, `opus45`, `opus46`) — agents now use explicit model IDs (`gpt-5.4`, `claude-opus-4-6`, `claude-opus-4-5`). Kept `gpt55` and `opus47` as opt-in pinned aliases for specific model behavior. `gpt` auto-resolve pinned to `gpt-5.4` (strongest generalist), `opus` pinned to `claude-opus-4-6` (best instruction-following Opus). Hybrid `model+match` on auto-resolve aliases — pinned winner for resolution, match patterns for `--all` discovery only.
+- mars.toml: alias descriptions rewritten. Pinned aliases describe version-specific characteristics (strengths, weaknesses, cost). Auto-resolve aliases describe the role/category. No more duplication between layers.
+- mars.toml: `default_effort` on all aliases. `autocompact: 30` on `opus` alias (1M context degrades past ~300k).
+- 14 agents: model refs changed from deleted aliases to explicit model IDs. `gpt54` → `gpt-5.4` (10 agents), `opus46` → `claude-opus-4-6` (3 agents), `opus45` → `claude-opus-4-5` (1 agent).
+- `@reviewer`, `@refactor-reviewer`: `models:` fan-out entries updated from `gpt54`/`opus46` to `gpt`/`opus` aliases.
+- `@frontend-coder`: `models:` fan-out entries updated from `opus46` to `opus`.
+- Git denylist hardened across all agents: `Bash(git checkout:*)` (was `Bash(git checkout --:*)`), added `Bash(git switch:*)` and `Bash(git stash:*)`.
+
+### Added
+- `models:` field on `@coder`, `@frontend-coder`, `@reviewer`, `@refactor-reviewer` — per-model effort/autocompact overrides for fan-out spawns.
+- `gpt55` pinned alias: GPT-5.5 opt-in for action-oriented fast work, `default_effort: low`.
+- `opus47` pinned alias: Opus 4.7 opt-in, `default_effort: medium`. Description notes: strongest benchmarks but literal instruction-following breaks complex prompts, long-context degrades above 100k, 35% tokenizer cost increase.
+
 ## [0.1.3] - 2026-04-24
 
 ### Added
