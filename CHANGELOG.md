@@ -4,6 +4,11 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-04-25
+
+### Changed
+- `@planner`: source writes fenced to active work `plan/` artifacts only. Imperative prompts now re-scoped to planning. Terminal report no longer replaces plan package.
+
 ## [0.1.5] - 2026-04-24
 
 ### Changed
