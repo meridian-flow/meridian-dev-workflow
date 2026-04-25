@@ -1,6 +1,6 @@
 [package]
 name = "meridian-dev-workflow"
-version = "0.1.5"
+version = "0.1.6"
 description = "Opinionated dev team for Meridian — architects, coders, reviewers, testers, and the skills that coordinate them."
 
 [dependencies.meridian-base]
@@ -24,56 +24,49 @@ targets = [
 ]
 models_cache_ttl_hours = 24
 
-# ============================================================================
-# Pinned aliases - specific model versions with tuned defaults
-# ============================================================================
-
 [models.gpt55]
 harness = "codex"
 description = "GPT-5.5 — action-oriented, fast. Best on low effort; overthinks on high. Good clean code output but weak at nuanced judgment."
+default_effort = "low"
 model = "gpt-5.5"
 provider = "openai"
-default_effort = "low"
 
 [models.opus47]
 harness = "claude"
 description = "Opus 4.7 — strongest benchmarks, best agentic coding. Literal instruction-following breaks complex prompts. Long-context degrades above 100k. 35% more expensive via tokenizer. Needs prompt migration from 4.6."
+default_effort = "high"
 model = "claude-opus-4-7"
 provider = "anthropic"
-default_effort = "high"
-
-# ============================================================================
-# Auto-resolve aliases - pinned winner with match patterns for discovery
-# ============================================================================
 
 [models.opus]
 harness = "claude"
 description = "Best for orchestration, frontend, UI/UX, and creative work. Strong instruction-following."
-provider = "anthropic"
-match = ["*opus*"]
-exclude = ["*:*"]
-model = "claude-opus-4-6"
 default_effort = "high"
+model = "claude-opus-4-6"
+match = ["*opus*"]
+provider = "anthropic"
+exclude = ["*:*"]
 
 [models.sonnet]
 harness = "claude"
 description = "Balanced Claude model - good reasoning at lower cost than Opus. Good writing/documentation style."
+default_effort = "high"
 provider = "anthropic"
 match = ["*sonnet*"]
 exclude = ["*:*"]
-default_effort = "high"
 
 [models.gptmini]
 harness = "codex"
 description = "Fast and cheap. Good for bulk exploration and simple tasks."
+default_effort = "high"
 provider = "openai"
 match = ["gpt-5*-mini"]
 exclude = ["*-nano"]
-default_effort = "high"
 
 [models.codex]
 harness = "codex"
 description = "Default backend implementer. Fast, token-efficient, faithful to instructions. Weak at frontend."
+default_effort = "high"
 provider = "openai"
 match = ["gpt-*-codex"]
 exclude = [
@@ -81,13 +74,14 @@ exclude = [
     "*-spark",
     "*-max",
 ]
-default_effort = "high"
 
 [models.gpt]
 harness = "codex"
 description = "Strongest generalist. Best all-around judgment, nuanced review, verification, and architectural reasoning."
-provider = "openai"
+default_effort = "high"
+model = "gpt-5.4"
 match = ["gpt-5*"]
+provider = "openai"
 exclude = [
     "*codex*",
     "*-pro",
@@ -96,5 +90,3 @@ exclude = [
     "*-chat",
     "*-turbo",
 ]
-model = "gpt-5.4"
-default_effort = "high"
