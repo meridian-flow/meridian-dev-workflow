@@ -33,7 +33,7 @@ boundaries.
 ## Model Selection
 
 Profile defaults are correct for most roles — don't override with `-m` unless
-you have a specific reason. Run `meridian models list` to see available
+you have a specific reason. Run `meridian mars models list` to see available
 families and strengths.
 
 ## Fan-Out vs Parallel Lanes
