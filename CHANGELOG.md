@@ -4,6 +4,9 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- `@dev-orchestrator`: frontmatter no longer forces generic `effort: high`; model alias policy now owns effort default.
+
 ## [0.1.7] - 2026-04-25
 
 ### Changed
