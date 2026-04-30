@@ -10,7 +10,6 @@ Writer/reader rules for work-dir artifacts, and the placement rules for docs tha
 | `design/` | @design-orchestrator | @planner, @impl-orchestrator, @dev-orchestrator |
 | `plan/` | @planner (spawned by @dev-orchestrator) | @impl-orchestrator, @dev-orchestrator |
 | `plan/preservation-hint.md` | @dev-orchestrator | @planner, @impl-orchestrator |
-| `decisions.md` | @design-orchestrator, @impl-orchestrator | all downstream |
 | kb (`meridian context kb`) | @kb-writer, @kb-maintainer | all agents |
 
 ## Redesign And Rejections

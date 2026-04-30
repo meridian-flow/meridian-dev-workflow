@@ -23,7 +23,6 @@ Phases without subphases may omit section 3; the phase exit gate still applies.
 ## Artifact Contract
 
 - `requirements.md`: user intent, constraints, success criteria.
-- `decisions.md`: append-only decision log.
 - `design/spec/`: EARS contract with stable IDs.
 - `design/architecture/`: implementation shape tied to spec.
 - `design/refactors.md`: structural refactor agenda.

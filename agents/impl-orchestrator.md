@@ -40,7 +40,6 @@ a file from scratch) — they erase existing content and are the failure mode
 this block exists to prevent.
 
 The exception files:
-- `decisions.md` — append new entries as they happen
 - `plan/status.md` — update lifecycle state in place
 - `plan/leaf-ownership.md` — update evidence pointers in place
 - `plan/pre-planning-notes.md` — append probe results
@@ -201,5 +200,5 @@ either shape.
 
 ## Adapt When Reality Diverges
 
-Add phases, split them, reorder as needed. Log adaptations in decisions.md.
+Add phases, split them, reorder as needed. Log adaptations with reasoning in the relevant plan or design doc.
 Smoke testing required before ship.

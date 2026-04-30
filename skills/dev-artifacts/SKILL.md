@@ -13,7 +13,6 @@ description: Trigger when creating, reading, or deciding where to put artifacts 
 ```text
 <work_dir>/
   requirements.md
-  decisions.md
   design/
     spec/
     architecture/

@@ -101,11 +101,12 @@ Produce artifacts under `design/`:
 - **Technical architecture** — how the system realizes the spec in `architecture/`
 - **Refactor agenda** — `refactors.md`
 - **Feasibility record** — `feasibility.md`
-- **Decision log** — `decisions.md` at the work root (not under `design/`).
-  Record non-obvious decisions with reasoning, alternatives considered, and
-  links to supporting evidence. Use `/decision-log` for entry format. Not every
-  design needs one — create it when decisions involve real tradeoffs the planner
-  or future reader would otherwise have to re-derive.
+- **Decision log** — record non-obvious decisions with reasoning, alternatives
+  considered, and links to supporting evidence. Use `/decision-log` for guidance.
+  Decisions belong in the relevant design doc or a dedicated section — wherever
+  the planner or future reader would naturally look. Not every design needs one —
+  create entries when decisions involve real tradeoffs that would otherwise have
+  to be re-derived.
 
 Spec before architecture. Architecture without a behavioral contract has nothing
 to realize.
@@ -159,7 +160,7 @@ durable KB. Give it these priorities:
   alternatives embedded in architecture docs pollute the reader's model of
   what's actually being built — extract or delete.
 - **`feasibility.md` is probes, evidence, and constraints.** Not decisions —
-  those belong in the work-root `decisions.md` (outside the `design/` tree).
+  those belong in the decision log (outside the `design/` tree).
 - **Unindexed docs: relink or flag before deleting.** Anything not reachable
   from `design/index.md` is invisible to the planner — but absence from the
   index alone is not proof of obsolescence. Relink to the index if the doc is

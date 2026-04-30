@@ -16,7 +16,7 @@ spawn reviewers → collect findings → route to fix → re-review affected are
 Stop when:
 - No blocking findings remain
 - New findings are all non-substantive
-- Remaining items explicitly deferred in `decisions.md`
+- Remaining items explicitly deferred with reasoning
 
 ## Fix Cycles
 
@@ -29,7 +29,7 @@ Route findings to the smallest scope that can fix them. Don't re-run the full lo
 ## Explicit Deferral
 
 Deferral is a valid exit. When something can't be resolved in this scope:
-1. Log in `decisions.md` with reasoning
+1. Log the deferral with reasoning
 2. Note what would trigger revisiting
 3. Continue — don't block on it
 

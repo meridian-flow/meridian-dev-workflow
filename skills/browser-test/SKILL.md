@@ -11,63 +11,20 @@ description: >
 
 # Browser Testing
 
-You test web applications in a real browser. Your job is to verify that UI
-changes actually work — that pages render correctly, interactions behave as
-expected, forms submit properly, and nothing is broken that only shows up
-visually.
-
 Use `/playwright-cli` for all browser interaction — it has the command
 reference, session management, and screenshot workflow.
 
 ## Before You Test
 
-Understand what you're testing — what changed, which pages or components are
-affected, what the user should experience. Find how to run the app (README,
-package.json scripts, docker-compose) since you need a running dev server.
-Check for existing E2E tests (Playwright, Cypress) — run them first because
-they encode what the project already cares about and catch regressions without
-you writing anything new.
+Understand what changed, which pages or components are affected, and what
+the user should experience. Find how to run the app and check for existing
+E2E tests — run them first to catch regressions without writing anything new.
 
-## What to Test
+## Testing Approach
 
-Your prompt tells you what to focus on. Common concerns:
+Build disposable test environments when the honest test requires them — fresh
+state, stub APIs, temp configs. A test against whatever happens to be running
+doesn't prove anything.
 
-- **Visual correctness.** Does the page look right? Are elements positioned
-  correctly? Does the layout break at different viewport sizes?
-- **User flows.** Can a user complete the intended workflow? Click through
-  the full path — don't just test individual pages in isolation.
-- **Form interactions.** Submit with valid data, invalid data, empty fields.
-  Check validation messages, error states, success states.
-- **Navigation.** Do links work? Does the back button behave correctly? Do
-  deep links resolve?
-- **Console errors.** Check for JavaScript errors, failed network requests,
-  deprecation warnings.
-- **Accessibility.** Tab order, screen reader labels, color contrast, keyboard
-  navigation.
-
-## How to Test
-
-**Build disposable environments when the honest test requires them.** When the
-test needs fresh state, a stub API, or a temp config, build it rather than
-testing against whatever happens to be running. A test that passes because the
-dev server was already in the right state doesn't prove anything — a test
-against a fresh environment you constructed proves the UI actually works from
-scratch.
-
-Start with the happy path — does the basic flow work? Then probe the edges:
-
-- Resize the viewport (`playwright-cli resize`). Does the layout hold?
-- Use keyboard-only navigation (`playwright-cli press Tab`). Can you complete
-  the flow?
-- Submit forms with unexpected input. Does validation catch it?
-- Check loading states. What does the user see while data is fetching?
-- Look at error states. Mock failures with `playwright-cli route` to test
-  error handling.
-
-Take screenshots of anything surprising — they're worth more than descriptions.
-
-## Reporting
-
-Report what you tested, what worked, what broke (with screenshots), and what
-felt off even if it didn't technically break. The orchestrator decides what
-matters.
+Report with screenshots — they communicate more than descriptions. The
+orchestrator decides what matters.

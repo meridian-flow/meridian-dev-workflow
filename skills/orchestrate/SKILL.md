@@ -35,7 +35,6 @@ See `resources/escalation.md` for redesign briefs and bailout patterns.
 ## Artifacts Are State
 
 Anything not on disk doesn't survive your spawn ending. Keep artifacts current as you go:
-- `decisions.md` — judgment calls, as they happen
 - `plan/status.md` — phase lifecycle
 - `plan/leaf-ownership.md` — evidence pointers
 
