@@ -4,36 +4,18 @@ Agent profiles and skills for the dev orchestration workflow.
 
 ## Releasing
 
-Use `meridian mars version` for releases:
+Use `mars version` (or `meridian mars version`) for releases:
 
 ```bash
-# Patch release (0.0.29 → 0.0.30)
-meridian mars version patch --push
-
-# Minor release (0.0.30 → 0.1.0)  
-meridian mars version minor --push
-
-# Explicit version
-meridian mars version 1.0.0 --push
+mars version patch --push       # bump, commit, tag, push
+mars version minor --push       # minor bump when scope warrants it
 ```
 
-This:
-1. Bumps version in `mars.toml`
-2. Commits the change
-3. Tags the commit
-4. Pushes branch and tag to origin
-
-### Changelog
-
-Update `CHANGELOG.md` before releasing:
-1. Move `[Unreleased]` content to new version section
-2. Add date: `[X.Y.Z] - YYYY-MM-DD`
-3. Use caveman style — terse, fragment-friendly
-4. Commit changelog, then run `meridian mars version`
+This bumps `mars.toml`, promotes CHANGELOG.md `[Unreleased]` to the new version, commits, tags, and optionally pushes. Write changelog entries under `[Unreleased]` as you work — `mars version` handles the rest.
 
 ### After Release
 
-Downstream repos (like `meridian-cli`) pick up new versions via:
+Downstream repos pick up new versions via:
 ```bash
 meridian mars add meridian-dev-workflow@vX.Y.Z
 meridian mars sync

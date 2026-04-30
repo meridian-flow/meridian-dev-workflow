@@ -1,6 +1,8 @@
 ---
 name: ears-parsing
 description: Mechanical EARS verification contract for testers. Use when phase verification is keyed to claimed EARS statement IDs and you need to turn each statement into trigger, fixture, assertion, and report outcome.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # EARS Parsing
@@ -36,4 +38,4 @@ For each claimed statement ID include:
 - observed result
 - expected result when falsified
 
-Tester lanes report. @impl-orchestrator updates `plan/leaf-ownership.md`.
+Tester lanes report. @tech-lead updates `plan/leaf-ownership.md`.

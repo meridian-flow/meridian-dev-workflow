@@ -10,10 +10,6 @@ url = "https://github.com/meridian-flow/meridian-base"
 url = "https://github.com/anthropics/skills"
 skills = ["frontend-design"]
 
-[dependencies.caveman]
-url = "https://github.com/JuliusBrussee/caveman"
-skills = ["caveman"]
-
 [dependencies.playwright-cli]
 url = "https://github.com/microsoft/playwright-cli"
 version = "main"

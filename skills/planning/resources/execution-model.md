@@ -1,6 +1,6 @@
 # Execution Model
 
-The plan is executed by @impl-orchestrator as a nested loop: phases outside, subphases inside, with verification at both levels.
+The plan is executed by @tech-lead as a nested loop: phases outside, subphases inside, with verification at both levels.
 
 ```mermaid
 flowchart TB

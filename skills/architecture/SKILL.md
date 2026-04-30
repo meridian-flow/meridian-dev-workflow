@@ -1,6 +1,8 @@
 ---
 name: architecture
 description: Use when designing a system, component, or significant change — problem framing, tradeoff analysis, and approach evaluation. Triggers on phrases like "how should we architect this", "let's think about how to build X", or descriptions of non-trivial features, refactors, or system redesigns that need structural thinking before implementation.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Architecture Design

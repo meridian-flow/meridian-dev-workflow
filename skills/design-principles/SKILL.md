@@ -5,6 +5,8 @@ description: >
   probing discipline, and edge-case thinking. Load when evaluating requirements,
   producing design packages, or deciding whether a problem is well-understood
   before committing to a solution.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Spec-Driven Development

@@ -3,7 +3,9 @@ name: planning
 description: >
   Shared definitions for plan execution — phases, subphases, verification
   levels, probe/diagnosis lanes, and the execution model. Loaded by both
-  @planner (to produce plans) and @impl-orchestrator (to execute them).
+  @planner (to produce plans) and @tech-lead (to execute them).
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Plan Execution

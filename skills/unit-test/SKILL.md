@@ -1,6 +1,8 @@
 ---
 name: unit-test
 description: Use when verifying particular behaviors in isolation — edge cases, regression guards, tricky internal logic, and phase-scoped contracts that need a test pinning them down. Not the right fit for broad build verification (that's verification), component composition (integration-test), or end-to-end user flows (smoke-test).
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Unit Testing
@@ -69,4 +71,4 @@ Return:
 - failures with diagnosis
 - pruned obsolete tests and rationale
 
-@impl-orchestrator updates `plan/leaf-ownership.md` using your report.
+@tech-lead updates `plan/leaf-ownership.md` using your report.

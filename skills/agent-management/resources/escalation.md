@@ -35,11 +35,11 @@ When design/plan is fundamentally broken, terminate with a Redesign Brief:
 
 ## design-problem vs scope-problem
 
-**design-problem:** The design itself is wrong. Needs design-orchestrator.
+**design-problem:** The design itself is wrong. Needs @architect-lead.
 **scope-problem:** The plan is wrong but design is fine. Needs replanning.
 
 Get this right — wrong classification wastes cycles.
 
 ## Don't Force Through
 
-Orchestrators that force through broken foundations create expensive rework downstream. Early escalation is cheaper than late discovery.
+Managers that force through broken foundations create expensive rework downstream. Early escalation is cheaper than late discovery.

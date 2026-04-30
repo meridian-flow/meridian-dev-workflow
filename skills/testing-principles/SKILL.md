@@ -6,6 +6,8 @@ description: >
   each tier. Load when deciding what kind of test a change needs, when a
   test suite feels off (too brittle, too slow, too many mocks), or when
   routing work to @unit-tester, @integration-tester, or @smoke-tester.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Testing Principles

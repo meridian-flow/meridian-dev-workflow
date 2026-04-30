@@ -16,6 +16,6 @@ Testers are not limited to the @coder's described checks. Generate independent e
 
 @integration-tester — the middle tier between unit and smoke. Tests that internal components compose correctly — module boundaries, coordination logic, contracts between collaborators — with fakes at external system boundaries. Use when a phase introduces new interfaces, protocols, or state machines where the composition matters more than the isolated logic. Not the right fit for pure logic (unit-tester) or real runtime behavior against live systems (smoke-tester).
 
-**Note on gate tests during implementation:** unit and integration tests spawned at phase exit gates are temporary — deleted after verification passes. The permanent test suite is designed as a whole by @test-orchestrator after implementation ships, so unit/integration/e2e tests stay coherent.
+**Note on gate tests during implementation:** unit and integration tests spawned at phase exit gates are temporary — deleted after verification passes. The permanent test suite is designed as a whole by @qa-lead after implementation ships, so unit/integration/e2e tests stay coherent.
 
 ## Situational

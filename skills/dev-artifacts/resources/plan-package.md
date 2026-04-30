@@ -47,11 +47,11 @@ Include:
 
 ## Staffing Contract
 
-Every plan must include staffing concrete enough for @impl-orchestrator to execute directly:
+Every plan must include staffing concrete enough for @tech-lead to execute directly:
 
 1. **Per-phase teams** — implementer variant (`@coder`, `@refactor-coder`, `@frontend-coder`), tester lanes (`@verifier`, `@smoke-tester`, `@unit-tester`, `@integration-tester`, `@browser-tester` as applicable), probe/diagnosis steps where behavior is unclear.
 2. **Final review loop** — reviewer focus areas, `@refactor-reviewer` (full change set), and `@smoke-tester` (end-to-end).
-3. **Escalation policy** — when findings require routing to `@smoke-tester` (behavioral), `@investigator` (root-cause), or redesign escalation to @dev-orchestrator.
+3. **Escalation policy** — when findings require routing to `@smoke-tester` (behavioral), `@investigator` (root-cause), or redesign escalation to @product-manager.
 
 A plan without staffing drives execution toward coder-only behavior with weak review loops.
 

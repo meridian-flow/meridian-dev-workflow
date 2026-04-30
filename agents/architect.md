@@ -8,7 +8,7 @@ description: >
   relevant files with -f. Writes to the work directory.
 model: gpt-5.4
 effort: high
-skills: [meridian-cli, md-validation, architecture, tech-docs, decision-log, dev-artifacts, dev-principles]
+skills: [md-validation, architecture, tech-docs, decision-log, dev-artifacts, dev-principles]
 tools: [Bash(meridian *), Bash(git *), Write, Edit, WebSearch, WebFetch]
 disallowed-tools: [Agent, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git revert:*), Bash(git checkout:*), Bash(git switch:*), Bash(git stash:*), Bash(git restore:*), Bash(git reset --hard:*), Bash(git clean:*)]
 sandbox: workspace-write

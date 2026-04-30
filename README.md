@@ -13,20 +13,20 @@ be installed.
 
 The dev lifecycle splits across orchestrators with distinct ownership:
 
-**dev-orchestrator** (interactive) — the primary developer. Translates between
+**product-manager** (interactive) — the primary developer. Translates between
 user and technical teams. Requirements gathering, scope sizing, design/plan
 approval, redesign routing. Spawns everything downstream.
 
-**design-orchestrator** (autonomous) — owns the technical design. Challenges
+**architect-lead** (autonomous) — owns the technical design. Challenges
 feasibility, explores structural options, produces behavioral spec + architecture.
 
 **planner** (autonomous) — decomposes design into executable phases with
 parallelism posture, EARS ownership, and staffing.
 
-**impl-orchestrator** (autonomous) — drives phase-by-phase execution. Probes
+**tech-lead** (autonomous) — drives phase-by-phase execution. Probes
 before coding, routes findings by type, runs verification gates.
 
-**test-orchestrator** (autonomous) — designs and produces the permanent test
+**qa-lead** (autonomous) — designs and produces the permanent test
 suite after implementation ships. Risk-based strategy, adversarial testing.
 
 **kb-writer** + **kb-maintainer** + **tech-writer** (autonomous, parallel) —
@@ -35,9 +35,9 @@ and update user-facing docs respectively after implementation.
 
 ```bash
 # Full lifecycle:
-# dev-orchestrator → design-orchestrator → planner → impl-orchestrator
-#   → test-orchestrator + kb-writer + kb-maintainer + tech-writer (parallel)
-meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
+# product-manager → architect-lead → planner → tech-lead
+#   → qa-lead + kb-writer + kb-maintainer + tech-writer (parallel)
+meridian spawn -a product-manager -p 'Build JWT token validation'
 ```
 
 ## Agents
@@ -46,10 +46,10 @@ meridian spawn -a dev-orchestrator -p 'Build JWT token validation'
 
 | Agent | Model | Role |
 |---|---|---|
-| `dev-orchestrator` | (harness default) | Primary developer — requirements gathering, routing, design/plan approval, redesign routing |
-| `design-orchestrator` | sonnet 1M | Technical design — challenges feasibility, explores options, produces spec + architecture |
-| `impl-orchestrator` | opus | Phase-by-phase execution — probe/code/verify loops, gates, final review |
-| `test-orchestrator` | gpt | Permanent test suite — risk-based strategy, tier design, adversarial testing |
+| `product-manager` | (harness default) | Primary developer — requirements gathering, routing, design/plan approval, redesign routing |
+| `architect-lead` | sonnet 1M | Technical design — challenges feasibility, explores options, produces spec + architecture |
+| `tech-lead` | opus | Phase-by-phase execution — probe/code/verify loops, gates, final review |
+| `qa-lead` | gpt | Permanent test suite — risk-based strategy, tier design, adversarial testing |
 
 **Design & Planning:**
 
@@ -143,7 +143,7 @@ resolve from the base source. Both sources must be installed.
 ```bash
 meridian mars add meridian-flow/meridian-base
 meridian mars add meridian-flow/meridian-dev-workflow
-meridian config set primary.agent dev-orchestrator
+meridian config set primary.agent product-manager
 ```
 
 ## Layout

@@ -1,14 +1,16 @@
 ---
-name: orchestrate
+name: agent-management
 description: >
-  Shared mental model for orchestrator agents — coordination patterns,
+  Shared mental model for agent managers and leads — coordination patterns,
   delegation discipline, convergence loops, escalation. Load when you
   coordinate work across multiple spawns rather than implementing directly.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
-# Orchestrate
+# Agent Management
 
-Orchestrators coordinate — they don't implement. Your value is the vantage point: seeing across phases, catching drift, routing corrections. If you drop into implementation, you lose that view.
+Managers coordinate — they don't implement. Your value is the vantage point: seeing across phases, catching drift, routing corrections. If you drop into implementation, you lose that view.
 
 ## Core Discipline
 
@@ -16,7 +18,7 @@ Orchestrators coordinate — they don't implement. Your value is the vantage poi
 
 **Use `meridian spawn`, not Agent tools.** Spawns persist reports, support model routing, remain inspectable after compaction.
 
-**Match prompt scope to agent scope.** Before spawning, consider what the agent is built to do. A @coder expects a scoped task. An @impl-orchestrator expects a full implementation scope it drives through a final gate. A @reviewer expects a focus area and the artifacts to examine. Shape the prompt to fit the agent's role. Prompts shaped for the wrong category invite early exit, scope creep, or misplaced effort. Commit-cadence instructions are not completion scope — if you want all phases run, say so explicitly.
+**Match prompt scope to agent scope.** Before spawning, consider what the agent is built to do. A @coder expects a scoped task. A @tech-lead expects a full implementation scope it drives through a final gate. A @reviewer expects a focus area and the artifacts to examine. Shape the prompt to fit the agent's role. Prompts shaped for the wrong category invite early exit, scope creep, or misplaced effort. Commit-cadence instructions are not completion scope — if you want all phases run, say so explicitly.
 
 **Stay at altitude.** Your job: route context, evaluate evidence, drive convergence, handle escalation. Not: write code, edit files, run tests directly.
 

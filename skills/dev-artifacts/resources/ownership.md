@@ -6,15 +6,15 @@ Writer/reader rules for work-dir artifacts, and the placement rules for docs tha
 
 | Artifact | Writer | Readers |
 |---|---|---|
-| `requirements.md` | @dev-orchestrator | @design-orchestrator, @impl-orchestrator, @planner |
-| `design/` | @design-orchestrator | @planner, @impl-orchestrator, @dev-orchestrator |
-| `plan/` | @planner (spawned by @dev-orchestrator) | @impl-orchestrator, @dev-orchestrator |
-| `plan/preservation-hint.md` | @dev-orchestrator | @planner, @impl-orchestrator |
+| `requirements.md` | @product-manager | @architect-lead, @tech-lead, @planner |
+| `design/` | @architect-lead | @planner, @tech-lead, @product-manager |
+| `plan/` | @planner (spawned by @product-manager) | @tech-lead, @product-manager |
+| `plan/preservation-hint.md` | @product-manager | @planner, @tech-lead |
 | kb (`meridian context kb`) | @kb-writer, @kb-maintainer | all agents |
 
 ## Redesign And Rejections
 
-- Redesign brief lives in @impl-orchestrator terminal report.
+- Redesign brief lives in @tech-lead terminal report.
 - Keep only approved state at `design/` and `plan/`.
 - Replace rejected drafts atomically. Use git history for prior versions.
 

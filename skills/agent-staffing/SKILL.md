@@ -1,6 +1,8 @@
 ---
 name: agent-staffing
 description: Use when composing a team for a design or implementation phase — choosing which agents to spawn, how many, what runs in parallel, which review focus areas to cover, and how to scale effort to complexity. Also use when deciding whether a task is small enough to skip orchestration ceremony or large enough to warrant fan-out.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Agent Staffing
@@ -8,12 +10,12 @@ description: Use when composing a team for a design or implementation phase — 
 Compose the right team for each phase. The goal is coverage across
 perspectives, not redundant passes from the same angle.
 
-Each orchestrator has its own staffing patterns in its body — this skill covers
+Each manager/lead has its own staffing patterns in its body — this skill covers
 the general principles that apply everywhere.
 
 ## General Principles
 
-**Delegation is mandatory for orchestrators.** Orchestrators never write code
+**Delegation is mandatory for managers and leads.** They never write code
 or edit source files directly. If no team composition was provided by your
 caller, compose one yourself using the agent catalogs below.
 
@@ -22,8 +24,8 @@ and how much harder is it to fix later than now? High-risk areas get more
 coverage and more diverse perspectives. Low-risk areas get lighter treatment.
 
 **Review convergence.** Review loops run until convergence (no new substantive
-findings), not a fixed number of passes. The orchestrator can stop early but
-must log the reasoning.
+findings), not a fixed number of passes. The lead can stop early but must log
+the reasoning.
 
 **Route by work type.** Not everything is a coding task. Probe unclear behavior
 with `@smoke-tester`, diagnose root causes with `@investigator`, implement with

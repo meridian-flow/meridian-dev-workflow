@@ -1,6 +1,8 @@
 ---
 name: tech-docs
 description: Use when writing, reviewing, or restructuring technical documents — design docs, reference material, architecture specs, or any structured documentation that humans and agents rely on. Covers structure, clarity, and navigability.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Tech Docs

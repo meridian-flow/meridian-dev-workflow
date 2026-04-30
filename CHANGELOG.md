@@ -15,6 +15,17 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `dev-artifacts`: path discovery updated — context dirs available as `$MERIDIAN_CONTEXT_*_DIR` env vars alongside CLI commands.
 
 ### Changed
+- **Role renames**: `dev-orchestrator` → `product-manager`, `design-orchestrator` → `architect-lead`, `impl-orchestrator` → `tech-lead`, `test-orchestrator` → `qa-lead`, `frontend-dev` → `ux-lead`. Real-world titles prime for delegation over micromanagement.
+- **Skill rename**: `orchestrate` → `agent-management`. Body vocabulary updated to manager/lead.
+- **Skill list rebuild**: 56→39 loads across coordinators. Each role loads only what it actually needs.
+- **New `design-principles` skill**: split from dev-principles — spec-driven development, treat requirements as hypotheses, edge-case thinking, probe before committing. ~400w.
+- `dev-principles`: slimmed 1001→457w after design-principles extraction.
+- `browser-test`: trimmed 478→164w. Methodology only, mechanics in `/playwright-cli`.
+- `decisions.md` decoupled — no longer mandatory file path. Decisions belong in relevant design docs.
+- All skills get explicit invocation-control flags. `issues` explicitly flipped as safety net.
+- `agent-staffing`: vocabulary → manager/lead. Cross-references updated throughout resources.
+- `AGENTS.md`: updated with `mars version` release guidance.
+- `mars.toml`: removed `caveman` dependency.
 - `@design-orchestrator`: new "Design Artifact Hygiene" gate before returning design-ready. Spawns `@kb-maintainer` in explicit target-tree mode (`-f design/`) — splits mixed-purpose docs, resolves contradictions, extracts rejected approaches to `design/alternatives.md`, enforces `design/index.md` as reading-order entry point. Deletion tightened: only when content is explicitly duplicated or clearly superseded by cited replacement; unindexed docs get relinked or flagged before deletion. `feasibility.md` scoped to probes/evidence/constraints, decisions go in `decisions.md`. Gate runs after review loops converge, before terminal report.
 - `@design-orchestrator`: Completion now caller-agnostic — returns design-ready to whoever spawned it. @planner spawn only when caller explicitly delegated autonomous planning. When caller is @dev-orchestrator, it owns user approval gate and planner handoff. Technical feasibility pushback also routes to caller, not hardcoded @dev-orchestrator. Enforced via `<do_not_spawn_planner>` constraint block.
 - `@dev-orchestrator`: frontmatter no longer forces generic `effort: high`; model alias policy now owns effort default.

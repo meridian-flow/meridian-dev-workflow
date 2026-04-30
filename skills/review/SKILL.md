@@ -1,6 +1,8 @@
 ---
 name: review
 description: Use whenever reviewing code, evaluating implementation quality, or assessing a change — PR reviews, phase reviews, design reviews, and any task where the goal is finding problems rather than building things. Covers adversarial mindset, severity handling, and structured reporting.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 # Review
 

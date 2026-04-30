@@ -7,6 +7,8 @@ description: >
   surfaces at runtime. Not the right fit when unit or integration tests
   already cover the behavior. Pair with `/playwright-cli` for browser
   mechanics.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Browser Testing

@@ -8,9 +8,9 @@ Agents that produce artifacts — code, design docs, research findings, and capt
 
 @frontend-coder — production frontend code writer for visual/UI work where design fidelity and aesthetics are the primary concern. Same staffing rules as @coder. Pick this variant when the work is about what users see and feel — matching a design spec, implementing visual polish — not just because the file is frontend code. Pass mockups or screenshots when available.
 
-@mockup-gen — fast throwaway mockups using the project's real components and design system. Not production code — exists for rapid visual iteration with the user. One per iteration round. Spawned by @frontend-dev, not by impl-orchestrator.
+@mockup-gen — fast throwaway mockups using the project's real components and design system. Not production code — exists for rapid visual iteration with the user. One per iteration round. Spawned by @ux-lead, not by tech-lead.
 
-@imagegen — native image generation. UI concept mockups, visual explorations, icons, reference imagery. Usually spawned on explicit user request — image generation is expensive. Spawned by @frontend-dev.
+@imagegen — native image generation. UI concept mockups, visual explorations, icons, reference imagery. Usually spawned on explicit user request — image generation is expensive. Spawned by @ux-lead.
 
 ## Design Exploration
 

@@ -1,6 +1,8 @@
 ---
 name: issues
 description: Mirror local tracking artifacts to GitHub Issues for team visibility. Use this whenever you find bugs, unexpected behavior, deferred decisions, or backlog items during implementation, investigation, or review — anything worth tracking beyond the current work item. Also use when asked to file an issue or when you've investigated a problem and determined it needs a GH issue rather than a quick fix.
+disable-model-invocation: false
+allow_implicit_invocation: true
 ---
 
 # Issue Tracking

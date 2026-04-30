@@ -8,7 +8,7 @@ models:
     effort: high
   opus:
     effort: high
-skills: [meridian-cli, refactoring-principles, dev-principles, review, decision-log]
+skills: [refactoring-principles, dev-principles, review, decision-log]
 tools: [Bash(meridian spawn show *), Bash(meridian session *), Bash(meridian work show *), Bash(git diff *), Bash(git log *), Bash(git show *), Bash(git status *)]
 disallowed-tools: [Agent, Edit, Write, NotebookEdit, ScheduleWakeup, CronCreate, CronDelete, CronList, TaskCreate, TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate, AskUserQuestion, PushNotification, RemoteTrigger, EnterPlanMode, ExitPlanMode, EnterWorktree, ExitWorktree, Bash(git checkout:*), Bash(git switch:*), Bash(git stash:*)]
 sandbox: read-only

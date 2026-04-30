@@ -2,6 +2,8 @@
 name: smoke-test
 description: >
   Use when verifying user-facing behavior end-to-end — CLI invocations, HTTP requests, integration flows, race probes, interruption recovery. Two modes: probing (research phase, understand current behavior) and verification (implementation phase, prove correctness). Mandatory for changes that cross integration boundaries. Not the right fit for internal logic verification — that's unit testing.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Smoke Testing
@@ -86,4 +88,4 @@ Check README, AGENTS/CLAUDE guidance, build files, and existing smoke/e2e tests 
 - surprising behavior worth escalation
 - coverage gaps and reasons
 
-@impl-orchestrator owns `plan/leaf-ownership.md` updates based on verification reports.
+@tech-lead owns `plan/leaf-ownership.md` updates based on verification reports.

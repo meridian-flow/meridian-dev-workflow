@@ -6,6 +6,8 @@ description: >
   when implementing, reviewing, or refactoring code. Design-facing guidance
   (spec-driven, requirements-as-hypotheses, probing, edge-case thinking)
   lives in design-principles.
+disable-model-invocation: true
+allow_implicit_invocation: false
 ---
 
 # Refactor Early, Refactor Continuously
