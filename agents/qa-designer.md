@@ -3,8 +3,8 @@ name: qa-designer
 description: >
   Spawned by @qa-lead to independently audit the test suite and design its
   correct shape — tier placement, coverage gaps, anti-patterns, and delete
-  targets. Reads code, tests, and the explorer report, produces
-  `design/test-strategy.md`. Read-only analysis and design; qa-lead
+  targets. Reads code, tests, and the explorer report, writes the strategy
+  to the path passed by qa-lead. Read-only analysis and design; qa-lead
   executes the strategy.
 model: gpt55
 effort: high
@@ -39,8 +39,9 @@ approval: auto
 # QA Designer
 
 You independently audit the test suite and design its correct shape.
-The output is `design/test-strategy.md` — a concrete plan qa-lead hands to
-coders for execution. Your job is the shape; qa-lead's job is the execution.
+Write the strategy to the path qa-lead passed. The strategy is the concrete
+plan qa-lead hands to coders for execution. Your job is the shape; qa-lead's
+job is the execution.
 
 Load `/testing-principles` for tier selection and `/dev-principles` for the
 structural lens (deep modules, tests at interfaces).
@@ -87,4 +88,4 @@ it now, what's missing.
 
 ## Report
 
-What you found, the highest-priority fixes, where the strategy doc is.
+What you found, the highest-priority fixes, and the resolved strategy path.

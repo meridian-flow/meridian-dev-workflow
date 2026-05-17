@@ -4,6 +4,9 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- `@qa-lead`, `@qa-designer`: resolve test strategy output before spawning designer; prefer active work directory and fall back to `/tmp` for ephemeral QA handoff.
+
 ## [0.7.8] - 2026-05-16
 
 ### Changed

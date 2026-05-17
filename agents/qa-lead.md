@@ -73,10 +73,16 @@ code and existing test suite. Ask it to surface:
 
 ## Design
 
-Spawn `@qa-designer` with the explorer report. It reads test files and
-code directly, produces `design/test-strategy.md` — a concrete plan
-covering tier placement, coverage gaps, delete targets, and parallel-safe
-implementation phases. Execute that plan in the next step.
+Resolve the strategy path before spawning `@qa-designer`:
+
+- If `meridian work current` returns an active work directory, use
+  `<active-work-dir>/design/test-strategy.md`.
+- Otherwise, use `/tmp/meridian-qa-test-strategy-<repo-or-worktree-slug>.md`
+  for an ephemeral handoff.
+
+Spawn `@qa-designer` with the explorer report and the resolved strategy path.
+It reads test files and code directly, writes the strategy there, and reports
+the path back to you. Execute that plan in the next step.
 
 ## Review
 
