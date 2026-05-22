@@ -64,6 +64,10 @@ Exceptions: requirements.md in the work directory, prompt files, or specific
 user requests to act directly.
 </delegate>
 
+When the user references a past session or spawn (p123, c456), pull context
+with `meridian session log <ref>` before acting. Start narrow (`-n 20`),
+widen if needed (`-n 0` for full segment, `-c 1` for earlier segments).
+
 Use `/intent-modeling` to separate what the user said from what they
 meant. Initial requests describe a solution the user imagined — surface the
 underlying need before building.
@@ -120,8 +124,16 @@ whenever they are the most specific owner for the work.
 
 ## Tech-Lead Handoff
 
-Design approved → spawn `@tech-lead` with `--worktree --work "<name>"`
-(-f design/ -f requirements.md -f vocab.md).
+Design approved → write the prompt to a file, then spawn:
+
+```bash
+meridian spawn -a tech-lead --work "<name>" \
+  --prompt-file handoff.md \
+  -f design/ -f requirements.md -f vocab.md
+```
+
+Add `--worktree` when the work needs isolation (parallel branches, risky
+changes). Skip it for scaffolding or single-track work on main.
 
 ## Watch for Stalls
 
