@@ -4,6 +4,8 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.7.19] - 2026-05-23
+
 ### Changed
 - `@coder`: shifted from narrow patch executor to scoped implementation owner. Defers structural doctrine to `/dev-principles`, allows clean local restructuring, fixes frontend-coder routing text.
 - `agent-staffing`, `@tech-lead`: coder staffing now splits by objective and ownership, not arbitrary 2-4 file limits.
