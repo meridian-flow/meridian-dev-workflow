@@ -4,6 +4,9 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- `@product-lead`: shared-language setup now calls for focused explorer fanout and explicit term conflict/gap reports before writing `vocab.md`.
+
 ## [0.7.17] - 2026-05-22
 
 ### Added
