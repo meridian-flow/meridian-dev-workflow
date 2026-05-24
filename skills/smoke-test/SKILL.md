@@ -57,11 +57,13 @@ Report per-ID outcomes (`verified` / `falsified` / `unparseable` / `blocked`).
 
 ## Execution
 
-Run in the active worktree — the caller already placed you where the change
-lives. Inspect `git status` and the working tree before probing so you know
-what is already in flight. Use disposable environments (temp repo, throwaway
-config) only for destructive probes or clean-baseline comparisons that would
-contaminate the worktree.
+Run in the workspace the caller selected — a managed worktree, a
+human-prepared custom-path workspace, or the current checkout. Do not create
+or switch worktrees yourself; caller owns workspace/worktree placement.
+Inspect `git status` and the working tree before probing so you know what is
+already in flight. Use disposable environments (temp repo, throwaway config)
+only for destructive probes or clean-baseline comparisons that would
+contaminate the workspace.
 
 Respect the shared workspace: do not reset, revert, stash, or clean the working
 tree. Do not delete untracked files without ownership confirmation. Keep

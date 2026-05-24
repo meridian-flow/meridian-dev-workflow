@@ -132,13 +132,67 @@ most specific owner for the work.
 Design approved → write the prompt to a file, then spawn:
 
 ```bash
-meridian spawn -a tech-lead --work "<name>" \
+meridian spawn -a tech-lead --work <work-id> \
   --prompt-file handoff.md \
   -f design/ -f requirements.md -f vocab.md
 ```
 
-Add `--worktree` when the work needs isolation (parallel branches, risky
-changes). Skip it for scaffolding or single-track work on main.
+Use `--worktree` for implementation that needs isolation: parallel branches,
+risky changes, or larger work where agents should stay out of the main
+checkout. Small direct coder slices usually run in the caller-selected
+workspace.
+
+When the scope warrants a work item, start or switch to it first, then spawn
+with `--worktree`. Meridian ensures the managed worktree before launch — no
+separate preflight is needed in the common case.
+
+```bash
+meridian work start "<descriptive name>"
+meridian spawn -a tech-lead --work <work-id> --worktree \
+  --prompt-file handoff.md \
+  -f design/ -f requirements.md -f vocab.md
+```
+
+Do not create a work item just to satisfy ceremony. Small direct coder slices
+can run without a work item or worktree when no durable coordination artifacts
+are needed.
+
+Reach for `meridian work worktree --ensure` (active work item) or
+`meridian work worktree <work-id> --ensure` (explicit work item, no session
+re-attachment) when you need to recover or inspect the worktree before
+spawning, or when isolation is discovered later. Manual `git worktree add`
+paths are outside the dev workflow.
+
+Existing managed worktree metadata is authoritative. `meridian work worktree
+--ensure` reuses or recovers the recorded managed worktree; do not treat cwd
+or a new `--repo` value as permission to switch an existing work item to a
+different repo. If the recorded target looks wrong, stop and report it.
+
+If isolation is warranted but a durable work item is not, run
+`meridian work worktree --ensure` without an active work item. Meridian
+creates a managed temporary worktree for the session/task — isolation
+without work-item artifacts.
+
+### Cross-Repo Implementation
+
+When implementation belongs in a repository other than this session's
+authority root — coordinating from `meridian-cli` while the work lives in
+`mars-agents`, `meridian-web`, a prompt package, etc. — pass the target repo
+explicitly. The target repo determines the canonical worktree path
+(`<target-repo>.worktrees/<worktree-name>`); work item artifacts may stay
+under the authority project.
+
+```bash
+meridian work worktree <work-id> --repo <path-or-alias> --ensure
+meridian spawn -a tech-lead --work <work-id> --worktree \
+  --repo <path-or-alias> \
+  --prompt-file handoff.md \
+  -f design/ -f requirements.md -f vocab.md
+```
+
+Pass `--repo` whenever the implementation target is not this session's
+authority root. If the target repo is ambiguous, name it before spawning
+rather than letting Meridian default to the wrong repository.
 
 ## Watch for Stalls
 

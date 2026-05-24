@@ -4,6 +4,13 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- `@product-lead`, `@tech-lead`: worktree guidance now treats isolation as warranted for larger/risky work, not small direct coder slices; implementation owners use Meridian managed worktree ensure instead of manual `git worktree add` paths.
+- `@product-lead` tech-lead handoff: dropped redundant `work worktree --ensure` preflight in the common path — `spawn --worktree` ensures the managed worktree itself. Examples now use `<work-id>` consistently with `--work` and worktree commands. Adds temporary worktree path (`meridian work worktree --ensure` with no active work item) for isolation without a work item.
+- `@tech-lead` worktree section: operational specifics for mid-run ensure — session stays in its launch directory, subsequent specialist spawns run inside the managed worktree via `--worktree`, and a re-launch in the worktree is what tech-lead reports rather than attempting to relocate the current session. Adds temporary worktree mode for isolation without a work item.
+- `@product-lead`, `@tech-lead`: cross-repo implementation guidance — pass `--repo <path-or-alias>` when coordination runs in one repo (e.g. `meridian-cli`) but implementation belongs in another (`mars-agents`, `meridian-web`, prompt packages). Target repo determines canonical worktree path; ambiguous target fails clearly instead of provisioning in the wrong repo.
+- `@product-lead`, `@tech-lead`, `@smoke-tester`, `/smoke-test`, `agent-staffing`: finalized workspace/worktree wording — tester guidance now uses caller-selected workspace, managed worktree metadata is authoritative on ensure/recovery, and tech-lead shipping text no longer hardcodes worktree-only PR wording.
+
 ## [0.7.19] - 2026-05-23
 
 ### Changed

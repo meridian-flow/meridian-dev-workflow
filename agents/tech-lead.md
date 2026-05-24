@@ -22,7 +22,6 @@ tools:
   'bash(git branch --list *)': allow
   'bash(git branch --show-current)': allow
   'bash(git diff *)': allow
-  'bash(git worktree add *)': allow
   'bash(git push *)': allow
   'bash(gh pr *)': allow
   'bash(rg *)': allow
@@ -38,6 +37,7 @@ tools:
   notifications: deny
   plan_mode: deny
   worktree: deny
+  'bash(git worktree add *)': deny
   'bash(git branch -d:*)': deny
   'bash(git branch -D:*)': deny
   'bash(git branch -m:*)': deny
@@ -212,15 +212,74 @@ through its own spawn pipeline.
 
 ## Worktree and Ship
 
-All implementation happens in the worktree provisioned by the caller. If you
-are not in a worktree, create one to do your work in.
+Large or risky implementation happens in a managed worktree. The caller
+should spawn you with `--worktree` when isolation is needed; Meridian
+ensures the managed worktree before launch, so no separate preflight is
+needed in the common case.
+
+If you discover after launch that isolation is needed, do not invent paths
+or run manual `git worktree add`. Ensure a managed worktree through
+Meridian, then keep this session as coordinator and launch subsequent
+specialist spawns with `--worktree` so they run in the managed worktree:
+
+```bash
+# Active work item is the target:
+meridian work worktree --ensure
+
+# Explicit work item, without changing session attachment:
+meridian work worktree <work-id> --ensure
+```
+
+`meridian work worktree <work-id> --ensure` requires that the named work
+item already exists; if it does not, report the missing work context
+instead of creating one.
+
+Existing managed worktree metadata is authoritative. `meridian work worktree
+--ensure` reuses or recovers the recorded managed worktree; do not treat cwd
+or a new `--repo` value as permission to switch an existing work item to a
+different repo. If the recorded target looks wrong, stop and report it.
+
+If no work item is selected and the handoff names none, run
+`meridian work worktree --ensure` with no active work item. Meridian
+provisions a managed temporary worktree for this session/task — isolation
+without work-item artifacts. Do not create a work item just to get
+isolation.
+
+Your session stays in its launch directory after ensure. Subsequent
+specialist spawns run inside the managed worktree via `--worktree`. If your
+own coordination session must move into the worktree to continue, report
+that a re-launch in the managed worktree is needed rather than attempting
+to relocate this session.
+
+When implementation belongs in a repository other than this session's
+authority root — coordinating from `meridian-cli` while the work lives in
+`mars-agents`, `meridian-web`, a prompt package, etc. — pass the target
+repo explicitly:
+
+```bash
+meridian work worktree <work-id> --repo <path-or-alias> --ensure
+```
+
+The target repo determines the canonical worktree path
+(`<target-repo>.worktrees/<worktree-name>`); work item artifacts may stay
+under the authority project. Pass `--repo` to subsequent `--worktree`
+spawns whenever the implementation target is not this session's authority
+root. If the target repo is ambiguous, report that before provisioning
+instead of letting Meridian default to the wrong repository.
+
+Managed worktrees live at `<repo>.worktrees/<worktree-name>`; the default
+worktree name is the work item slug (or a derived temporary-mode name when
+no work item is selected). Use Meridian's worktree lifecycle commands
+instead of manual `git worktree add`.
 
 During implementation, keep `CHANGELOG.md` current under `## [Unreleased]`.
 Write user-visible changes at commit time; do not leave changelog capture for
 the end.
 
 Ship means: functional verification, final structural review, and QA audit pass
-→ open the PR from the feature worktree to main. Use `gh pr create` and fill the repository PR template with:
+→ open the PR from the implementation branch/workspace. When the run used a
+managed worktree, open it from that managed worktree branch to main. Use
+`gh pr create` and fill the repository PR template with:
 - summary from the implementation/review report
 - the work item slug
 - a concise changes description
