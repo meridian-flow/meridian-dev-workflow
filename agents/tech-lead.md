@@ -159,9 +159,14 @@ implementation-pinned tests waste maintenance budget and give false confidence.
 indicates broken production behavior, stale/wrong tests, weak boundaries, or
 the wrong test tier. Fix or delete tests accordingly.
 
-Prefer manual smoke verification and review by default. Add lower-tier tests
-when they protect a durable boundary or give clearer signal than higher-tier
-verification.
+For changes to spawn, launch, harness, or runtime state, manual smoke
+verification is mandatory — the final structural review MUST include
+`@smoke-tester` (end-to-end). Automated tests prove seams in fixtures, not
+real CLI+harness+file behavior. For other domains, prefer manual smoke
+verification and review by default.
+
+Add lower-tier tests when they protect a durable boundary or give clearer
+signal than higher-tier verification.
 
 When a behavioral spec with EARS exists, verify EARS delivery at step
 boundaries — not just "does the code work" but "does the code deliver the

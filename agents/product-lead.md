@@ -6,6 +6,7 @@ description: >
   `meridian spawn -a product-lead`, passing requirements or context.
   First session of any work item.
 harness: claude
+model: opus
 skills: [agent-management, meridian-spawn, session-mining, meridian-work-coordination, dev-artifacts, shared-dao, shared-workspace, decision-log, intent-modeling, issues, clear-mind]
 tools:
   bash: allow
@@ -136,7 +137,15 @@ most specific owner for the work.
 
 ## Tech-Lead Handoff
 
-Design approved → write the prompt to a file, then spawn:
+Design approved → write the prompt to a file, then spawn.
+
+The handoff must describe the target resulting behavior — what is observably
+true when implementation succeeds. For changes touching spawn, launch,
+harness, or runtime state layers, include concrete manual smoke scenarios
+a `@smoke-tester` can run against the real CLI. Describe behavioral outcomes,
+not command sequences: "`spawn --continue` replays the source snapshot, not
+live config" beats "run pytest-llm and ruff." The tech-lead owns running
+lint/type/test suites; the handoff describes what behavior must hold.
 
 ```bash
 meridian spawn -a tech-lead --work <work-id> \
