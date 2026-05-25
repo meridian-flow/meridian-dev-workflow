@@ -7,6 +7,7 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 - `@product-lead`: past-session lookup now treats bare `session log` as safe recent entries and reserves `--full`/`--no-truncate` for deliberate expansion.
 - `@product-lead`: past-session lookup now calls out entry `0` as the selected segment prologue/handoff slot.
+- `@product-lead`: session log guidance aligned with finalized CLI — segment-local default, `--segment previous|N`, `--global` as explicit opt-in only, and `meridian session search` recommended with the printed `Open:` command for known text.
 
 ## [0.7.20] - 2026-05-24
 

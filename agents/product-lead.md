@@ -67,11 +67,14 @@ user requests to act directly.
 
 When the user references a past session or spawn (p123, c456), pull context
 with `meridian session log <ref>` before acting. Bare `session log` reads the
-last 5 interaction entries with safe previews. Use `--tail 20` for more recent
-context, `--full` for the full current segment, `--no-truncate` for complete
-content, `--from 0 --limit 1` for the selected segment prologue/handoff, and
-`--segment previous` or `--around N --context M` for older or deterministic
-windows.
+last 5 interaction entries from the current segment with safe previews;
+navigation is segment-local by default. Use `--tail 20` for more recent
+context, `--from 0 --limit 1` for the segment setup slot (entry 0),
+`--around N --context M` for a deterministic window, `--segment previous|N` to
+switch segments, and `--full`/`--no-truncate` for deliberate expansion. Reach
+for `--global` only when you need one flat stream across all segments. Prefer
+`meridian session search "<text>" <ref>` when you know what you're looking
+for — each hit prints an `Open:` command to run directly.
 
 Use `/intent-modeling` to separate what the user said from what they
 meant. Initial requests describe a solution the user imagined; surface the
