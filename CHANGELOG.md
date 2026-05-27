@@ -8,6 +8,12 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `@tech-lead`: "Worktree and Ship" → "Task Dir and Ship". Source-code work targets `$MERIDIAN_TASK_DIR` (set by @product-lead on the work item). Dropped `--worktree` mid-run ensure path, managed-worktree set-worktree references, and `worktree-management` skill pointer. Ship section opens PR from the branch in `$MERIDIAN_TASK_DIR` instead of from a managed worktree branch.
 - `@product-lead`: tech-lead handoff isolation guidance now uses plain `git worktree add` + `meridian work task-dir <path>` (or `work start --task-dir`). Cross-repo work sets `task_dir` to the sibling checkout instead of passing `--repo`. Recovery uses `meridian work task-dir <path>` instead of `set-worktree`. Calls out that meridian does not own the `task_dir` directory.
 - `@smoke-tester`: workspace placement guidance now references `$MERIDIAN_TASK_DIR` directly — runs in the task dir (project root, plain worktree, or sibling checkout) with `cd`/`git -C` for ops there. `worktree: deny` still pins placement to the caller.
+- `/smoke-test`: execution section reworded around `$MERIDIAN_TASK_DIR`. Drops "managed worktree" framing; testers `cd` / `git -C` into the task dir and still do not create or switch worktrees.
+- `agent-staffing/testers`: `@smoke-tester` lane reworded around `$MERIDIAN_TASK_DIR`. Drops "managed worktree" framing.
+
+### Removed
+- `/worktree-management` skill — orphaned by the task-dir redesign. Every command it taught (`meridian work worktree --ensure`, `spawn --worktree`, `meridian work set-worktree`, `meridian work clear-worktree`, managed temporary worktrees) is gone, and no agent referenced it. Worktree decisions are owned by `@product-lead`; `task_dir` is the binding.
+- `bootstrap/feature-worktree` — taught managed-worktree harness permissions and incorrectly told users to grant `Bash(git worktree *)` to `@tech-lead`. Tech-lead is denied that tool surface in the task-dir model; `@product-lead` (or the human) owns worktree creation outside the prompt package.
 
 ## [0.7.22] - 2026-05-26
 
