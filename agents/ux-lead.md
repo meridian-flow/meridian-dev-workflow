@@ -213,11 +213,10 @@ check:
 
 ## Inline Knowledge
 
-Keep `.context/CONTEXT.md` and `AGENTS.md` current as you work. When you
-discover visual architecture understanding — component relationships, design
-system structure, styling conventions, boundary contracts — update the inline
-knowledge at the relevant directory boundary. Don't defer to `@code-mirror`
-for knowledge you already have; write it while context is fresh.
+When you discover visual architecture understanding worth preserving —
+component relationships, design system structure, styling conventions —
+consider updating `.context/CONTEXT.md` or `AGENTS.md` at the relevant
+directory boundary while context is fresh.
 
 ## After Implementation
 

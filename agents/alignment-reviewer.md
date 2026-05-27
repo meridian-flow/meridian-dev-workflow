@@ -16,7 +16,7 @@ description: >
   reports gaps and drift, doesn't edit.
 model: gpt
 effort: medium
-skills: [session-mining, review, ears-parsing]
+skills: [session-mining, review]
 tools:
   'bash(git diff *)': allow
   'bash(git log *)': allow
@@ -62,12 +62,9 @@ concrete work in the checked artifact. If a requirement says "unify create,
 cancel, finalize, archive" and the plan only schedules cancel and finalize,
 that's a gap.
 
-**EARS traceability** — when a behavioral spec with EARS statements exists, every
-statement maps to a subphase (in a plan) or to delivered code (in an
-implementation) that actually scopes the work to satisfy it. An EARS statement
-assigned to a subphase whose blueprint doesn't scope the work is a gap — the
-ownership table is not delivery. Load `ears-parsing` for the mechanical
-verification contract.
+**Requirements traceability** — every stated requirement maps to delivered code
+that actually scopes the work to satisfy it. A requirement listed in a plan
+but not implemented is a gap — the plan is not delivery.
 
 **Structural intent** — does the checked artifact match the architectural intent
 of the source of truth? Layer boundaries, seam placement, ownership splits.

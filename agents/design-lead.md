@@ -128,8 +128,6 @@ interfaces, patterns) and stop. Implementation decomposition and phasing are
 the tech-lead's responsibility — tech-lead decomposes work as needed during
 implementation.
 
-When a behavioral spec with EARS exists, include it. Spec before architecture.
-
 Before your final reporting, spawn `@kb-maintainer --skills tech-docs,llm-writing`
 on the `design/` directory to clean up coordination debris — superseded drafts,
 contradictions, unindexed content. When the documentation-structure review finds

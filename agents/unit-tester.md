@@ -7,7 +7,7 @@ description: >
 model: gpt-5.4
 model-invocable: false
 effort: medium
-skills: [unit-test, testing-principles, ears-parsing]
+skills: [unit-test, testing-principles]
 tools:
   bash: allow
   write: allow

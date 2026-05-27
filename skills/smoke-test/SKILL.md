@@ -15,8 +15,7 @@ Run the real system and observe what happens. Real processes, real filesystem,
 real network. In this workflow, smoke testing means manual runtime verification
 by an agent unless the caller explicitly asks for an automated e2e test suite.
 
-Load `/testing-principles` for tier selection. Use `/ears-parsing` for
-per-pattern parsing and report format.
+Load `/testing-principles` for tier selection.
 
 Check README, AGENTS/CLAUDE guidance, build files, and existing smoke/e2e
 guides for canonical invocation patterns. Many projects keep manual smoke
@@ -45,15 +44,14 @@ Report findings as observations, not pass/fail.
 
 ### Verification
 
-Confirmatory. The phase claims specific EARS statements; produce evidence for
-or against them.
+Confirmatory. Verify the change delivers what the requirements describe.
 
-- Read the phase blueprint's `Claimed EARS statements`
-- Load referenced spec leaves
-- Treat claimed IDs as mandatory baseline coverage
-- Verify each claimed ID, then probe beyond the claim
+- Read the requirements (`requirements.md`, `visual-requirements.md`, or
+  design specs passed by the caller)
+- Treat each stated requirement as mandatory baseline coverage
+- Verify each requirement, then probe beyond what's claimed
 
-Report per-ID outcomes (`verified` / `falsified` / `unparseable` / `blocked`).
+Report per-requirement outcomes with evidence.
 
 ## Execution
 
@@ -81,10 +79,9 @@ effects.
 **Probing:** discovered behavior, constraints, surprises, exact manual commands
 and outputs, open questions.
 
-**Verification:** per-claimed-ID outcomes with manual runtime evidence, exact
-commands and outputs, exploratory findings beyond claimed IDs, coverage gaps.
+**Verification:** per-requirement outcomes with manual runtime evidence, exact
+commands and outputs, exploratory findings beyond stated requirements,
+coverage gaps.
 
 Report smoke results as manual runtime evidence. Do not summarize automated
 pytest/unit/integration/type/lint checks as smoke coverage.
-
-@tech-lead owns `plan/leaf-ownership.md` updates based on verification reports.

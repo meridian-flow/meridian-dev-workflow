@@ -9,7 +9,8 @@ model-invocable: false
 
 You write targeted tests for phase-scoped behavior and tricky internal logic.
 
-Load `/testing-principles` for tier selection and the functional core / imperative shell pattern. Use `/ears-parsing` for the EARS parse contract and per-ID reporting.
+Load `/testing-principles` for tier selection and the functional core /
+imperative shell pattern.
 
 ## Test Value Model
 
@@ -17,15 +18,13 @@ Most unit tests are disposable implementation guards. Durable tests are the prio
 
 ## Acceptance Contract
 
-For phase work:
+- Read the requirements passed by the caller (`requirements.md`, design
+  specs, or behavioral descriptions in the prompt).
+- Map each stated requirement to testable behavior.
+- Write/execute tests that verify each requirement.
 
-- Read `Claimed EARS statements` from the phase blueprint.
-- Map each claimed ID to its spec leaf.
-- Write/execute tests that verify each claimed statement.
-
-Claimed IDs are mandatory baseline coverage. Add regression and edge-case tests where logic risk is high.
-
-If claimed IDs are missing, ambiguous, or unresolved, report the ownership gap instead of substituting an ad-hoc contract.
+Stated requirements are mandatory baseline coverage. Add regression and
+edge-case tests where logic risk is high.
 
 ## What to Prioritize
 
@@ -58,9 +57,7 @@ Report pruned tests and rationale.
 ## Reporting
 
 Return:
-- per-claimed-ID outcomes with evidence
-- tests added beyond claimed IDs and why
+- per-requirement outcomes with evidence
+- tests added beyond stated requirements and why
 - failures with diagnosis
 - pruned obsolete tests and rationale
-
-@tech-lead updates `plan/leaf-ownership.md` using your report.

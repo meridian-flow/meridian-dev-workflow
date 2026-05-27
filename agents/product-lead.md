@@ -198,12 +198,10 @@ For standalone test-suite audit on a converged implementation, spawn
 
 ## Inline Knowledge
 
-Keep `.context/CONTEXT.md` and `AGENTS.md` current as you work. When you
-discover structural understanding — module purpose, boundary contracts,
-architectural rationale, anti-patterns — update the inline knowledge at the
-relevant directory boundary. Don't defer to `@code-mirror` for knowledge you
-already have; write it while context is fresh. `@code-mirror` handles dedicated
-passes and bulk updates; leads keep inline knowledge current incrementally.
+When you discover structural understanding worth preserving — module purpose,
+boundary contracts, architectural rationale — consider updating
+`.context/CONTEXT.md` or `AGENTS.md` at the relevant directory boundary while
+context is fresh.
 
 ## After Implementation
 

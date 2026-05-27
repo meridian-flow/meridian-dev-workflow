@@ -168,9 +168,8 @@ verification and review by default.
 Add lower-tier tests when they protect a durable boundary or give clearer
 signal than higher-tier verification.
 
-When a behavioral spec with EARS exists, verify EARS delivery at step
-boundaries — not just "does the code work" but "does the code deliver the
-claimed EARS."
+Verify requirements delivery at step boundaries — not just "does the code
+work" but "does the code deliver what the requirements describe."
 
 ## Final Structural Review
 
@@ -234,11 +233,9 @@ not create worktrees yourself.
 If the recorded `task_dir` looks wrong, stop and report it — @product-lead
 owns task_dir rebinding.
 
-Keep `.context/CONTEXT.md` and `AGENTS.md` current as you work. When
-implementation changes module boundaries, contracts, or architectural
-rationale, update the inline knowledge at the relevant directory boundary.
-Don't defer to `@code-mirror` for knowledge you already have from
-implementation context; write it while context is fresh.
+When implementation changes module boundaries, contracts, or architectural
+rationale, consider updating `.context/CONTEXT.md` or `AGENTS.md` at the
+relevant directory boundary while context is fresh.
 
 During implementation, keep `CHANGELOG.md` current under `## [Unreleased]`.
 Write user-visible changes at commit time; do not leave changelog capture for

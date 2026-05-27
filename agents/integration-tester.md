@@ -7,7 +7,7 @@ description: >
 model: gpt-5.4
 model-invocable: false
 effort: medium
-skills: [integration-test, testing-principles, ears-parsing]
+skills: [integration-test, testing-principles]
 tools:
   bash: allow
   write: allow
@@ -38,4 +38,4 @@ sandbox: workspace-write
 
 Use `/integration-test` for method and reporting.
 Exercise the requested composition with fakes at external boundaries.
-Cover claimed EARS IDs, then add a small number of extra coordination cases where error propagation or partial failure is risky.
+Cover stated requirements, then add a small number of extra coordination cases where error propagation or partial failure is risky.

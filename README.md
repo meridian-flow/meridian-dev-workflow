@@ -100,7 +100,7 @@ meridian spawn -a product-lead -p 'Build JWT token validation'
 | `dev-artifacts` | Shared artifact convention between leads — v3 layout with spec/architecture trees |
 | `session-mining` | Session-mining workflow patterns — recover parent-session decisions and delegate bulk transcript reads |
 | `architecture` | Problem framing, tradeoff analysis, approach evaluation |
-| `planning` | Decomposing design packages into executable phases — EARS ownership, parallelism posture, staffing |
+| `planning` | Plan execution — phases, subphases, verification levels, probe/diagnosis lanes |
 | `agent-staffing` | Team composition — which agents to spawn, how many, what runs in parallel |
 | `dev-principles` | Simplicity, separation of concerns, structural judgment — the operating lens for code decisions |
 | `testing-principles` | Test tier selection, risk-based coverage, functional core / imperative shell |
@@ -115,7 +115,7 @@ meridian spawn -a product-lead -p 'Build JWT token validation'
 | `smoke-test` | End-to-end testing — CLI, HTTP, race probes, interruption recovery |
 | `unit-test` | Focused test writing — edge cases, regression guards, tricky logic |
 | `integration-test` | Composition testing — module boundaries, fakes at external systems |
-| `ears-parsing` | Mechanical EARS verification contract for testers — per-pattern parse and per-ID reporting |
+| `react-architecture` | React-specific structural lens — tokens, state, composition, imports, component API consistency |
 | `tech-docs` | Technical writing craft — hierarchical docs, linking strategy, and progressive disclosure |
 | `frontend-design` | Distinctive, production-grade frontend interfaces — anti-generic-AI aesthetics |
 

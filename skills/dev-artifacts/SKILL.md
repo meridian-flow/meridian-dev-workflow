@@ -15,21 +15,17 @@ model-invocable: false
 ```text
 <work_dir>/
   requirements.md
+  visual-requirements.md     # ux-lead visual problem statement
+  vocab.md                   # shared terminology (when needed)
   design/
     spec/
     architecture/
     refactors.md
     feasibility.md
   plan/
-    overview.md
-    phase-N-<slug>.md        # scope, subphases, phase exit gate, EARS claims
-    leaf-ownership.md
     status.md
-    pre-planning-notes.md
-    preservation-hint.md
 ```
 
-See `resources/plan-package.md` for phase-file structure and artifact contracts.
 See `resources/ownership.md` for writer/reader rules and doc-layer placement.
 
 ## Convention Is Swappable

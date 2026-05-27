@@ -9,11 +9,17 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `react-architecture` skill: React-specific structural lens — token discipline, state architecture, component composition, import boundaries, component API consistency. Complements `dev-principles` with what generic structural skills don't cover about React codebases. Loaded on demand via `--skills react-architecture`.
 
 ### Changed
-- `@product-lead`, `@tech-lead`, `@ux-lead`: leads now keep `.context/CONTEXT.md` and `AGENTS.md` current incrementally as they work, instead of deferring all inline knowledge to `@code-mirror`. Dedicated passes remain code-mirror's job; leads write what they already know while context is fresh.
+- `@product-lead`, `@tech-lead`, `@ux-lead`: nudge leads to update `.context/CONTEXT.md` and `AGENTS.md` when they discover structural understanding while working.
+- Tester skills (`smoke-test`, `unit-test`, `integration-test`) now verify against requirements docs instead of EARS statement IDs. Acceptance contracts read `requirements.md` / `visual-requirements.md` / design specs.
+- `@alignment-reviewer`: EARS traceability → requirements traceability.
+- `@reviewer`: validate against stated requirements, not EARS/phase blueprints.
+- `@tech-lead`: verify requirements delivery at step boundaries.
 - `@ux-lead`: added visual requirements gathering (probe → `visual-requirements.md` gate), shared visual vocabulary section that orients against existing KB/codebase terms with `grill-with-docs`, oneshot default path through `@frontend-coder`, exploration exception for genuinely ambiguous visual intent. Skills added: `shared-dao`, `dev-artifacts`, `shared-workspace`, `session-mining`, `grill-with-docs`. Model pinned to `opus` with `model-policies` cascade.
 ### Removed
 - `@mockup-gen`: deleted. Throwaway visual iteration runs through `@frontend-coder` with a fast model when needed.
 - `@frontend-designer`: deleted. Visual spec formation is ux-lead's job (via `visual-requirements.md`); implementation routes directly to `@frontend-coder`.
+- `ears-parsing` skill: deleted. Testers verify against requirements, not EARS.
+- `dev-artifacts/resources/plan-package.md`: deleted. Plan ceremony (phases, EARS claims, leaf-ownership) replaced by lightweight requirements-driven flow.
 
 ## [0.7.23] - 2026-05-27
 

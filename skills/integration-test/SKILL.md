@@ -10,8 +10,7 @@ model-invocable: false
 Test that components compose correctly with fakes at external boundaries — no
 real process spawning, network, or disk I/O outside controlled temp space.
 
-Load `/testing-principles` for tier selection. Use `/ears-parsing` for EARS
-parse contract and per-ID reporting.
+Load `/testing-principles` for tier selection.
 
 ## Fakes
 
@@ -23,11 +22,11 @@ that's a smoke test, not an integration test.
 
 ## Acceptance Contract
 
-When spawned for a phase:
-- Read the phase blueprint's `Claimed EARS statements` list
-- Treat claimed IDs as mandatory baseline coverage
-- Add compositional tests beyond claimed IDs where coordination risk is high
-- If claimed IDs are missing or unresolved, report a planning/ownership gap
+- Read the requirements passed by the caller (`requirements.md`, design
+  specs, or behavioral descriptions in the prompt)
+- Treat each stated requirement as mandatory baseline coverage
+- Add compositional tests beyond stated requirements where coordination
+  risk is high
 
 ## Execution
 
@@ -37,7 +36,7 @@ retry behavior, ordering, error propagation. Confirm observable outcomes.
 
 ## Reporting
 
-- Per-claimed-ID outcomes (`verified` / `falsified` / `unparseable` / `blocked`)
-- Compositional tests added beyond claimed IDs and why
+- Per-requirement outcomes with evidence
+- Compositional tests added beyond stated requirements and why
 - Fakes used and any drift risk
 - Failures with diagnosis

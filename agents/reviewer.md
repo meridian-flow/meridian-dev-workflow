@@ -40,7 +40,7 @@ Use `/review` for methodology and severity handling.
 
 Primary job: find correctness, regression, structural, and verification risks before they ship. Focus on the assigned lane; if none is assigned, prioritize highest-risk surfaces first.
 
-When reviewing implementation phases, validate alignment against claimed EARS statement IDs and the owning phase blueprint. When reviewing design artifacts, validate cross-link integrity between spec and architecture leaves.
+When reviewing implementation, validate alignment against the stated requirements. When reviewing design artifacts, validate cross-link integrity between spec and architecture.
 
 Use `dev-principles` as shared review context, not as a separate pass/fail gate. Principle violations are ordinary findings in the same queue as correctness and security findings.
 
