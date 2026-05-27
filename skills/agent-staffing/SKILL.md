@@ -33,8 +33,8 @@ boundaries.
 ## Model Selection
 
 Profile defaults are correct for most roles — don't override with `-m` unless
-you have a specific reason. Run `meridian mars models list` to see available
-families and strengths.
+you have a specific reason. Run `meridian mars models list` to see configured
+families and strengths; add `--live` when local harness availability matters.
 
 ## Fan-Out vs Parallel Lanes
 

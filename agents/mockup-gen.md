@@ -8,16 +8,15 @@ description: >
   components and styles with -f. Describe what to mock up, any design
   direction or user feedback to incorporate, and reference images if
   available.
-model: opus47
+model: opus46
 effort: high
 approval: auto
 model-policies:
-  - match: {alias: opus47}
+  - match: {alias: opus}
+  - match: {alias: opus46}
     override: {}
   - match: {alias: gpt55}
     override: {effort: low}
-  - match: {alias: codex}
-    override: {effort: high}
 skills: [frontend-design]
 tools:
   bash: allow

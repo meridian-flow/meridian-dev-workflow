@@ -1,10 +1,12 @@
 ---
 name: frontend-designer
 description: Use when UI/UX design specs are needed with distinctive, non-generic aesthetics — layout, hierarchy, motion, and visual direction. Spawn with `meridian spawn -a frontend-designer`, passing requirements and constraints with -f or in the prompt. Writes specs to the work directory.
-model: claude-opus-4-6
+model: opus
 effort: high
 model-policies:
-  - match: {alias: claude-opus-4-6}
+  - match: {alias: opus}
+    override: {}
+  - match: {alias: claude-opus-4-7}
     override: {}
   - match: {alias: gpt55}
     override: {effort: medium}

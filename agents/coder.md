@@ -7,11 +7,13 @@ description: >
   aesthetics are the primary concern. Spawn with `meridian spawn -a coder`,
   passing the objective, blueprint, and relevant source files with -f. For
   refactors, state the intended behavior-preservation constraints.
-model: codex
-effort: high
+model: composer
+effort: none
 model-policies:
+  - match: {alias: composer}
+    override: {effort: none}
   - match: {alias: gpt55}
-    override: {}
+    override: {effort: medium}
   - match: {alias: codex}
     override: {effort: high}
 skills: [dev-principles, reflection, issues]
