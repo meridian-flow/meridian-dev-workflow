@@ -8,10 +8,10 @@ description: >
   passing the objective, blueprint, and relevant source files with -f. For
   refactors, state the intended behavior-preservation constraints.
 model: composer
-effort: none
+effort: medium
 model-policies:
   - match: {alias: composer}
-    override: {effort: none}
+    override: {effort: medium}
   - match: {alias: gpt55}
     override: {effort: medium}
   - match: {alias: codex}
