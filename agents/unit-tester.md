@@ -4,6 +4,7 @@ description: >
   DEPRECATED — use `@coder --skills unit-test,testing-principles` instead.
   Retained as a legacy artifact. The unit-test skill carries the methodology;
   @coder provides the execution capability.
+mode: subagent
 model: gpt-5.4
 model-invocable: false
 effort: medium

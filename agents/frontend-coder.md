@@ -11,6 +11,7 @@ description: >
   build, and any responsive or interaction requirements. Pass mockup files
   or screenshots when available — clear visual targets produce better
   results than prose descriptions.
+mode: subagent
 model: claude-opus-4-8
 effort: high
 model-policies:

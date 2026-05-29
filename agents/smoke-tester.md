@@ -6,7 +6,9 @@ description: >
   that only surfaces at runtime. Probing mode maps existing behavior for design;
   verification mode proves a change works. Mandatory for integration boundaries.
   Spawn with `meridian spawn -a smoke-tester`, telling it what to probe or verify.
-model: gpt-5.4
+mode: subagent
+model: gpt55
+subagents: [coder]
 effort: high
 skills: [smoke-test, issues]
 tools:
@@ -29,7 +31,7 @@ tools:
   'bash(git reset --hard:*)': deny
   'bash(git clean:*)': deny
 sandbox: danger-full-access
-approval: yolo
+approval: never
 ---
 
 # Smoke Tester

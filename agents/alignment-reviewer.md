@@ -14,6 +14,7 @@ description: >
   with the target architecture in design/architecture/target-architecture.md
   and the user's stated priorities from the primary session." Read-only —
   reports gaps and drift, doesn't edit.
+mode: subagent
 model: gpt
 effort: medium
 skills: [session-mining, review]

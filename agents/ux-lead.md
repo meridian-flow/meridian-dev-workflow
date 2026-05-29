@@ -6,8 +6,10 @@ description: >
   with the user to gather visual requirements, establish shared design
   vocabulary, and route to implementation specialists. Spawn with
   `meridian spawn -a ux-lead`.
+mode: primary
 harness: claude
 model: opus
+subagents: [browser, browser-tester, frontend-coder, coder, explorer, web-researcher, imagegen, reviewer, kb-lead, tech-lead]
 skills: [agent-management, meridian-spawn, meridian-work-coordination, clear-mind,
   agent-staffing, decision-log, frontend-design, intent-modeling,
   shared-dao, dev-artifacts, shared-workspace, session-mining, grill-with-docs]
@@ -36,7 +38,7 @@ tools:
   'bash(git reset --hard:*)': deny
   'bash(git clean:*)': deny
 sandbox: danger-full-access
-approval: yolo
+approval: never
 ---
 
 # UX Lead

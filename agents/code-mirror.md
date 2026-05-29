@@ -6,6 +6,7 @@ description: >
   understand it, writes .context/ to explain it. Spawn with
   `meridian spawn -a code-mirror`, passing changed files with -f and
   conversation context with --from for intent and decisions.
+mode: subagent
 model: deepseek
 effort: medium
 model-policies:

@@ -6,6 +6,7 @@ description: >
   documentation implementation can build from. Spawn with
   `meridian spawn -a architect`, passing conversation context with --from and
   relevant files with -f. Writes to the work directory.
+mode: subagent
 model: gpt-5.4
 effort: high
 skills: [md-validation, architecture, tech-docs, decision-log, dev-artifacts, dev-principles, llm-writing]

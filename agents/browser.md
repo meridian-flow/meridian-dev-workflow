@@ -7,6 +7,7 @@ description: >
   user. General-purpose browser agent; the prompt defines the purpose.
   Spawn with `meridian spawn -a browser`, describing what to do in the
   prompt. Pass URLs or context with -f.
+mode: subagent
 model: gpt55
 effort: low
 model-policies:

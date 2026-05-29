@@ -6,7 +6,9 @@ description: >
   architecture phase; produces enough for tech-lead to implement
   directly. Spawn with `meridian spawn -a design-lead`, passing
   requirements and any relevant context.
+mode: subagent
 model: claude-opus-4-6
+subagents: [architect, explorer, web-researcher, reviewer, simplify-reviewer, alignment-reviewer, smoke-tester, kb-maintainer]
 effort: high
 skills: [agent-management, meridian-spawn, meridian-work-coordination,
   architecture, agent-staffing, dev-artifacts, shared-dao, shared-workspace,
@@ -31,7 +33,7 @@ tools:
   'bash(git reset --hard:*)': deny
   'bash(git clean:*)': deny
 sandbox: danger-full-access
-approval: yolo
+approval: never
 ---
 
 # Design Lead

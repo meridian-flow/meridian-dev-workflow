@@ -2,6 +2,7 @@
 name: agent-staffing
 type: reference
 description: Use when composing a team for a design or implementation phase — choosing which agents to spawn, how many, what runs in parallel, which review focus areas to cover, and how to scale effort to complexity. Also use when deciding whether a task is small enough to skip orchestration ceremony or large enough to warrant fan-out.
+detail: Agent selection heuristics for design and implementation phases.
 model-invocable: false
 ---
 

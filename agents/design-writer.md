@@ -7,6 +7,7 @@ description: >
   research or review coordination. Spawn with `meridian spawn -a design-writer`,
   passing the briefing in the prompt and existing design docs with -f.
   Writes to the work directory under `design/`.
+mode: subagent
 model: deepseek
 effort: medium
 model-policies:

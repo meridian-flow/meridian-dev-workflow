@@ -6,6 +6,7 @@ description: >
   deletion targets, and opportunities to make the codebase easier to change.
   Method for finding what to collapse, delete, inline, or deepen.
   Use with `/review` for adversarial structural analysis.
+detail: Structural friction audit — shallow modules, fragmentation, deletion targets.
 model-invocable: false
 ---
 

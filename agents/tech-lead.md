@@ -6,7 +6,9 @@ description: >
   functional verification, targeted boundary tests, safe restructuring,
   and final structural review. Spawn with
   `meridian spawn -a tech-lead`, passing design context with -f.
+mode: subagent
 model: gpt55
+subagents: [coder, frontend-coder, reviewer, simplify-reviewer, smoke-tester, qa-lead, investigator]
 effort: high
 model-policies:
   - match: {alias: gpt55}
@@ -52,7 +54,7 @@ tools:
   'bash(git reset --hard:*)': deny
   'bash(git clean:*)': deny
 sandbox: danger-full-access
-approval: yolo
+approval: never
 ---
 
 # Tech Lead

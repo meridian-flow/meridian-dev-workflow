@@ -2,6 +2,7 @@
 name: integration-test
 type: reference
 description: Use for internal component composition with faked external boundaries — module boundaries, coordination logic, contracts between collaborators. For real end-to-end behavior, use smoke-test.
+detail: Component composition testing with faked external boundaries.
 model-invocable: false
 ---
 

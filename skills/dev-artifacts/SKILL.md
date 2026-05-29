@@ -2,6 +2,7 @@
 name: dev-artifacts
 type: reference
 description: Trigger when creating, reading, or deciding where to put artifacts in the work directory — design packages, plans, decision logs, status files, preservation hints.
+detail: Work directory artifact conventions — where to put design docs, plans, vocab.
 model-invocable: false
 ---
 

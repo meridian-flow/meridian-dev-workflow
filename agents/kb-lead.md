@@ -8,7 +8,9 @@ description: >
   `meridian spawn -a kb-lead`, passing relevant files with -f; add --from
   when routing depends on decisions not captured in artifacts.
   For post-implementation capture, add `--skills post-impl-capture`.
+mode: subagent
 model: deepseek
+subagents: [code-mirror, kb-maintainer, kb-writer, tech-writer]
 effort: high
 skills: [agent-management, meridian-spawn, session-mining, meridian-work-coordination,
   agent-staffing, qi-layer, shared-dao, shared-workspace, intent-modeling, issues,

@@ -8,7 +8,9 @@ description: >
   boundaries that are hard to verify manually. Spawn with `meridian spawn
   -a qa-lead`, passing design context with -f and conversation context
   with --from.
+mode: subagent
 model: gpt55
+subagents: [coder, explorer, reviewer, session-explorer]
 effort: high
 model-policies:
   - match: {alias: gpt55}

@@ -7,6 +7,7 @@ description: >
   testing skills. Shared foundation — tier selection, functional core /
   imperative shell, and the tradeoffs behind each tier. Always include
   this skill when spawning @coder for testing work.
+detail: Test routing decisions — what kind of test a change needs and why.
 model-invocable: false
 ---
 

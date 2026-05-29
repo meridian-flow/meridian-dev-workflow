@@ -4,6 +4,12 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- All agents: add `mode` field (primary or subagent) for progressive loading
+- Orchestrators: add `subagents` list for inventory filtering
+- 5 agents: `approval: yolo` → `approval: never`
+- 17 skills: add `detail` field for inventory summaries
+
 ## [0.7.27] - 2026-05-29
 
 update models

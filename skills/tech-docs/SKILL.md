@@ -5,6 +5,7 @@ description: >
   Load when writing design documents — architecture specs, behavioral specs,
   component docs, feasibility reports. Covers structure and clarity for the
   artifacts under design/ in the work directory.
+detail: Design document writing conventions — specs, component docs, feasibility.
 model-invocable: false
 ---
 

@@ -7,6 +7,7 @@ description: >
   aesthetics are the primary concern. Spawn with `meridian spawn -a coder`,
   passing the objective, blueprint, and relevant source files with -f. For
   refactors, state the intended behavior-preservation constraints.
+mode: subagent
 model: composer
 effort: medium
 model-policies:

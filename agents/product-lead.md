@@ -5,8 +5,10 @@ description: >
   approval, and implementation routing. Spawn with
   `meridian spawn -a product-lead`, passing requirements or context.
   First session of any work item.
+mode: primary
 harness: claude
 model: opus
+subagents: [explorer, web-researcher, reviewer, session-explorer, design-lead, tech-lead, qa-lead, kb-lead, smoke-tester]
 model-policies:
   - match: {alias: gpt55}
     override: {effort: high, harness: pi}
@@ -30,7 +32,7 @@ tools:
   'bash(git reset --hard:*)': deny
   'bash(git clean:*)': deny
 sandbox: danger-full-access
-approval: yolo
+approval: never
 ---
 
 # Product Lead

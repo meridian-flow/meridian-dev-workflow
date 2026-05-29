@@ -8,6 +8,7 @@ description: >
   Vague prompts waste generation cycles. Pass reference images with -f
   when matching an existing visual language. Spawn with
   `meridian spawn -a imagegen`.
+mode: subagent
 model: gpt55
 effort: medium
 skills: [intent-modeling]

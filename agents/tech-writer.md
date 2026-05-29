@@ -5,6 +5,7 @@ description: >
   started guides, CLI reference, API docs, tutorials, integration guides.
   Spawn with `meridian spawn -a tech-writer`, passing conversation context
   with --from and relevant source files with -f.
+mode: subagent
 model: deepseek
 effort: medium
 model-policies:

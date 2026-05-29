@@ -6,6 +6,7 @@ description: >
   errors, or interactive annotation with the user. Spawn with
   `meridian spawn -a browser-tester`, telling it what changed and what to
   verify. Pass relevant source files with -f for context on what to expect.
+mode: subagent
 model: gpt55
 effort: low
 model-policies:

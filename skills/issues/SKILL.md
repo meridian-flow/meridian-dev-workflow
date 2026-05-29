@@ -9,6 +9,7 @@ description: Use when you find bugs, unexpected behavior, deferred decisions, or
 File GitHub issues proactively. File an issue when follow-up needs durable tracking beyond the current report.
 
 GitHub Issues are a visibility layer on top of spawn reports and work-scoped
+detail: GitHub issue filing conventions for bugs, decisions, and backlog.
 notes. If `gh` is unavailable, report that issue filing was skipped and log the draft locally.
 
 ## When to File

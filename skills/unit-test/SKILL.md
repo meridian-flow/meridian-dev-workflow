@@ -2,6 +2,7 @@
 name: unit-test
 type: reference
 description: Use for isolated logic, regression-critical edge cases, and module contracts. For component composition, use integration-test. For end-to-end behavior, use smoke-test.
+detail: Isolated logic and regression-critical edge case testing.
 model-invocable: false
 ---
 
