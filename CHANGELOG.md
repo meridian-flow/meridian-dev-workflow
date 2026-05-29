@@ -4,6 +4,8 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-05-29
+
 ### Added
 - `@design-researcher`: pure research/challenge specialist — adversarial analysis, alternatives, tradeoff matrices. Fans out to explorers and web-researchers.
 
