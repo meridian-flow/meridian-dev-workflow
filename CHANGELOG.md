@@ -4,6 +4,8 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.11.3] - 2026-05-30
+
 ### Changed
 - `testing`: manual probes now require `meridian -C "$MERIDIAN_TASK_DIR" ...` for Meridian commands inside inherited sessions.
 
