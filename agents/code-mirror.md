@@ -9,7 +9,9 @@ model-policies:
     override: {}
   - match: {alias: sonnet}
     override: {}
-skills: [qi-layer, shared-dao, md-validation, llm-writing, intent-modeling, decision-log, reflection]
+skills:
+  load: [shared-dao, llm-writing, intent-modeling, reflection]
+  available: [qi-layer, md-validation, decision-log]
 tools:
   'bash(meridian *)': allow
   'bash(git *)': allow
@@ -58,7 +60,7 @@ and the placement rules. Key principle: AGENTS.md routes, .context/ explains.
 2. **Read existing .context/.** Check what documentation already exists.
    Update rather than recreate when the existing content is still accurate.
 3. **Mine intent from provided context.** Use the conversation history
-   (--from), session-explorer findings, and design artifacts your spawner
+   (--from), session-miner findings, and design artifacts your spawner
    passed. Capture *why* things were built this way — rationale, rejected
    alternatives, constraints that drove the shape.
 4. **Write .context/ files.** Focus on what's invisible in the code:

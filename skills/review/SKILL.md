@@ -1,11 +1,7 @@
 ---
 name: review
 type: reference
-description: >
-  Load when reviewing code, designs, or plans — adversarial mindset, severity
-  handling, and structured reporting. Use for PR reviews, phase reviews,
-  design reviews, and any task where the goal is finding problems.
-detail: Adversarial review methodology — severity, structured output, stop conditions.
+description: Use when reviewing code, designs, or plans — adversarial mindset, severity handling, structured reporting.
 model-invocable: true
 ---
 # Review

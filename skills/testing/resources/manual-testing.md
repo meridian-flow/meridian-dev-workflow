@@ -1,26 +1,14 @@
----
-name: smoke-test
-type: reference
-description: >
-  Use when you need to understand or verify runtime behavior against the real
-  system — CLI invocations, HTTP requests, integration flows, race probes,
-  interruption recovery. Two modes: probing (how does this behave?) and
-  verification (does this change work?). Mandatory for integration boundaries.
-detail: Runtime verification methodology — probing and confirming real system behavior.
-model-invocable: true
----
-
-# Smoke Testing
+# Manual Testing
 
 Run the real system and observe what happens. Real processes, real filesystem,
-real network. In this workflow, smoke testing means manual runtime verification
+real network. In this workflow, manual testing means manual runtime verification
 by an agent unless the caller explicitly asks for an automated e2e test suite.
 
-Load `/testing-principles` for tier selection.
+Load `/testing` for tier selection.
 
-Check README, AGENTS/CLAUDE guidance, build files, and existing smoke/e2e
-guides for canonical invocation patterns. Many projects keep manual smoke
-guides as markdown in `tests/e2e/` or `tests/smoke/` — check conventions before
+Check README, AGENTS/CLAUDE guidance, build files, and existing manual/e2e
+guides for canonical invocation patterns. Many projects keep manual test
+guides as markdown in `tests/e2e/` or `tests/manual/` — check conventions before
 assuming what format to use.
 
 ## Two Modes
@@ -84,5 +72,5 @@ and outputs, open questions.
 commands and outputs, exploratory findings beyond stated requirements,
 coverage gaps.
 
-Report smoke results as manual runtime evidence. Do not summarize automated
-pytest/unit/integration/type/lint checks as smoke coverage.
+Report manual test results as manual runtime evidence. Do not summarize automated
+pytest/unit/integration/type/lint checks as manual test coverage.

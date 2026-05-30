@@ -6,12 +6,16 @@ model: composer
 effort: medium
 model-policies:
   - match: {alias: composer}
-    override: {effort: medium}
+    override: {}
   - match: {alias: gpt55}
     override: {effort: medium}
-  - match: {alias: codex}
-    override: {effort: high}
-skills: [dev-principles, reflection, issues]
+  - match: {alias: sonnet}
+    override: {}
+  - match: {alias: deepseek}
+    override: {}
+skills:
+  load: [dev-principles, reflection, testing]
+  available: [issues]
 tools:
   bash: allow
   write: allow

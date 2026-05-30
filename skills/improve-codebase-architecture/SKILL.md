@@ -1,16 +1,11 @@
 ---
-name: simplify
+name: improve-codebase-architecture
 type: reference
-description: >
-  Load when hunting structural friction — shallow modules, fragmentation,
-  deletion targets, and opportunities to make the codebase easier to change.
-  Method for finding what to collapse, delete, inline, or deepen.
-  Use with `/review` for adversarial structural analysis.
-detail: Structural friction audit — shallow modules, fragmentation, deletion targets.
+description: Structural improvement — shallow modules, fragmentation, deletion targets, deep-module opportunities, code-judo moves.
 model-invocable: true
 ---
 
-# Simplify
+# Improve Codebase Architecture
 
 The goal is making the codebase easier to change. Every boundary, file, and
 abstraction is a cost — it should earn its place by hiding substantial

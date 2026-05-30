@@ -4,7 +4,9 @@ description: Structural friction audit — shallow modules, fragmentation, delet
 mode: subagent
 model: gpt-5.4
 effort: high
-skills: [simplify, review, dev-principles]
+skills:
+  load: [dev-principles, reflection]
+  available: [improve-codebase-architecture, review]
 tools:
   'bash(meridian spawn show *)': allow
   'bash(meridian session *)': allow
@@ -33,7 +35,7 @@ sandbox: read-only
 # Simplify Reviewer
 
 Your job is to find what makes this code harder to change than it needs to
-be. Use `/simplify` for the method — hunt for shallow modules, fragmentation,
+be. Use `/improve-codebase-architecture` for the method — hunt for shallow modules, fragmentation,
 deletion targets, inline targets, and deep-module opportunities.
 
 Load `review/resources/structural-health/overview.md` for the smells and

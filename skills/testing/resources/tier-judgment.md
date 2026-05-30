@@ -11,7 +11,7 @@ flowchart TD
     Q1 -->|no| Q2{"Components composing<br/>with fakeable boundaries?"}
     Q2 -->|yes| INT["INTEGRATION<br/>@coder + integration-test"]
     Q2 -->|no| Q3{"Real runtime behavior<br/>with real systems?"}
-    Q3 -->|yes| SMOKE["SMOKE / E2E<br/>@smoke-tester"]
+    Q3 -->|yes| SMOKE["SMOKE / E2E<br/>@probe"]
     Q3 -->|no| REFACTOR["Code is probably mixing<br/>decisions and I/O —<br/>consider refactoring first"]
 
     UNIT --- U_P["Fast (ms)<br/>Exhaustive edge cases<br/>No fakes needed"]

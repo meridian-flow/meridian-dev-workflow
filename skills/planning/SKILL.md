@@ -1,11 +1,7 @@
 ---
 name: planning
 type: reference
-description: >
-  Load when producing or executing plans. Shared definitions — phases,
-  subphases, verification levels, probe/diagnosis lanes, and the execution
-  model. Used by @tech-lead for plan execution.
-detail: Plan structure — phases, subphases, verification levels, handoff format.
+description: Use when decomposing work into phases — plan structure, verification levels, execution model.
 model-invocable: true
 ---
 
@@ -48,9 +44,9 @@ add checkpoint value.
   verification suite and reviews its own diff before reporting (see
   `/reflection`). No separate verifier or reviewer spawn. Quick feedback
   while context is still loaded.
-- **Phase exit gate — full verification.** `@smoke-tester` and `@reviewer`
-  are the default lanes. Add `@coder --skills integration-test,testing-principles`
-  or `@coder --skills unit-test,testing-principles` only when the phase
+- **Phase exit gate — full verification.** `@probe` and `@reviewer`
+  are the default lanes. Add `@coder with `/testing` `resources/integration-patterns.md``
+  or `@coder with `/testing` `resources/unit-patterns.md`` only when the phase
   introduces a durable boundary, composition risk, or narrow logic risk that
   higher-tier verification cannot cover cheaply. All gate lanes run in
   parallel (`--bg` + `spawn wait`).
@@ -60,7 +56,7 @@ add checkpoint value.
 Not all work in a phase is implementation:
 
 - **Probe** — when a subphase depends on runtime behavior that isn't
-  well-understood, schedule a `@smoke-tester` probe before the coding step.
+  well-understood, schedule a `@probe` probe before the coding step.
 - **Diagnosis** — when a subphase addresses a failure with unclear root cause,
   schedule an `@investigator` step before the coding step.
 
@@ -69,5 +65,5 @@ Not all work in a phase is implementation:
 Route findings to the right specialist, not always back to @coder:
 
 - **Implementation bugs** → back to coder
-- **Unclear runtime behavior** → `@smoke-tester` probe
+- **Unclear runtime behavior** → `@probe` probe
 - **Root-cause uncertainty** → `@investigator`

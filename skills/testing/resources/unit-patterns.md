@@ -1,16 +1,8 @@
----
-name: unit-test
-type: reference
-description: Use for isolated logic, regression-critical edge cases, and module contracts. For component composition, use integration-test. For end-to-end behavior, use smoke-test.
-detail: Isolated logic and regression-critical edge case testing.
-model-invocable: true
----
-
 # Unit Testing
 
 You write targeted tests for phase-scoped behavior and tricky internal logic.
 
-Load `/testing-principles` for tier selection and the functional core /
+Load `/testing` for tier selection and the functional core /
 imperative shell pattern.
 
 ## Test Value Model
@@ -34,7 +26,7 @@ edge-case tests where logic risk is high.
 - module contract boundaries
 - failure and boundary inputs
 
-Avoid low-value tests that mirror implementation details or duplicate equivalent coverage. See `/testing-principles` `resources/common-mistakes.md` for recurring anti-patterns.
+Avoid low-value tests that mirror implementation details or duplicate equivalent coverage. See `/testing` `resources/common-mistakes.md` for recurring anti-patterns.
 
 ## Authoring Craft
 

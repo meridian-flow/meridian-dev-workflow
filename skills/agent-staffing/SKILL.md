@@ -1,8 +1,7 @@
 ---
 name: agent-staffing
 type: reference
-description: Use when composing a team for a design or implementation phase — choosing which agents to spawn, how many, what runs in parallel, which review focus areas to cover, and how to scale effort to complexity. Also use when deciding whether a task is small enough to skip orchestration ceremony or large enough to warrant fan-out.
-detail: Agent selection heuristics for design and implementation phases.
+description: Use when composing a team — which agents, how many, parallel vs sequential, effort scaling.
 model-invocable: true
 ---
 
@@ -27,15 +26,21 @@ findings), not a fixed number of passes. The lead can stop early but must log
 the reasoning.
 
 **Route by work type.** Not everything is a coding task. Probe unclear behavior
-with `@smoke-tester`, diagnose root causes with `@investigator`, implement with
+with `@probe`, diagnose root causes with `@investigator`, implement with
 coder variants. Plans that treat everything as coder work produce guesswork at
 boundaries.
 
 ## Model Selection
 
-Profile defaults are correct for most roles — don't override with `-m` unless
-you have a specific reason. Run `meridian mars models list` to see configured
-families and strengths; add `--live` when local harness availability matters.
+Profile defaults handle most roles. Model overrides are user preference —
+don't second-guess the profile default unless the task demands a different
+capability tier.
+
+**Reviews** are the main exception. Fan out reviewers across models for
+perspective diversity — different models catch different issues. gpt-5.4
+is the most thorough single-reviewer model for finding subtle issues.
+
+Run `meridian mars models list` for configured families and strengths.
 
 ## Fan-Out vs Parallel Lanes
 
@@ -48,7 +53,7 @@ families and strengths; add `--live` when local harness availability matters.
 
 When a phase talks to an external system:
 - Probe the real system before coding against assumed behavior
-- `@smoke-tester` is mandatory for every integration phase
+- `@probe` is mandatory for every integration phase
 - Per-target coverage: N targets means N tested, not one-of-three
 
 ## Agent Catalogs
@@ -56,6 +61,6 @@ When a phase talks to an external system:
 See resources for detailed catalogs:
 
 - `resources/reviewers.md` — @reviewer, @alignment-reviewer, @simplify-reviewer
-- `resources/testers.md` — @smoke-tester, @browser-tester, unit-test and integration-test skills
+- `resources/testers.md` — @probe, @browser-probe, unit-test and integration-test skills
 - `resources/builders.md` — @coders, @architects, @web-researchers, @explorers
 - `resources/maintainers.md` — @kb-writer, @kb-maintainer, @tech-writer, @investigator

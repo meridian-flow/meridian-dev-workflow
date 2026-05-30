@@ -1,13 +1,7 @@
 ---
 name: post-impl-capture
 type: reference
-description: >
-  Orients a documentation coordinator into post-implementation knowledge
-  capture mode. Pass as --skills post-impl-capture when spawning @kb-lead
-  after implementation ships. Provides the specific coordination sequence
-  for mining implementation sessions, assessing scope, fanning out writers,
-  and reviewing coverage.
-detail: Post-implementation documentation capture workflow.
+description: Use after implementation ships — coordinates knowledge capture across .context/, KB, and docs layers.
 model-invocable: true
 ---
 
@@ -20,7 +14,7 @@ transcripts compact and reasoning evaporates.
 
 ## Coordination Sequence
 
-1. **Mine conversations.** Spawn @session-explorer with --from to extract
+1. **Mine conversations.** Spawn @session-miner with --from to extract
    decisions, rejected alternatives, and intent from implementation sessions.
 
 2. **Assess scope.** Read the work item's design artifacts (requirements.md,
@@ -29,13 +23,13 @@ transcripts compact and reasoning evaporates.
    undocumented decisions.
 
 3. **Spawn documentation agents in parallel:**
-   - @code-mirror — pass changed source files (-f), session-explorer
+   - @code-mirror — pass changed source files (-f), session-miner
      findings, design artifacts (requirements.md, design/), and
-     implementation session context (--from). Pass session-explorer
+     implementation session context (--from). Pass session-miner
      findings as the primary context. Add `--from` only when specific
      rationale phrasing matters and the digest doesn't capture it.
      Goal: ".context/ and AGENTS.md updated for all affected modules."
-   - @kb-writer — pass session-explorer findings, design artifacts, and
+   - @kb-writer — pass session-miner findings, design artifacts, and
      conversation context (--from). Goal: "cross-cutting knowledge captured
      in KB."
    - @tech-writer — pass changed files and design artifacts. Goal:

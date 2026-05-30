@@ -1,7 +1,7 @@
 ---
 name: issues
 type: reference
-description: Use when you find bugs, unexpected behavior, deferred decisions, or backlog items worth tracking beyond the current work item. Also use when asked to file an issue or when investigation determines a GH issue is needed rather than a quick fix.
+description: Use when filing bugs, deferred decisions, or backlog items that need durable tracking.
 ---
 
 # Issue Tracking
@@ -9,8 +9,6 @@ description: Use when you find bugs, unexpected behavior, deferred decisions, or
 File GitHub issues proactively. File an issue when follow-up needs durable tracking beyond the current report.
 
 GitHub Issues are a visibility layer on top of spawn reports and work-scoped
-model-invocable: true
-detail: GitHub issue filing conventions for bugs, decisions, and backlog.
 notes. If `gh` is unavailable, report that issue filing was skipped and log the draft locally.
 
 ## When to File

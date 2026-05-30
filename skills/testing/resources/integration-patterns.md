@@ -1,17 +1,9 @@
----
-name: integration-test
-type: reference
-description: Use for internal component composition with faked external boundaries — module boundaries, coordination logic, contracts between collaborators. For real end-to-end behavior, use smoke-test.
-detail: Component composition testing with faked external boundaries.
-model-invocable: true
----
-
 # Integration Testing
 
 Test that components compose correctly with fakes at external boundaries — no
 real process spawning, network, or disk I/O outside controlled temp space.
 
-Load `/testing-principles` for tier selection.
+Load `/testing` for tier selection.
 
 ## Fakes
 
@@ -19,7 +11,7 @@ Fakes implement the same interface as the real collaborator and reproduce the
 behaviors the test relies on (success, failure, edge cases). Keep them
 deterministic, fast, and close to the tests that use them. When a fake drifts
 from the real system, add a contract test that pins the real behavior — but
-that's a smoke test, not an integration test.
+that's a manual test, not an integration test.
 
 ## Acceptance Contract
 

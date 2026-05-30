@@ -11,7 +11,7 @@ flowchart TB
 
         subgraph SUBPHASE["FOR EACH SUBPHASE"]
             PROBE{"Behavior unclear?"}
-            PROBE -->|yes| SM["@smoke-tester<br/>(probing mode)"]
+            PROBE -->|yes| SM["@probe<br/>(probing mode)"]
             SM --> IMPL
             PROBE -->|no| IMPL
             IMPL["@coder / @frontend-coder<br/>(self-verify + self-review)"]
@@ -27,7 +27,7 @@ flowchart TB
 
         subgraph GATE["PHASE EXIT GATE (parallel)"]
             direction LR
-            ST["@smoke-tester<br/>(verify mode)"]
+            ST["@probe<br/>(verify mode)"]
             UT["@coder + unit-test /<br/>@coder + integration-test<br/>(temp — delete after)"]
             RV["@reviewer<br/>(one general)"]
         end
@@ -45,7 +45,7 @@ flowchart TB
     subgraph FINAL["FINAL GATE (parallel)"]
         FRV["@reviewer fan-out<br/>(focus areas incl.<br/>plan coverage +<br/>design alignment)"]
         FRFR["@reviewer<br/>(structural focus,<br/>full change set)"]
-        FST["@smoke-tester<br/>(end-to-end)"]
+        FST["@probe<br/>(end-to-end)"]
     end
 
     FINAL --> GAPS{"Gaps found?"}
@@ -64,7 +64,7 @@ flowchart TB
 Route findings to the right specialist, not always back to @coder:
 
 - **Implementation bugs** → back to the coder (context is still fresh).
-- **Unclear runtime behavior** → `@smoke-tester` probe before re-attempting the fix.
+- **Unclear runtime behavior** → `@probe` probe before re-attempting the fix.
 - **Root-cause uncertainty** → `@investigator` to diagnose before coding resumes.
 - **Phase-gate findings** → route by type as above, then re-run affected gate lanes.
 - **Final-gate gaps** → new phase appended to the plan, following the normal phase loop.
@@ -72,7 +72,7 @@ Route findings to the right specialist, not always back to @coder:
 ## Probe Before Coding
 
 When a subphase depends on runtime behavior that isn't well-understood, spawn
-`@smoke-tester` in probing mode before coding. Don't let @coder guess at system
+`@probe` in probing mode before coding. Don't let @coder guess at system
 behavior — probing is cheap, wrong assumptions are expensive.
 
 ## When Subphases Are Omitted

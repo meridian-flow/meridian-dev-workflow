@@ -1,11 +1,7 @@
 ---
 name: architecture
 type: reference
-description: >
-  Shared vocabulary for architectural thinking — boundaries, dependencies,
-  tradeoff dimensions, and structural risk. Load when designing, writing
-  about, or planning around system architecture.
-detail: Structural thinking vocabulary — boundaries, dependencies, tradeoffs.
+description: Use when designing or reasoning about system boundaries — tradeoff dimensions, dependencies, structural risk.
 model-invocable: true
 ---
 

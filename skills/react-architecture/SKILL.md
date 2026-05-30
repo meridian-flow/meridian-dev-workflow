@@ -1,13 +1,7 @@
 ---
 name: react-architecture
 type: reference
-description: >
-  Load when building or reviewing React frontend code for maintainability
-  and visual consistency. React-specific structural lens — token discipline,
-  state architecture, component composition, import boundaries, component
-  API consistency. Complements dev-principles with what generic structural
-  skills don't cover about React codebases.
-detail: React component patterns, layout composition, and visual consistency.
+description: Use when building or reviewing React code — component composition, state architecture, visual consistency.
 model-invocable: true
 ---
 
@@ -15,7 +9,7 @@ model-invocable: true
 
 How to structure React code for maintainability and consistent feel. Generic
 structural principles (deep modules, separation of concerns, deletion) live in
-`/dev-principles` and `/simplify` — this skill applies those principles to
+`/dev-principles` and `/improve-codebase-architecture` — this skill applies those principles to
 React code and adds what only frontend codebases need.
 
 ## Token Discipline

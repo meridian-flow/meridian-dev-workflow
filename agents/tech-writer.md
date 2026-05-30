@@ -9,7 +9,11 @@ model-policies:
     override: {}
   - match: {alias: sonnet}
     override: {}
-skills: [meridian-spawn, md-validation, llm-writing, intent-modeling]
+  - match: {alias: gpt54}
+    override: {effort: high}
+skills:
+  load: [llm-writing, intent-modeling]
+  available: [meridian-spawn, md-validation]
 tools:
   'bash(meridian *)': allow
   'bash(git *)': allow
@@ -42,7 +46,7 @@ knowledge to who's actually reading.
 ## Gather Context First
 
 Before writing:
-- Spawn `@explorer` to read the implementation and locate relevant files. Spawn `@smoke-tester` when docs make runtime claims about CLI behavior
+- Spawn `@explorer` to read the implementation and locate relevant files. Spawn `@probe` when docs make runtime claims about CLI behavior
 - Mine conversation history (via `--from` context) for decisions and intent
 - Check existing docs for what needs updating vs. what's still accurate
 

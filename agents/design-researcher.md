@@ -8,8 +8,10 @@ description: >
 mode: subagent
 model: gpt-5.4
 effort: high
-subagents: [explorer, web-researcher, session-explorer]
-skills: [dev-principles, architecture, shared-dao, intent-modeling, issues]
+subagents: [explorer, web-researcher, session-miner]
+skills:
+  load: [dev-principles]
+  available: [architecture, shared-dao, intent-modeling, issues]
 tools:
   bash: allow
   write: allow

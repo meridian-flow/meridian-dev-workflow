@@ -1,13 +1,7 @@
 ---
-name: testing-principles
+name: testing
 type: principle
-description: >
-  Load when deciding what kind of test a change needs, when a test suite
-  feels off, or when routing work to @smoke-tester or @coder with
-  testing skills. Shared foundation — tier selection, functional core /
-  imperative shell, and the tradeoffs behind each tier. Always include
-  this skill when spawning @coder for testing work.
-detail: Test routing decisions — what kind of test a change needs and why.
+description: Restraint-first testing discipline — tier selection, when NOT to write tests, functional core patterns.
 model-invocable: true
 ---
 
@@ -104,12 +98,20 @@ single-shot.
 
 ## When Each Tester Applies
 
-- `@coder --skills unit-test,testing-principles` — phase-scoped tests on the
-  functional core, edge cases, regression guards.
-- `@coder --skills integration-test,testing-principles` — composition across
-  internal components with fakes at external boundaries.
-- `@smoke-tester` — real runtime behavior against real interfaces. Two modes
-  (probing vs verification) — see `/smoke-test`.
+Load the relevant resource when the tier is justified by the risk and the
+question:
+
+- `resources/unit-patterns.md` — pure logic, edge cases, regression guards on
+  the functional core.
+- `resources/integration-patterns.md` — composition across internal components
+  with fakes at external boundaries.
+- `resources/manual-testing.md` — real runtime behavior against real
+  interfaces. Two modes (probing vs verification).
+- `resources/browser-testing.md` — browser-based verification of frontend
+  changes.
+
+`@probe` is the runtime verification agent — see
+`resources/manual-testing.md`.
 
 Coders self-verify with the narrowest useful evidence for the change — often
 focused checks or manual smoke, plus automated checks where they buy

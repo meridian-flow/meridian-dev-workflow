@@ -4,6 +4,34 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- `@gpt-dev`: direct implementation lead for gpt55/codex — codes itself, spawns reviewers to verify. No coder delegation, minimal orchestration overhead.
+- `@probe`: runtime behavior verification agent.
+- `@browser-probe`: browser-based verification (renamed from browser-tester).
+- `/dev-workflow`, `/pre-dev`, `/post-dev`, `/prototype` skills.
+
+### Changed
+- All skill descriptions trimmed to one-line "when + what" format. Removed `detail` field from all skills.
+- `@tech-lead`: upgraded `mode: subagent` → `mode: primary`. Added `thermo-nuclear-review` to skills.available. Removed `bash(sed *)` allow (undermined `edit: deny` delegation). Model-policies: alias-based (`opus46`, `opus48`), not raw model IDs.
+- `@design-lead`: upgraded `mode: subagent` → `mode: primary`. Cold-start orientation. Removed stale model aliases, added gpt55/opus48. Removed `/dev-artifacts` references.
+- `@product-lead`: replaced hardcoded tech-lead handoff with `/handoff` skill and implementation lead routing. Removed lifecycle peers from `subagents:`. Model-policies: dropped harness overrides, added opus48.
+- `@ux-lead`: pinned default model to opus46 (interactive primary). Removed `harness: claude` (auto-resolves). Model-policies: opus46/47/48 + gpt55.
+- `@frontend-coder`: moved `frontend-design` from available to load. Model-policies: opus47/48/composer/deepseek/gpt55, removed stale `codex`.
+- `@coder`: model-policies cleaned — removed stale `codex`, added deepseek.
+- `@gpt-dev`: removed nonexistent `explorer` from subagents.
+- `@architect`, `@design-writer`: removed `/dev-artifacts` references.
+- `dev-principles`: added "Get it right the first time" — AI code is cheap to write, expensive to untangle.
+- `agent-staffing`: model selection section — profile defaults handle most roles, reviews fan out across models for perspective diversity.
+- All agents: `decision-logging` → `decision-log` (skill merged upstream).
+- All agents: removed `delegation` from skills (merged into `clear-mind` upstream).
+- Fixed corrupted body content in `issues` (stale `detail:` line leaked into body text).
+
+### Removed
+- `dev-artifacts` skill — ownership table duplicated what each agent body already says; stale references to removed `plan/status.md`.
+- `@browser-tester` — renamed to `@browser-probe`.
+- `@qa-lead`, `@smoke-tester`, `@unit-tester` — consolidated into testing skill resources.
+- `browser-test`, `smoke-test`, `unit-test`, `integration-test` skills — consolidated into `/testing` with resources.
+
 ## [0.9.0] - 2026-05-29
 
 ### Added
@@ -63,9 +91,9 @@ update models
 - `@coder`: effort `none` → `medium` (top-level and composer override). Unblocks `meridian mars check` on mars 0.7.3, which rejects `none`. For composer, cursor probe treats `medium` and `none` as the same default tier — no behavior change. gpt55 and codex overrides unchanged.
 - `@tech-lead`: "Worktree and Ship" → "Task Dir and Ship". Source-code work targets `$MERIDIAN_TASK_DIR` (set by @product-lead on the work item). Dropped `--worktree` mid-run ensure path, managed-worktree set-worktree references, and `worktree-management` skill pointer. Ship section opens PR from the branch in `$MERIDIAN_TASK_DIR` instead of from a managed worktree branch.
 - `@product-lead`: tech-lead handoff isolation guidance now uses plain `git worktree add` + `meridian work task-dir <path>` (or `work start --task-dir`). Cross-repo work sets `task_dir` to the sibling checkout instead of passing `--repo`. Recovery uses `meridian work task-dir <path>` instead of `set-worktree`. Calls out that meridian does not own the `task_dir` directory.
-- `@smoke-tester`: workspace placement guidance now references `$MERIDIAN_TASK_DIR` directly — runs in the task dir (project root, plain worktree, or sibling checkout) with `cd`/`git -C` for ops there. `worktree: deny` still pins placement to the caller.
+- `@probe`: workspace placement guidance now references `$MERIDIAN_TASK_DIR` directly — runs in the task dir (project root, plain worktree, or sibling checkout) with `cd`/`git -C` for ops there. `worktree: deny` still pins placement to the caller.
 - `/smoke-test`: execution section reworded around `$MERIDIAN_TASK_DIR`. Drops "managed worktree" framing; testers `cd` / `git -C` into the task dir and still do not create or switch worktrees.
-- `agent-staffing/testers`: `@smoke-tester` lane reworded around `$MERIDIAN_TASK_DIR`. Drops "managed worktree" framing.
+- `agent-staffing/testers`: `@probe` lane reworded around `$MERIDIAN_TASK_DIR`. Drops "managed worktree" framing.
 
 ### Removed
 - `/worktree-management` skill — orphaned by the task-dir redesign. Every command it taught (`meridian work worktree --ensure`, `spawn --worktree`, `meridian work set-worktree`, `meridian work clear-worktree`, managed temporary worktrees) is gone, and no agent referenced it. Worktree decisions are owned by `@product-lead`; `task_dir` is the binding.
@@ -99,7 +127,7 @@ update models
 - `@product-lead` tech-lead handoff: dropped redundant `work worktree --ensure` preflight in the common path — `spawn --worktree` ensures the managed worktree itself. Examples now use `<work-id>` consistently with `--work` and worktree commands. Adds temporary worktree path (`meridian work worktree --ensure` with no active work item) for isolation without a work item.
 - `@tech-lead` worktree section: operational specifics for mid-run ensure — session stays in its launch directory, subsequent specialist spawns run inside the managed worktree via `--worktree`, and a re-launch in the worktree is what tech-lead reports rather than attempting to relocate the current session. Adds temporary worktree mode for isolation without a work item.
 - `@product-lead`, `@tech-lead`: cross-repo implementation guidance — pass `--repo <path-or-alias>` when coordination runs in one repo (e.g. `meridian-cli`) but implementation belongs in another (`mars-agents`, `meridian-web`, prompt packages). Target repo determines canonical worktree path; ambiguous target fails clearly instead of provisioning in the wrong repo.
-- `@product-lead`, `@tech-lead`, `@smoke-tester`, `/smoke-test`, `agent-staffing`: finalized workspace/worktree wording — tester guidance now uses caller-selected workspace, managed worktree metadata is authoritative on ensure/recovery, and tech-lead shipping text no longer hardcodes worktree-only PR wording.
+- `@product-lead`, `@tech-lead`, `@probe`, `/smoke-test`, `agent-staffing`: finalized workspace/worktree wording — tester guidance now uses caller-selected workspace, managed worktree metadata is authoritative on ensure/recovery, and tech-lead shipping text no longer hardcodes worktree-only PR wording.
 
 ## [0.7.19] - 2026-05-23
 
@@ -108,9 +136,9 @@ update models
 - `agent-staffing`, `@tech-lead`: coder staffing now splits by objective and ownership, not arbitrary 2-4 file limits.
 - `@tech-lead`: reframed around objective framing and convergence judgment; coders own code-level structure inside assigned objectives.
 - Dev workflow verification language now separates manual smoke checks from automated tests/checks in reports.
-- QA timing aligned as post-convergence, pre-shipping audit across `@tech-lead`, `@qa-lead`, staffing, and plan-package guidance.
-- `@product-lead`: standard QA audit now routes through `@tech-lead`; direct `@qa-lead` spawn reserved for standalone audit of converged implementation.
-- `@qa-lead`, testing guidance: pruning language now puts burden of proof on keeping tests, requires named durable behavior/contract/risk for retained coverage, and sends uncertain coverage to manual smoke guide improvements before automated tests.
+- QA timing aligned as post-convergence, pre-shipping audit across `@tech-lead`, `@`, staffing, and plan-package guidance.
+- `@product-lead`: standard QA audit now routes through `@tech-lead`; direct `@` spawn reserved for standalone audit of converged implementation.
+- `@`, testing guidance: pruning language now puts burden of proof on keeping tests, requires named durable behavior/contract/risk for retained coverage, and sends uncertain coverage to manual smoke guide improvements before automated tests.
 
 ## [0.7.18] - 2026-05-23
 
@@ -137,7 +165,7 @@ update models
 - `/dev-principles`: testing guidance now favors durable boundary coverage over routine test addition. Added end-of-change LOC reflection so code growth needs a concrete justification and a re-check against shallow wrappers, duplicated logic, and weak boundaries.
 - `@tech-lead`: verification defaults to smoke testing and review. Lower-tier tests are now conditional on durable boundary, composition, or narrow logic risk. Final structural review now checks net LOC growth before stopping.
 - `planning`, `plan-package`: phase exit gates and staffing now treat unit/integration test lanes as justified exceptions instead of default lanes.
-- README: removed stale `@unit-tester` testing row.
+- README: removed stale `@` testing row.
 
 ## [0.7.13] - 2026-05-22
 
@@ -146,14 +174,14 @@ update models
 ## [0.7.11] - 2026-05-19
 
 ### Changed
-- `@qa-lead`: simplified from 4-phase orchestrator to hands-on agent — gathers context via explorer/session-explorer, makes deletion/addition judgments directly, reviewer pass on the diff. Most QA passes should be net-negative in test lines.
+- `@`: simplified from 4-phase orchestrator to hands-on agent — gathers context via explorer/session-miner, makes deletion/addition judgments directly, reviewer pass on the diff. Most QA passes should be net-negative in test lines.
 - `@kb-lead`: reframed from post-implementation capture coordinator to general documentation coordinator — any doc goal (cleanup, restructuring, term changes, coverage audits, post-impl capture). Added `@kb-maintainer` to layer table with conditional sequencing.
 
 ### Added
 - `post-impl-capture` skill: extracted kb-lead's implementation-specific coordination sequence. Callers pass `--skills post-impl-capture` when spawning kb-lead after implementation ships.
 
 ### Removed
-- `@qa-designer`: orphaned by qa-lead simplification — qa-lead now makes tier/deletion judgments directly.
+- `@qa-designer`: orphaned by  simplification —  now makes tier/deletion judgments directly.
 
 ## [0.7.10] - 2026-05-17
 
@@ -166,7 +194,7 @@ update models
 ## [0.7.9] - 2026-05-17
 
 ### Changed
-- `@qa-lead`, `@qa-designer`: resolve test strategy output before spawning designer; prefer active work directory and fall back to `/tmp` for ephemeral QA handoff.
+- `@`, `@qa-designer`: resolve test strategy output before spawning designer; prefer active work directory and fall back to `/tmp` for ephemeral QA handoff.
 
 ## [0.7.8] - 2026-05-16
 
@@ -180,7 +208,7 @@ update models
 ### Changed
 - `@kb-lead`, `@product-lead`, `@design-lead`, `@tech-lead`, `@design-writer`, `@reviewer`: carry `shared-dao`
 - `@product-lead`: renamed `glossary.md` to `vocab.md`
-- `@qa-lead`: final report must show add audit, delete audit, no-op rationale, and validation. Explicitly explains why tests were added, deleted, kept, moved, or left unchanged.
+- `@`: final report must show add audit, delete audit, no-op rationale, and validation. Explicitly explains why tests were added, deleted, kept, moved, or left unchanged.
 
 ## [0.7.5] - 2026-05-16
 
@@ -192,17 +220,17 @@ update models
 
 ### Added
 - `@simplify-reviewer` agent: structural friction hunter. Finds shallow modules, fragmentation, deletion targets, and deep-module opportunities. Spawned by @design-lead (investigation) and @tech-lead (final structural review). Read-only, outputs concrete simplification moves with leverage priority. Model: gpt.
-- `/simplify` skill: methodology for hunting structural friction — shallow modules, fragmented concerns, deletion targets, inline targets, deep-module opportunities. Resources reference the structural-health catalog under `/review`.
+- `/improve-codebase-architecture` skill: methodology for hunting structural friction — shallow modules, fragmented concerns, deletion targets, inline targets, deep-module opportunities. Resources reference the structural-health catalog under `/review`.
 - `@product-lead` shared language: mines KB and codebase for existing terminology via @explorer, grills user for convergence, produces canonical-only `glossary.md` alongside `requirements.md`. Unresolved terminology discrepancies logged separately.
 - `/handoff` skill: prompt craft for subagent handoffs — context matching, boundary setting, exit criteria. Teaches orchestrators to give subagents exactly what they need for verifiable output. Pass artifacts via `-f` instead of inlining. When spawning with `--from`, teaches pointing to session content instead of restating it. Loaded by @product-lead, @design-lead, @tech-lead.
 
 ### Changed
-- `/dev-principles`: "Good software is software that is easy to change" as opening. Added deep modules over shallow modules section. Added anti-festering — tech debt compounds at agent speed. Added tests at interfaces not internals to enable safe simplification. Coders write tests freely; qa-lead does cleanup audit.
+- `/dev-principles`: "Good software is software that is easy to change" as opening. Added deep modules over shallow modules section. Added anti-festering — tech debt compounds at agent speed. Added tests at interfaces not internals to enable safe simplification. Coders write tests freely;  does cleanup audit.
 - `@coder`: pre-edit XML `<boundary_rule>` gate — new files, classes, and abstractions require independent-concern justification. Shallow modules explicitly called out as structural debt to avoid. Dropped prose repetition.
 - `@tech-lead`: final structural review adds `@simplify-reviewer` lane. `@reviewer (structural focus)` narrowed — deep-module territory owned by `@simplify-reviewer`. QA Escalation → QA Audit: standard post-impl step, not escalation.
 - `@design-lead`: investigation fan-out adds `@simplify-reviewer` (replaces `@reviewer (structural focus)` overlap). Investigation findings must be written into design documents immediately, not left in conversation context. Design decisions are live, not accumulated — drop what the latest direction invalidates. Reviewer handoffs pass current direction only, not abandoned decisions.
-- `@qa-lead`: repositioned from emergency responder to standard post-impl test audit — adds boundary tests for interfaces and edge cases, deletes tests that don't protect real behavior. Spawned by @product-lead and @tech-lead as a standard phase. Model changed from sonnet to gpt55. Execute section now has explicit Delete lane via `edit`.
-- `@qa-designer` (was `@qa-design-lead`): renamed and reframed — independently audits test suite and designs correct shape (tier placement, coverage gaps, delete targets). Standard spawn by @qa-lead, not emergency-only. Model changed from claude-opus-4-6 to gpt55.
+- `@`: repositioned from emergency responder to standard post-impl test audit — adds boundary tests for interfaces and edge cases, deletes tests that don't protect real behavior. Spawned by @product-lead and @tech-lead as a standard phase. Model changed from sonnet to gpt55. Execute section now has explicit Delete lane via `edit`.
+- `@qa-designer` (was `@qa-design-lead`): renamed and reframed — independently audits test suite and designs correct shape (tier placement, coverage gaps, delete targets). Standard spawn by @, not emergency-only. Model changed from claude-opus-4-6 to gpt55.
 - `agent-staffing`: reviewers catalog updated with @simplify-reviewer entry and spawning guidance.
 - `@design-writer`, `@tech-writer`, `@code-mirror`: model changed from sonnet to deepseek (DeepSeek V4 Pro) with sonnet as fallback candidate.
 - `@reviewer`: opus fallback replaced with deepseek candidate.
@@ -212,28 +240,28 @@ update models
 ## [0.7.1] - 2026-05-15
 
 ### Changed
-- `@smoke-tester`: worktree-native default. Caller owns worktree placement. Temp envs only for destructive probes or clean-baseline comparisons.
+- `@probe`: worktree-native default. Caller owns worktree placement. Temp envs only for destructive probes or clean-baseline comparisons.
 - `smoke-test`: execution guidance worktree-first, disposable envs as exception. Shared-workspace safety lives in skill, not duplicated in agent.
-- `agent-staffing/resources/testers.md`: @smoke-tester lane now active-worktree by default.
+- `agent-staffing/resources/testers.md`: @probe lane now active-worktree by default.
 
 ## [0.7.0] - 2026-05-14
 
 ### Changed
 - Workflow: default path is now design-lead → tech-lead. Planner removed entirely from active lifecycle.
-- `@product-lead`: routing simplified — design → user approval → tech-lead. Planner checkpoint removed. Post-impl spawns @kb-lead; @qa-lead spawned only on explicit need or tech-lead escalation. Redesign loop routes design-lead → tech-lead directly.
+- `@product-lead`: routing simplified — design → user approval → tech-lead. Planner checkpoint removed. Post-impl spawns @kb-lead; @ spawned only on explicit need or tech-lead escalation. Redesign loop routes design-lead → tech-lead directly.
 - `@design-lead`: lighter output — high-level structure, key interfaces, boundaries, patterns, tradeoffs, risks. Removed "minimum deliverable" heavyweight spec language. Removed @planner auto-spawn. Description reframed from "heavy design" to "design guidance."
 - `@tech-lead`: owns work decomposition directly from design, functional verification, targeted boundary tests, safe restructuring, and final structural review. Planner escalation removed. Integration testing uses `@coder --skills integration-test` instead of `@integration-tester`.
-- `@qa-lead`: repositioned from mandatory post-impl phase to specialist escalation. Description reframed — spawned for significant structural test-suite work, not routine post-impl.
+- `@`: repositioned from mandatory post-impl phase to specialist escalation. Description reframed — spawned for significant structural test-suite work, not routine post-impl.
 - `@kb-lead`: description softened — "when implementation knowledge needs capturing" instead of "after implementation ships." Timing left intentionally flexible.
-- `agent-staffing/resources/testers.md`: permanent test suite note updated — @tech-lead owns with @qa-lead as specialist escalation. `@integration-tester` replaced with `@coder --skills integration-test`.
+- `agent-staffing/resources/testers.md`: permanent test suite note updated — @tech-lead owns with @ as specialist escalation. `@integration-tester` replaced with `@coder --skills integration-test`.
 - `dev-artifacts/resources/ownership.md`: plan/ writer changed from @planner to @tech-lead. @planner removed from all artifact readers.
 - `planning/SKILL.md`: description updated — used by @tech-lead, not @planner.
 - `agent-staffing/resources/reviewers.md`: @alignment-reviewer usage updated — planner verification point replaced with design verification.
-- README: lifecycle updated to design-lead → tech-lead default. Planner removed from topology and agent table. qa-lead marked as specialist.
+- README: lifecycle updated to design-lead → tech-lead default. Planner removed from topology and agent table.  marked as specialist.
 
 - `@tech-lead` Implementation: coder spawns scoped to one subphase, 2-4 files. Parallel `--bg` when file sets are disjoint, sequential when they overlap.
 - `@tech-lead` Verification: test-quality reviewer spawned after test-writing at phase gates.
-- All callers: `@unit-tester` → `@coder --skills unit-test,testing-principles`. `@coder --skills integration-test` → `@coder --skills integration-test,testing-principles`. Updated in tech-lead, qa-lead, investigator, planning, agent-staffing, dev-artifacts.
+- All callers: `@` → `@coder --skills unit-test,testing-principles`. `@coder --skills integration-test` → `@coder --skills integration-test,testing-principles`. Updated in tech-lead, , investigator, planning, agent-staffing, dev-artifacts.
 - `testing-principles`: description notes to always include when spawning coder for testing. "When Each Tester Applies" section uses `@coder --skills` patterns.
 - `dev-principles` Deletion: rewrote from hedging questions to direct mandates — delete dead code, collapse duplication, fix structural rot immediately, escalate deep rot.
 - `agent-staffing/resources/builders.md`: coder entry reframed around small spawn scope and parallel-when-disjoint.
@@ -245,7 +273,7 @@ update models
 ### Deprecated
 - `@planner`: marked deprecated with `model-invocable: false`. Retained as legacy artifact; no lead or orchestrator routes to it. Default workflow is design-lead → tech-lead.
 - `@integration-tester`: marked deprecated with `model-invocable: false`. Use `@coder --skills integration-test` instead. The skill carries the methodology; @coder provides execution.
-- `@unit-tester`: marked deprecated with `model-invocable: false`. Use `@coder --skills unit-test,testing-principles` instead.
+- `@`: marked deprecated with `model-invocable: false`. Use `@coder --skills unit-test,testing-principles` instead.
 
 ## [0.6.2] - 2026-05-11
 
@@ -256,7 +284,7 @@ update models
 ## [0.5.11] - 2026-05-11
 
 ### Changed
-- `@qa-lead`: gpt-5.4 (Codex) → sonnet (Claude). Orchestrators need native blocking spawn-wait, not Codex poll loops. Sonnet handles test design decisions fine.
+- `@`: gpt-5.4 (Codex) → sonnet (Claude). Orchestrators need native blocking spawn-wait, not Codex poll loops. Sonnet handles test design decisions fine.
 
 ## [0.5.10] - 2026-05-11
 
@@ -269,10 +297,10 @@ update models
 ## [0.5.8] - 2026-05-10
 
 ### Added
-- `@qa-design-lead`: analysis-only agent spawned by @qa-lead when the test suite has structural problems. Reads test files and explorer report, produces `design/test-strategy.md`. No sub-spawning — pure analysis and doc writing. Covers tier audit, diff analysis of coder-touched tests, anti-pattern inventory, conftest map, decomposition plan.
+- `@qa-design-lead`: analysis-only agent spawned by @ when the test suite has structural problems. Reads test files and explorer report, produces `design/test-strategy.md`. No sub-spawning — pure analysis and doc writing. Covers tier audit, diff analysis of coder-touched tests, anti-pattern inventory, conftest map, decomposition plan.
 
 ### Changed
-- `@qa-lead`: full loop driver — explores first (spawns @explorer), decides whether to spawn @qa-design-lead for heavy redesign or proceed inline, runs one @reviewer pass, then hands off to `@coder --skills unit-test` or `@coder --skills integration-test`. Adds Edit tool for `# qa-validated: <work-item>` markers. Drops direct use of @unit-tester and @integration-tester in favor of `@coder` + skill routing.
+- `@`: full loop driver — explores first (spawns @explorer), decides whether to spawn @qa-design-lead for heavy redesign or proceed inline, runs one @reviewer pass, then hands off to `@coder --skills unit-test` or `@coder --skills integration-test`. Adds Edit tool for `# qa-validated: <work-item>` markers. Drops direct use of @ and @integration-tester in favor of `@coder` + skill routing.
 
 ## [0.5.7] - 2026-05-10
 
@@ -298,14 +326,14 @@ update models
 - `@kb-lead` agent: post-implementation knowledge capture coordinator. Routes to @code-mirror (.context/), @kb-writer (KB), @tech-writer (docs/). Replaces product-lead's parallel kb-writer + tech-writer + kb-maintainer spawns.
 
 ### Changed
-- `@product-lead`: post-implementation routing simplified — spawns @qa-lead + @kb-lead instead of three parallel doc agents + sequential kb-maintainer. Passes work directory context (`-f $(meridian work current)`) to kb-lead. `<delegate>` tag uses behavioral framing instead of role identity.
+- `@product-lead`: post-implementation routing simplified — spawns @ + @kb-lead instead of three parallel doc agents + sequential kb-maintainer. Passes work directory context (`-f $(meridian work current)`) to kb-lead. `<delegate>` tag uses behavioral framing instead of role identity.
 - `@tech-lead`: replaced contradictory "every action is a spawn" absolute with scoped behavioral guidance. `<delegate>` tag uses behavioral framing.
 - `@planner`: replaced brittle verb-inference routing rule with spawn-identity check. "Parallelize aggressively" → "parallelize when independence is proven."
-- `@investigator`: replaced recursive self-spawning with @explorer/@smoke-tester delegation for narrow probes.
-- `@tech-writer`: fixed wrong-agent routing — @explorer for reading, @smoke-tester for runtime verification. "Important information first" → lead with user action/command/behavior.
+- `@investigator`: replaced recursive self-spawning with @explorer/@probe delegation for narrow probes.
+- `@tech-writer`: fixed wrong-agent routing — @explorer for reading, @probe for runtime verification. "Important information first" → lead with user action/command/behavior.
 - `@alignment-reviewer`: replaced contrastive definition with positive framing.
 - `@ux-lead`: `<delegate>` tag uses behavioral routing instead of role identity.
-- `@unit-tester`, `@integration-tester`: descriptions reframed positively instead of "not the right fit for."
+- `@`, `@integration-tester`: descriptions reframed positively instead of "not the right fit for."
 - `agent-staffing`: "delegation is mandatory" → "delegation is the default" with coordination-artifact exception.
 - `agent-staffing/reviewers`: over-absolute skip rule replaced with decision-log rationale.
 - `agent-staffing/testers`: "only verification that matters" → "mandatory behavioral lane."
@@ -383,7 +411,7 @@ update models
 ## [0.3.8] - 2026-05-06
 
 ### Changed
-- `@qa-lead`: sharpened unit-test judgment — keep/add tests for durable contracts, delete stale or implementation-shaped unit tests.
+- `@`: sharpened unit-test judgment — keep/add tests for durable contracts, delete stale or implementation-shaped unit tests.
 - more possible fanouts
 
 ## [0.3.7] - 2026-05-04
@@ -414,7 +442,7 @@ update models
 ## [0.3.1] - 2026-05-02
 
 ### Changed
-- Agent profiles: migrated 6 agents from deprecated `models:` to `fanout:` + `model-policies:` (browser, browser-tester, coder, frontend-coder, mockup-gen, refactor-reviewer).
+- Agent profiles: migrated 6 agents from deprecated `models:` to `fanout:` + `model-policies:` (browser, browser-probe, coder, frontend-coder, mockup-gen, refactor-reviewer).
 - Skill frontmatter: migrated all 17 skills from legacy `disable-model-invocation`/`allow_implicit_invocation` to canonical `invocation: explicit`.
 
 ### Added
@@ -430,13 +458,13 @@ update models
 - `@architect`: re-added `tech-docs` skill (was removed prematurely, before recognizing tech-docs is design doc methodology).
 - `@design-writer`: added `tech-docs` skill. Body trimmed — inlined mermaid/link-checker guidance replaced with skill references.
 - `@imagegen`: added `intent-modeling`. Description now tells callers to specify visual intent before spawning. Body addresses underspecified prompts. Removed prescribed work directory output.
-- `@smoke-tester`: description rewritten to cover both probing and verification modes equally.
-- `@investigator`: split `@explorer` reference into `@explorer` (codebase) + `@session-explorer` (sessions). Trimmed contrastive filler.
-- `@web-researcher`: updated routing for explorer/session-explorer split.
+- `@probe`: description rewritten to cover both probing and verification modes equally.
+- `@investigator`: split `@explorer` reference into `@explorer` (codebase) + `@session-miner` (sessions). Trimmed contrastive filler.
+- `@web-researcher`: updated routing for explorer/session-miner split.
 - `@refactor-coder`: positive opener (was "not to add features; it is to improve"). Cut orchestrator-scoping "good units" list. Trimmed skill restatement in Refactoring Posture. Compressed Behavior Preservation.
 - `@refactor-reviewer`: compressed "What to Look For" — references skill instead of duplicating 8-bullet list.
 - `@alignment-reviewer`: scope discipline flipped from negative list to positive routing.
-- `@unit-tester`: trimmed "safety net" metaphor.
+- `@`: trimmed "safety net" metaphor.
 - `@verifier`: trimmed "clearing mechanical noise" restatement.
 - `@frontend-coder`: trimmed "separate polished UI from functional-but-flat" filler.
 - `@mockup-gen`: trimmed redundant "not production code" from body opener (description already routes on this).
@@ -445,25 +473,25 @@ update models
 - `unit-test` skill: cut "What Unit Tests Are For" section — testing-principles covers tier definition, agent knows what unit tests are.
 - `tech-docs` skill: scoped as design document methodology. Removed obsolete `scripts/` (check-md-links replaced by `meridian kg check`). Removed "Writing for Agent Consumers" — readability principles apply to all readers.
 - `smoke-test` skill: rewritten for equal probing/verification coverage. Killed contrastive "ARE and ARE NOT" section.
-- `agent-staffing/builders.md`: added `@session-explorer` entry with routing guidance.
-- `agent-staffing/maintainers.md`: updated `@kb-writer` entry for `@session-explorer` delegation.
+- `agent-staffing/builders.md`: added `@session-miner` entry with routing guidance.
+- `agent-staffing/maintainers.md`: updated `@kb-writer` entry for `@session-miner` delegation.
 - `@product-lead`: prescriptive requirements gathering (7 bullet points with examples) compressed to principles. Added `intent-modeling` skill — handles hypothesis-vs-spec reasoning that was hand-rolled in the body.
 - `@tech-lead`: trimmed 211→105 lines. Cut execution loop duplication with `planning/resources/execution-model.md` (was restating the entire subphase/gate/final-gate loop). Cut prescriptive "Before Any Final Report" checklist — replaced with two report shapes. Added `intent-modeling` — launch prompt interpretation and redesign-brief judgment are intent calls. `@product-manager` refs → `@product-lead`.
 - `@design-lead`: trimmed 184→105 lines. Cut 40-line "Design Artifact Hygiene" section (detailed kb-maintainer instructions) to one sentence. Cut "Refactoring Awareness" section that restated `refactoring-principles` skill. Fixed stale `meridian spawn -a architect-lead` in description. Added `llm-writing`.
 - `@planner`: trimmed 131→95 lines. Cut prescriptive thoroughness checklist into prose principles. `@product-manager` refs → `@product-lead`. Added `llm-writing`.
-- `@qa-lead`: trimmed 136→75 lines. Collapsed step-by-step "Strategy Before Tests" into principle-level guidance. Collapsed "Produce Tests" prescriptive sections.
+- `@`: trimmed 136→75 lines. Collapsed step-by-step "Strategy Before Tests" into principle-level guidance. Collapsed "Produce Tests" prescriptive sections.
 - `@tech-writer`: trimmed 100→60 lines. Cut "Writing Principles" section (generic writing advice now covered by `llm-writing`). Compressed Diátaxis to bullets. Added `llm-writing`.
 - `@design-writer`: trimmed 67→45 lines. Cut "Quality Bar" checklist. Added `llm-writing`.
 - `@architect`: added `llm-writing`.
 - `@frontend-designer`: added `llm-writing`.
 - `@reviewer`: `models:` fan-out field → `fanout:` (new schema).
-- `@design-lead`, `@qa-lead`, `@ux-lead`: added `intent-modeling`. All orchestrators interpret caller intent and make escalation/routing judgments.
+- `@design-lead`, `@`, `@ux-lead`: added `intent-modeling`. All orchestrators interpret caller intent and make escalation/routing judgments.
 - `@ux-lead`: `@product-manager` refs → `@product-lead`.
 - `review` skill: trimmed 76→50 lines. Cut "What wastes everyone's time" (negative framing). Cut "How to Conduct the Review" prescriptive steps. Description trigger-first.
 - All skill descriptions: trigger-first ("Load when..." / "Use when...") instead of content-first. Fixed: `agent-management`, `design-principles`, `dev-principles`, `planning`, `refactoring-principles`, `testing-principles`, `browser-test`, `ears-parsing`, `issues`.
 - `issues` skill: trimmed 114→38 lines. Cut prescriptive examples, negative framing ("When NOT to Create"), verbose workflow integration. Opening now leads with "agents systematically under-file" to counter the actual failure mode.
-- `@product-lead`, `@design-lead`, `@tech-lead`, `@qa-lead`: added `issues` skill — leads triage reviewer findings and should file non-blocking issues rather than losing them.
-- `@coder`, `@smoke-tester`: added `issues` skill — discover file-worthy problems during implementation and testing.
+- `@product-lead`, `@design-lead`, `@tech-lead`, `@`: added `issues` skill — leads triage reviewer findings and should file non-blocking issues rather than losing them.
+- `@coder`, `@probe`: added `issues` skill — discover file-worthy problems during implementation and testing.
 - All `@product-manager` and `@architect-lead` references updated across agents and skill resources.
 
 ## [0.2.3] - 2026-05-02
@@ -488,7 +516,7 @@ update models
 
 ### Added
 - `@alignment-reviewer` agent: coverage verification — checks whether one artifact delivers what another promised (plan vs design, impl vs spec, code vs architecture). Takes source of truth via `-f`, optional conversation context via `--from`. Reports items as Covered/Gap/Partial/Drift. Model: gpt55, read-only.
-- `@frontend-dev` agent: primary visual/UX entry point — the visual counterpart to @dev-orchestrator. Works directly with user to iterate on design through rapid mockup cycles. Opus model, `harness: claude`, `approval: yolo`. Spawns @mockup-gen, @browser, @frontend-designer, @frontend-coder, @browser-tester, @imagegen.
+- `@frontend-dev` agent: primary visual/UX entry point — the visual counterpart to @dev-orchestrator. Works directly with user to iterate on design through rapid mockup cycles. Opus model, `harness: claude`, `approval: yolo`. Spawns @mockup-gen, @browser, @frontend-designer, @frontend-coder, @browser-probe, @imagegen.
 - `@mockup-gen` agent: fast throwaway visual mockups using the project's real frontend components and design system. Speed over polish — hardcode data, skip edge cases, get something visual in front of the user fast. Model: gpt55.
 - `@imagegen` agent: native image generation. UI concept mockups, visual explorations, icons, reference imagery. Usually spawned on explicit user request. Model: gpt55.
 - `@browser` agent: general-purpose browser interaction via `playwright-cli`. Scraping, data extraction, screenshots, interactive annotation, design research — the prompt defines the purpose. Model: gpt55.
@@ -497,7 +525,7 @@ update models
 - `dev-artifacts`: path discovery updated — context dirs available as `$MERIDIAN_CONTEXT_*_DIR` env vars alongside CLI commands.
 
 ### Changed
-- **Role renames**: `dev-orchestrator` → `product-manager`, `design-orchestrator` → `architect-lead`, `impl-orchestrator` → `tech-lead`, `test-orchestrator` → `qa-lead`, `frontend-dev` → `ux-lead`. Real-world titles prime for delegation over micromanagement.
+- **Role renames**: `dev-orchestrator` → `product-manager`, `design-orchestrator` → `architect-lead`, `impl-orchestrator` → `tech-lead`, `test-orchestrator` → ``, `frontend-dev` → `ux-lead`. Real-world titles prime for delegation over micromanagement.
 - **Skill rename**: `orchestrate` → `agent-management`. Body vocabulary updated to manager/lead.
 - **Skill list rebuild**: 56→39 loads across coordinators. Each role loads only what it actually needs.
 - **New `design-principles` skill**: split from dev-principles — spec-driven development, treat requirements as hypotheses, edge-case thinking, probe before committing. ~400w.
@@ -512,15 +540,15 @@ update models
 - `@design-orchestrator`: Completion now caller-agnostic — returns design-ready to whoever spawned it. @planner spawn only when caller explicitly delegated autonomous planning. When caller is @dev-orchestrator, it owns user approval gate and planner handoff. Technical feasibility pushback also routes to caller, not hardcoded @dev-orchestrator. Enforced via `<do_not_spawn_planner>` constraint block.
 - `@dev-orchestrator`: frontmatter no longer forces generic `effort: high`; model alias policy now owns effort default.
 - `@dev-orchestrator`: checkpoints now explicitly pass behavioral spec (`-f design/spec/`) to planner and impl-orchestrator when present — EARS traceability mandatory when EARS exist. Fixed stale `@prompt-writer` → `@prompter-orchestrator` reference. Routing table clarifies coder vs frontend-coder: functional (logic, state, routing, data flow) vs visual (design fidelity, aesthetics, UI polish).
-- `@impl-orchestrator`: scope clarified — functionality, logic, structure, and design alignment. Can touch frontend code for functional concerns; visual/UX iteration belongs to @frontend-dev. Phase exit gate gains @alignment-reviewer lane for EARS verification + @browser-tester for functional frontend verification. Can respawn @planner mid-flight when EARS gaps found at phase gates. Final gate uses @alignment-reviewer with full design package for holistic design-intent check.
+- `@impl-orchestrator`: scope clarified — functionality, logic, structure, and design alignment. Can touch frontend code for functional concerns; visual/UX iteration belongs to @frontend-dev. Phase exit gate gains @alignment-reviewer lane for EARS verification + @browser-probe for functional frontend verification. Can respawn @planner mid-flight when EARS gaps found at phase gates. Final gate uses @alignment-reviewer with full design package for holistic design-intent check.
 - `@planner`: "or lighter context" removed — requires design package with requirements, no escape hatch. Can be spawned by @impl-orchestrator for mid-flight plan adjustment. Two new thoroughness checks: every requirement in `requirements.md` maps to a delivering subphase, every EARS statement maps to a subphase whose blueprint actually scopes the work (table assignment alone is not delivery).
 - `@coder`: description reframed from file-type restriction to intent-based routing. Now full-stack: backend, frontend logic, CLI, infrastructure, data flow, build systems. "Do not use for React, TSX, CSS" restriction removed. Description adds spawn/prompt guidance (subphase, EARS statements, integration boundaries).
 - `@frontend-coder`: model `claude-opus-4-6` → `gpt55` (clear specs don't need Opus aesthetic judgment — GPT executes faithfully against design targets). Fan-out updated `opus`/`opus47` → `gpt55`/`codex`. Description reframed: pick when visual quality and design fidelity are the primary concern, not just because file is frontend code. Body shifted from autonomous aesthetic judgment ("generic UI is a failure") to faithful spec execution ("match the visual target"). Adds mockup/screenshot guidance.
 - `@refactor-coder`: dropped "scoped" filler from description. Added prompt guidance: state structural move and behavior-preservation constraints.
-- `@browser-tester`: model `claude-opus-4-6` → `gpt55` (GPT excels at computer use). MCP Playwright plugin → `playwright-cli` skill (harness-agnostic CLI). Sandbox → `danger-full-access` (browser automation needs it). Description adds spawn/prompt guidance.
+- `@browser-probe`: model `claude-opus-4-6` → `gpt55` (GPT excels at computer use). MCP Playwright plugin → `playwright-cli` skill (harness-agnostic CLI). Sandbox → `danger-full-access` (browser automation needs it). Description adds spawn/prompt guidance.
 - `browser-test` skill: refactored to methodology-only — references `/playwright-cli` for browser mechanics instead of teaching Playwright usage.
 - `agent-staffing/builders.md`: coder catalog entries updated — @coder is full-stack, @frontend-coder is visual design fidelity. Added @mockup-gen, @imagegen, @browser entries.
-- `agent-staffing/testers.md`: @browser-tester entry updated for `playwright-cli` usage and `--annotate` for interactive browser sessions.
+- `agent-staffing/testers.md`: @browser-probe entry updated for `playwright-cli` usage and `--annotate` for interactive browser sessions.
 - `agent-staffing/reviewers.md`: added @alignment-reviewer entry with usage at plan verification and impl final gate.
 - `@dev-orchestrator`: `@code-documenter` → `@kb-writer` in routing and post-impl. Post-impl now spawns `@kb-maintainer` after kb-writer completes for structural health.
 - `@impl-orchestrator`: `@code-documenter` → `@kb-writer`, `@kb-maintainer`, `@tech-writer`.
@@ -596,9 +624,9 @@ update models
 - `planning` skill: phase def aligned with impl-orchestrator ("stopping point" → "checkpoint").
 - `context-handoffs` skill: `--from` covers `<spawn-id>` and `$MERIDIAN_CHAT_ID` (top-level primary at any depth). Worked example added.
 - `session-mining` skill: `$MERIDIAN_CHAT_ID` semantics corrected — top-level primary, not parent. Heading, body, frontmatter all fixed.
-- `@dev-orchestrator`: reframed as "primary developer / translator between user and technical teams." New requirements gathering section — XY Problem awareness, JTBD-style questioning, first-principles challenge, solution-free gating before routing to design. Specialist routing table expanded: design-writer, smoke-tester for probing, investigator for diagnosis. Post-impl routing: test-orchestrator + code-documenter + tech-writer in parallel with `--from` session context. Planner terminal state handling (probe-request → smoke-tester, structural-blocking → design-orchestrator). Writing constraint: delegate via specialists, exceptions for requirements.md and prompts.
-- `@design-orchestrator`: reframed as technical design owner, not problem discovery. Sonnet 1M model, autocompact 30. Explores technical options (not first-principle problems — that's dev-orchestrator). Challenges technical feasibility. Expanded refactoring awareness — "clean codebase is prerequisite, design time is cheapest fix." Spawns explorer, refactor-reviewer, reviewer. Uses smoke-tester for probes not coder.
-- `@impl-orchestrator`: broke coder-centrism. New definitions section (phase, subphase, probe, diagnosis — each with right agent). Subphase loop: probe-first step, light reviewer per subphase, route issues by type (impl → coder, behavioral → smoke-tester, root-cause → investigator). Phase gate: one general reviewer (save fan-out for final gate), temp unit/integration tests deleted after. Final gate: reviewer fan-out by focus area, duplicate higher-level with opus, refactor-reviewer on full change set. Judgment/escalation discipline — recognize non-converging cycles, escalate redesign briefs.
+- `@dev-orchestrator`: reframed as "primary developer / translator between user and technical teams." New requirements gathering section — XY Problem awareness, JTBD-style questioning, first-principles challenge, solution-free gating before routing to design. Specialist routing table expanded: design-writer, probe for probing, investigator for diagnosis. Post-impl routing: test-orchestrator + code-documenter + tech-writer in parallel with `--from` session context. Planner terminal state handling (probe-request → probe, structural-blocking → design-orchestrator). Writing constraint: delegate via specialists, exceptions for requirements.md and prompts.
+- `@design-orchestrator`: reframed as technical design owner, not problem discovery. Sonnet 1M model, autocompact 30. Explores technical options (not first-principle problems — that's dev-orchestrator). Challenges technical feasibility. Expanded refactoring awareness — "clean codebase is prerequisite, design time is cheapest fix." Spawns explorer, refactor-reviewer, reviewer. Uses probe for probes not coder.
+- `@impl-orchestrator`: broke coder-centrism. New definitions section (phase, subphase, probe, diagnosis — each with right agent). Subphase loop: probe-first step, light reviewer per subphase, route issues by type (impl → coder, behavioral → probe, root-cause → investigator). Phase gate: one general reviewer (save fan-out for final gate), temp unit/integration tests deleted after. Final gate: reviewer fan-out by focus area, duplicate higher-level with opus, refactor-reviewer on full change set. Judgment/escalation discipline — recognize non-converging cycles, escalate redesign briefs.
 - `@planner`: methodology moved from planning skill into agent body (inputs, thoroughness, priorities, output contract, terminal shapes). Parallelism-first. Route by work type — probe/diagnosis lanes before coding.
 - `planning` skill: stripped to shared definitions only (phase, subphase, verification levels, probe/diagnosis lanes, fix-cycle routing). Both planner and impl-orchestrator load it without overlap.
 - `execution-model.md`: full rewrite. Mermaid diagram matches updated impl-orchestrator — probe step, light reviewer, issue-type routing, refactor-reviewer final-gate only, temp gate tests.
@@ -607,8 +635,8 @@ update models
 - `@tech-writer`: Diátaxis framework (tutorials, how-tos, reference, explanation). Gather context first via explorers + --from. Spawns own reviewer for accuracy. Audience-flexible — adapts to technical level.
 - `@code-documenter`: agent-facing format guidance (bullet/key-value over prose, include security/performance/failure modes). Spawns own reviewer for accuracy.
 - `@docs-orchestrator`: deleted. Replaced by direct spawns of code-documenter + tech-writer from dev-orchestrator.
-- `@coder`: clarified that unclear runtime behavior at integration boundaries → report back to orchestrator for smoke-tester.
-- 7 worker agents: added "Your final message is your report — no file needed." (reviewer, refactor-reviewer, explorer, verifier, smoke-tester, investigator, web-researcher)
+- `@coder`: clarified that unclear runtime behavior at integration boundaries → report back to orchestrator for probe.
+- 7 worker agents: added "Your final message is your report — no file needed." (reviewer, refactor-reviewer, explorer, verifier, probe, investigator, web-researcher)
 
 ### Renamed
 - `@internet-researcher` → `@web-researcher`. Updated all references across agents and skills.
@@ -693,7 +721,7 @@ update models
 ## [0.0.22] - 2026-04-14
 
 ### Changed
-- `shared-workspace` skill scope tightened. Removed from agents that don't mutate repo state: `@explorer`, `@reviewer`, `@refactor-reviewer`, `@architect`, `@planner`, `@frontend-designer`, `@internet-researcher`. Orientation (`meridian work` / `git status` at session start) and the safety rules (no destructive git, no `git add -A`, don't delete unfamiliar untracked files) don't apply to read-only agents or agents that only write to `$MERIDIAN_WORK_DIR/` — their caller already holds repo orientation. Retained on all four orchestrators, code-editing agents (`@coder`, `@frontend-coder`, `@verifier`, `@investigator`, `@code-documenter`, `@tech-writer`, `@unit-tester`), and broad-permission testers (`@browser-tester`, `@smoke-tester`) where the safety rules are real guardrails.
+- `shared-workspace` skill scope tightened. Removed from agents that don't mutate repo state: `@explorer`, `@reviewer`, `@refactor-reviewer`, `@architect`, `@planner`, `@frontend-designer`, `@internet-researcher`. Orientation (`meridian work` / `git status` at session start) and the safety rules (no destructive git, no `git add -A`, don't delete unfamiliar untracked files) don't apply to read-only agents or agents that only write to `$MERIDIAN_WORK_DIR/` — their caller already holds repo orientation. Retained on all four orchestrators, code-editing agents (`@coder`, `@frontend-coder`, `@verifier`, `@investigator`, `@code-documenter`, `@tech-writer`, `@`), and broad-permission testers (`@browser-probe`, `@probe`) where the safety rules are real guardrails.
 - `@dev-orchestrator`: `effort: medium` → `effort: high`. User-facing orchestrator handling intent gathering, design review, and redesign routing across design/impl orchestrators was under-resourced at medium.
 - `dev-principles` skill: new "Depend Deliberately" section — the pair to "Delete Often". A well-maintained library is a pre-validated abstraction; it has already survived the Rule of Three in the wild. Dependency earns its place when it deletes more code than it adds and collapses subsystems rather than swapping primitives. Simplicity measured by total ownership (code + cognitive load + failure modes + test matrix), not import count. Rejects the reflexive "stdlib-only is cleaner" frame.
 - `dev-principles` skill: new "Probe Your Options Before You Commit" section — deduction from reading code is cheap but wrong often enough to cost rework cycles. Match probe investment to decision reversibility: cheap experiments for one-way-door decisions, skip for reversible ones. Treat "we'll find out during implementation" as a risk flag, not a plan. When you catch yourself deducing instead of probing ("this looks like phantom complexity"), stop and design the probe.
@@ -756,7 +784,7 @@ update models
 ## [0.0.14] - 2026-04-10
 
 ### Added
-- `@investigator`: delegation capability. Spawns `@smoke-tester`, `@explorer`, `@unit-tester`, `@internet-researcher`, or narrower `@investigator` recursively. Sandbox → `danger-full-access` for `gh`/`curl`/web tools.
+- `@investigator`: delegation capability. Spawns `@probe`, `@explorer`, `@`, `@internet-researcher`, or narrower `@investigator` recursively. Sandbox → `danger-full-access` for `gh`/`curl`/web tools.
 - `@impl-orchestrator`: "External knowledge gaps" escalation paragraph. `@coder` stuck on lib/API behavior? Spawn `@internet-researcher`, don't burn `@coder` cycles guessing from training-data assumptions.
 - `CHANGELOG.md` introduced. Keep a Changelog format (later caveman-ified, see `[Unreleased]`).
 

@@ -4,7 +4,8 @@ description: Verify alignment between artifacts — plan vs design, code vs spec
 mode: subagent
 model: gpt
 effort: medium
-skills: [session-mining, review]
+skills:
+  available: [session-mining, review]
 tools:
   'bash(git diff *)': allow
   'bash(git log *)': allow
@@ -31,11 +32,11 @@ Your job is coverage verification: check whether the checked artifact delivers w
 
 Your caller provides three layers of context:
 
-1. **Files** (`-f`) — the source of truth: specs, design docs, requirements,
+1. **Files** — the source of truth: specs, design docs, requirements,
    architecture docs, plans. Also the artifact being checked.
-2. **Conversation** (`--from`) — when present, mine for user intent, stated
+2. **Conversation** (c###) — when present, mine for user intent, stated
    priorities, and decisions that may not have made it into formal artifacts.
-   Use the `session-mining` skill to navigate transcripts.
+   Use the `/session-mining` skill to navigate transcripts.
 3. **Prompt** — tells you which is the source of truth, which is being checked,
    and what specific alignment matters.
 

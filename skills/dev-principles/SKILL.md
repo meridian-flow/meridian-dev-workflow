@@ -1,128 +1,57 @@
 ---
 name: dev-principles
 type: principle
-description: >
-  Load when implementing, reviewing, refactoring, or designing. Core
-  engineering values — simplicity, separation of concerns, structural
-  judgment. The operating lens for all code decisions.
-detail: Core engineering values — simplicity, separation of concerns, structural judgment.
+description: Core engineering values for all code decisions — simplicity, separation of concerns, structural judgment.
 model-invocable: true
 ---
 
+# Core Beliefs
+
+1. **Code is cheap; bad code is expensive.** Writing code costs almost nothing now. The real cost is code that's hard to change — inconsistent, bloated, entangled. Optimize for the cost that's real.
+2. **Consistency beats cleverness.** Consistent patterns lower the reasoning cost for every human and agent that follows. Match what's there before inventing something new.
+3. **Code is fluid.** Optimize for change: clear seams, good boundaries, minimal coupling. The next change should be easy to make.
+
+These shape every principle below.
+
+# Get It Right the First Time
+
+The default agent failure is producing something plausible and moving on — half-finished, approximate, "works for now." The cost of wrong isn't one more generation; it's the mess every later agent inherits. Read the code before changing it. Follow the existing pattern before inventing one. Handle the edge cases now. Investigate when something's unclear instead of guessing. One correct pass costs less than three rounds of fixing a sloppy one.
+
 # Simplicity
 
-Good software is software that is easy to change. Every boundary, type, and
-layer is a cost — it should earn its place by making future changes smaller
-and safer.
+Good software is easy to change. Every boundary, type, and layer is a cost that must earn its place by making future changes smaller and safer. The default failure mode is over-engineering.
 
-The default failure mode is over-engineering, not under-engineering. Every
-boundary, type, and layer is a cost.
+Before adding structure, ask: is this a separate concern, or one thing wearing two names? Things that always change together are one thing. Independence justifies a split — partitioning alone doesn't. Justify the split, not the merge.
 
-Before adding structure, ask: is this actually a separate concern, or one
-thing wearing two names? If these pieces always change together, they are
-one thing. Partitioning does not make code simpler — independence does.
+Treat code growth as a cost: meaningful LOC growth should buy clearer behavior, a real boundary, or reasoning cost removed elsewhere.
 
-Justify the split, not the merge.
-
-## Deep Modules Over Shallow Modules
-
-A deep module hides substantial complexity behind a simple interface. The
-caller gets a lot of functionality for little interface cost.
-
-A shallow module has a complex interface but hides little — many exports,
-small implementation. If a module has one exported function that wraps three
-lines, it's shallow — keep that function in the file that calls it.
-
-Prefer one deep module over three shallow ones. If a module has one exported
-function that wraps three lines, it's shallow — keep that function in the
-file that calls it. When 3+ shallow modules in the same directory touch the
-same concept, bundle them into one deep module with a few well-named exports.
+**Deep modules over shallow.** A deep module hides substantial complexity behind a simple interface. A shallow one has a complex interface hiding little — many exports, thin implementation. If an exported function wraps three lines, keep it in its caller. When 3+ shallow modules in a directory touch the same concept, bundle them into one deep module with a few well-named exports.
 
 # Separation of Concerns
 
-Group by concern. Draw boundaries where things actually change
-independently. Smaller, focused files also cost less to read — LLM agents
-consume the whole file, so a 500-line module with one relevant function
-wastes attention on the other 480 lines.
+Group by concern; draw boundaries where things change independently. Smaller focused files also cost less to read — an agent consumes the whole file, so a 500-line module with one relevant function wastes attention on the other 480.
 
-When you see duplication across boundaries: are the boundaries wrong? Is
-this really two modules, or one module that got split for the wrong reason?
-Step back and rethink the structure — don't patch it with extraction.
+When you see duplication across boundaries, suspect the boundaries before patching with extraction: is this really two modules, or one split for the wrong reason? Rethink the structure rather than bridging it.
 
 # Make Changes Easy
 
-Refactoring is disentangling. The question is: what would you need to
-understand to make the next change here? Reduce that.
+Refactoring is disentangling. Ask: what would you need to understand to make the next change here? Reduce that. Refactor early, while context is fresh — a refactor that grows the codebase is suspect: disentangling, or adding ceremony?
 
-Refactor early while context is fresh. A refactor that grows the codebase
-is suspect — are you disentangling, or adding ceremony?
-
-# Abstraction Judgment
-
-Before extracting: is this real shared behavior, or surface similarity?
-Two cases look alike by coincidence. Three reveal the pattern.
-
-When an abstraction grows flags and branches: did it capture the wrong
-concept? Inline and re-form rather than patch.
+Before extracting, ask if it's real shared behavior or surface similarity — two cases alike by coincidence, three reveal the pattern. When an abstraction grows flags and branches, it captured the wrong concept: inline and re-form rather than patch.
 
 # Deletion and Structural Cleanup
 
-LLMs default to preserving code. Fight that instinct.
+LLMs default to preserving code. Fight that.
 
-**Dead code: delete it.** Unused functions, unreachable branches, commented-out
-blocks, stale imports, orphaned files. Dead code is not "keeping options open"
-— it's entanglement surface that misleads readers and accumulates coupling.
-If it's dead, remove it in the same change.
-
-**Obvious duplication: collapse it.** When the same logic appears in multiple
-places, unify it. Don't leave "will clean up later" TODOs — later never
-comes, and every copy drifts independently.
-
-**Structural problems are immediate tech debt.** Circular dependencies,
-god modules, leaky abstractions, misplaced responsibilities — fix them when
-you find them, not in a future cleanup pass. Structural rot compounds:
-every change built on a broken foundation makes the next fix harder.
-Tech debt left to fester at agent speed compounds in hours, not months.
-
-**Escalate deep rot.** When structural problems are large enough that fixing
-them risks breaking unrelated behavior or requires rethinking module
-boundaries, escalate to the user rather than silently working around it.
-Name the problem, explain the risk, and propose a path.
+- **Dead code: delete it** in the same change — unused functions, unreachable branches, commented-out blocks, stale imports, orphaned files. It's entanglement surface, not "keeping options open."
+- **Obvious duplication: collapse it.** Every copy drifts independently; "clean up later" never comes.
+- **Structural problems are immediate debt.** Circular dependencies, god modules, leaky abstractions, misplaced responsibility — fix on sight. Rot compounds at agent speed, in hours not months.
+- **Escalate deep rot.** When a fix risks breaking unrelated behavior or needs rethinking module boundaries, name the problem and propose a path rather than silently working around it.
 
 # Testing
 
-Verify changes by running the program and the project's existing checks.
-
-Add tests when they protect a durable boundary, contract, or risk that is hard
-to verify manually. Prefer manual smoke verification and focused integration
-tests when they answer the question with lower maintenance cost. Unit tests fit
-best where narrow logic, parsing edges, or similar cases give stronger signal
-than higher-tier checks.
-
-When tier choice is unclear, improve the manual smoke instructions first:
-capture the scenario, command, expected result, and edge/failure cases an agent
-should run against the real system.
-
-In final reports, separate manual smoke checks from automated checks/tests.
-Pytest, unit tests, integration tests, lint, and type checks are automated
-verification; they are not smoke testing.
-
-Test at module interfaces. Interface-focused tests make simplification safe:
-refactor freely, keep behavior stable, and let tests confirm the contract
-still holds.
-
-Treat code growth as a cost. Notice meaningful LOC growth and make sure it
-earns its place through clearer behavior, a real boundary, or a
-simplification that removes reasoning cost elsewhere. When the diff grows a
-lot, re-examine it for unnecessary files, shallow wrappers, duplicated logic,
-or boundaries that did not earn their cost.
-
-When a test-suite audit is needed, qa-lead reshapes the permanent suite
-toward high-leverage boundary coverage and removes tests that do not protect
-real behavior.
+Verify by running the program and the project's checks. Automated tests earn their place by protecting a durable boundary, contract, or risk that's hard to verify by running the system — default to restraint, not coverage targets. See `/testing` for tier judgment and when automated tests are justified. In reports, keep manual runtime evidence separate from automated checks.
 
 # Consistency
 
-Read surrounding code first. Does the project already solve this? Prefer
-its patterns over introducing new ones. A good dependency deletes more code
-than it adds.
+Read surrounding code first. Does the project already solve this? Prefer its patterns over introducing new ones. A good dependency deletes more code than it adds.

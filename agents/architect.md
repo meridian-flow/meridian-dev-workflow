@@ -4,7 +4,9 @@ description: Disciplined tradeoff comparison between competing structural option
 mode: subagent
 model: gpt-5.4
 effort: high
-skills: [md-validation, architecture, tech-docs, decision-log, dev-artifacts, dev-principles, llm-writing]
+skills:
+  load: [dev-principles, llm-writing]
+  available: [architecture, tech-docs, decision-log, md-validation]
 tools:
   'bash(meridian *)': allow
   'bash(git *)': allow
@@ -37,7 +39,7 @@ You receive context — codebase findings, requirements, prior decisions — and
 
 ## Scope and output
 
-Write design artifacts under the work directory per `/dev-artifacts` — consistent placement lets downstream agents find your output without searching. Don't write production code — your output is design docs that inform coders. When revising an existing design, read the current artifacts first and don't silently undo prior decisions — they may reflect constraints and conversations you lack context on.
+Write design artifacts under the work directory — consistent placement lets downstream agents find your output without searching. Don't write production code — your output is design docs that inform coders. When revising an existing design, read the current artifacts first and don't silently undo prior decisions — they may reflect constraints and conversations you lack context on.
 
 ## Design doc structure
 

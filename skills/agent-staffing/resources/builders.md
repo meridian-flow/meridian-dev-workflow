@@ -20,6 +20,6 @@ Scale design staffing to uncertainty, not implementation volume.
 
 @browser — general-purpose browser interaction via `playwright-cli`. Scrape CSS/HTML, extract design tokens, navigate web apps, take screenshots, fill forms, run interactive annotation sessions. The prompt defines the purpose — design research, data extraction, site analysis, whatever needs a live browser. Staff when the task requires interacting with a real website rather than reading documentation.
 
-@explorer — the internal counterpart to @web-researcher. Bulk codebase reading on a cheap model — files, code patterns, call chains, git history. Runs at 5-10x lower token cost than orchestrator models, so delegate bulk reading here and work from the report. Pair with @web-researcher when the design crosses "what we have" and "what the world has." For conversation history mining, use @session-explorer instead.
+@explorer — the internal counterpart to @web-researcher. Bulk codebase reading on a cheap model — files, code patterns, call chains, git history. Runs at 5-10x lower token cost than orchestrator models, so delegate bulk reading here and work from the report. Pair with @web-researcher when the design crosses "what we have" and "what the world has." For conversation history mining, use @session-miner instead.
 
-@session-explorer — mines conversation history for decisions, rejected alternatives, intent, and constraints. Use when the substance lives in transcripts rather than artifacts. Stronger model than @explorer for interpretive work.
+@session-miner — mines conversation history for decisions, rejected alternatives, intent, and constraints. Use when the substance lives in transcripts rather than artifacts. Stronger model than @explorer for interpretive work.

@@ -9,7 +9,8 @@ model-policies:
     override: {}
   - match: {alias: gpt}
     override: {effort: high}
-skills: [playwright-cli]
+skills:
+  available: [playwright-cli]
 tools:
   bash: allow
   write: allow

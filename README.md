@@ -30,7 +30,7 @@ and tradeoffs.
 coordinates specialists, verifies functionality, owns targeted boundary tests,
 safely restructures, and runs a final structural review before shipping.
 
-**qa-lead** (autonomous) — designs the permanent test suite from the design
+**** (autonomous) — designs the permanent test suite from the design
 package and shared understanding. Also handles structural test-suite work when
 needed.
 
@@ -56,7 +56,6 @@ meridian spawn -a product-lead -p 'Build JWT token validation'
 | `ux-lead` | opus | Visual design entry point — visual requirements, design vocabulary, frontend routing |
 | `design-lead` | claude-opus-4-6 | Technical design — structural options, interfaces, boundaries, tradeoffs |
 | `tech-lead` | gpt55 | Implementation owner — decomposition, coordination, verification, structural review |
-| `qa-lead` | gpt55 | Test suite designer — risk-based strategy, tier design, structural test work |
 
 **Design:**
 
@@ -76,8 +75,8 @@ meridian spawn -a product-lead -p 'Build JWT token validation'
 
 | Agent | Model | Role |
 |---|---|---|
-| `smoke-tester` | gpt-5.4 | Runtime verification — CLI flows, HTTP requests, race probes, integration boundaries |
-| `browser-tester` | gpt55 | Browser-based QA via Playwright — visual verification, user flows, console errors |
+| `probe` | gpt-5.4 | Runtime verification — CLI flows, HTTP requests, race probes, integration boundaries |
+| `browser-probe` | gpt55 | Browser-based QA via Playwright — visual verification, user flows, console errors |
 
 **Review & Analysis:**
 
@@ -109,8 +108,7 @@ meridian spawn -a product-lead -p 'Build JWT token validation'
 
 | Agent | Model | Status |
 |---|---|---|
-| `unit-tester` | gpt-5.4 | Use `@coder --skills unit-test,testing-principles` instead |
-| `integration-tester` | gpt-5.4 | Use `@coder --skills integration-test` instead |
+| `integration-tester` | gpt-5.4 | Use `@coder` with `/testing` `resources/integration-patterns.md` instead |
 
 ## Skills
 
@@ -125,19 +123,15 @@ meridian spawn -a product-lead -p 'Build JWT token validation'
 | `planning` | Plan execution — phases, subphases, verification levels, probe/diagnosis lanes |
 | `agent-staffing` | Team composition — which agents to spawn, how many, what runs in parallel |
 | `dev-principles` | Simplicity, separation of concerns, structural judgment — the operating lens for code decisions |
-| `testing-principles` | Test tier selection, risk-based coverage, functional core / imperative shell |
+| `testing` | Restraint-first testing discipline — tier selection, when NOT to write tests, functional core patterns. Resources cover unit, integration, manual, and browser testing. |
 
 **Agent methodology:**
 
 | Skill | What it teaches |
 |---|---|
 | `review` | Adversarial code review — severity thinking, structured reporting |
-| `simplify` | Structural friction hunting — shallow modules, fragmentation, deletion targets |
+| `improve-codebase-architecture` | Structural improvement — shallow modules, fragmentation, deletion targets, deep-module opportunities, code-judo moves. |
 | `issues` | GitHub Issues integration — labels, work-item linking, `gh` CLI patterns |
-| `browser-test` | Browser QA methodology — visual verification, accessibility, console errors |
-| `smoke-test` | End-to-end testing — CLI, HTTP, race probes, interruption recovery |
-| `unit-test` | Focused test writing — edge cases, regression guards, tricky logic |
-| `integration-test` | Composition testing — module boundaries, fakes at external systems |
 | `react-architecture` | React-specific structural lens — tokens, state, composition, imports, component API consistency |
 | `tech-docs` | Technical writing craft — hierarchical docs, linking strategy, and progressive disclosure |
 | `frontend-design` | Distinctive, production-grade frontend interfaces — anti-generic-AI aesthetics |

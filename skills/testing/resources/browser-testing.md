@@ -1,15 +1,3 @@
----
-name: browser-test
-type: reference
-description: >
-  Use when verifying a frontend change requires a real browser — visual
-  rendering, user flows, form behavior, accessibility, or console error
-  detection that only surfaces at runtime. Pair with `/playwright-cli` for
-  browser mechanics.
-detail: Browser-based verification methodology for frontend changes.
-model-invocable: true
----
-
 # Browser Testing
 
 Use `/playwright-cli` for all browser interaction — it has the command

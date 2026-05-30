@@ -1,19 +1,14 @@
 ---
 name: tech-docs
 type: reference
-description: >
-  Load when writing design documents — architecture specs, behavioral specs,
-  component docs, feasibility reports. Covers structure and clarity for the
-  artifacts under design/ in the work directory.
-detail: Design document writing conventions — specs, component docs, feasibility.
+description: Use when writing design documents — architecture specs, behavioral specs, component docs, feasibility reports.
 model-invocable: true
 ---
 
 # Tech Docs
 
 Methodology for writing design documents — the artifacts under `design/` that
-architects produce and coders build from. Use `/dev-artifacts` for file
-placement, this skill for how to write them.
+architects produce and coders build from.
 
 Load `/llm-writing` if it isn't already loaded.
 

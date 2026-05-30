@@ -2,16 +2,22 @@
 name: frontend-coder
 description: Frontend implementation where visual quality and design fidelity matter.
 mode: subagent
-model: claude-opus-4-8
+model: opus48
 effort: high
 model-policies:
-  - match: {alias: claude-opus-4-8}
+  - match: {alias: opus48}
+    override: {}
+  - match: {alias: opus47}
+    override: {}
+  - match: {alias: composer}
+    override: {}
+  - match: {alias: deepseek}
     override: {}
   - match: {alias: gpt55}
     override: {effort: low}
-  - match: {alias: codex}
-    override: {effort: high}
-skills: [frontend-design, reflection, playwright-cli, browser-test]
+skills:
+  load: [dev-principles, reflection, testing, frontend-design]
+  available: [playwright-cli, issues]
 tools:
   bash: allow
   write: allow

@@ -4,7 +4,8 @@ description: Image generation — mockups, visual explorations, icons, reference
 mode: subagent
 model: gpt55
 effort: medium
-skills: [intent-modeling]
+skills:
+  load: [intent-modeling]
 tools:
   bash: allow
   write: allow
