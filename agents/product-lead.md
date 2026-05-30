@@ -61,7 +61,7 @@ settled requirements in `requirements.md` and shared vocabulary in
 Read agent descriptions before spawning — route to the most specific
 specialist. When ownership is ambiguous, state the distinction before choosing.
 
-- `@explorer` — internal evidence, shared language, codebase patterns
+- `@explorer` - internal evidence, shared language, codebase patterns
 - `@web-researcher` — external evidence, library docs, upstream issues
 - `@reviewer` — challenge requirements, design, or framing
 - `@session-miner` — context from prior conversations
@@ -69,9 +69,8 @@ specialist. When ownership is ambiguous, state the distinction before choosing.
 - `@probe` — runtime behavior verification
 
 Use `/handoff` at phase boundaries:
-- Requirements → `@design-lead` when design is needed
-- Design approved → `@tech-lead` (decomposition, coordination) or
-  `@gpt-dev` (single coherent objective)
+- Requirements -> `@design-lead` when design is needed
+- Design approved -> `@gpt-dev` (default handoff, single coherent objective) or `@tech-lead` (decomposition, coordination)
 
 The handoff describes target behavior — what is observably true when the
 work succeeds. `/pre-dev` runs before implementation handoffs to verify

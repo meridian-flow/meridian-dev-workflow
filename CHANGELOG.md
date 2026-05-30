@@ -4,6 +4,8 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+- `@product-lead`: default dev handoff -> `@gpt-dev`
+
 ## [0.11.1] - 2026-05-30
 
 ## [0.11.0] - 2026-05-30
