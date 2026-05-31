@@ -4,6 +4,8 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.11.5] - 2026-05-31
+
 ### Added
 - `source-context` skill: clone open source repos into `~/.meridian/ref/`, spawn parallel `@explorer` agents to study source code, synthesize findings. Builds richer decision context before planning or designing.
 
