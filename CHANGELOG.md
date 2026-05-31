@@ -3,6 +3,8 @@
 Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [SemVer](https://semver.org/). Versions before 0.0.14 in git history only.
 
 ## [Unreleased]
+
+## [0.11.4] - 2026-05-31
 ### Changed
 - `post-impl-capture`: rewritten to the inline model — mine the impl session, diff intent (design artifacts) vs built (changed files), write every layer inline, hand structure to `@kb-maintainer`. No longer spawns `@code-mirror`/`@kb-writer`/`@tech-writer`. Retyped `reference` → `mode-shift` (it shifts `@kb-lead`'s capture mode, not plain reference material). Coverage-gap rescans inherit the base loop's three-wave cap instead of spawning open-endedly. `@kb-maintainer` handoff is now one-per-tree (one target per spawn).
 - `agent-staffing`: maintainers catalog now lists `@kb-lead` + `@kb-maintainer`; dropped `@kb-writer`/`@tech-writer`.
