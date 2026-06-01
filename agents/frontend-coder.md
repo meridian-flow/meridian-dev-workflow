@@ -2,11 +2,9 @@
 name: frontend-coder
 description: Frontend implementation where visual quality and design fidelity matter.
 mode: subagent
-model: opus48
+model: opus47
 effort: high
 model-policies:
-  - match: {alias: opus48}
-    override: {}
   - match: {alias: opus47}
     override: {}
   - match: {alias: composer}

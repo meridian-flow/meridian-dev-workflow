@@ -4,6 +4,9 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- `@frontend-coder`: default model `opus48` → `opus47`; drop `opus48` from model-policies (visual implementation tier).
+
 ## [0.11.5] - 2026-05-31
 
 ### Added
