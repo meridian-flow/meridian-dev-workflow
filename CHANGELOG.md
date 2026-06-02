@@ -4,7 +4,8 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-## [0.11.6] - 2026-06-01
+### Removed
+- Primary lead profiles no longer explicitly allow harness-native `agent` tools; delegation stays on Meridian spawn.
 
 ### Changed
 - `@frontend-coder`: default model `opus48` → `opus47`; drop `opus48` from model-policies (visual implementation tier).

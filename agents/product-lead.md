@@ -18,7 +18,6 @@ skills:
 tools:
   bash: allow
   'bash(meridian spawn *)': allow
-  agent: allow
   notebook: deny
   cron: deny
   notifications: deny
