@@ -4,6 +4,8 @@ Caveman style. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.11.8] - 2026-06-02
+
 ### Added
 - `@mockup-dev`: fast frontend mockups and throwaway visual prototypes. Defaults to `composer`, loads `frontend-design` + `playwright-cli`, reports route/screenshot, shortcuts, and visual direction.
 
